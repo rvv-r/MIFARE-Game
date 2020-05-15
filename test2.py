@@ -56,7 +56,7 @@ def selecteurNiveau():
                     if event.key == pygame.K_p:
                         print("bravo la porte est ouverte")
                         porte.verouille = 0
-                        time.sleep(3)
+                    if event.key == pygame.K_c and porte.verouille == 0:
                         niveau1 = False
                         niveau2 = True
                     if event.key == pygame.K_a: #qwerty de base il faut appuyer sur q pour un azerty
