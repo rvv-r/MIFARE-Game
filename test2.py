@@ -10,30 +10,29 @@ pygame.display.set_caption("Hack this Mifare")
 ############ Boucle des niveaux  #####################
 
 
-def selecteurNiveau():
+def bouclePrincipale():
 
 
 
 ####### CREATION DES FONDS ############################
 
-        fenetre_niveau1 = Terrain("mur.jpg")
+        fenetre_niveau1 = Terrain("scene.jpg")
         fenetre_niveau2 = Terrain("mur2.jpg")
-        fenetre_gameover = Terrain("Gameover.png")
+        #fenetre_gameover = Terrain("Gameover.png")
 
 
 ####### CREATION DE LA PORTE #########################
 
-        porte = Porte("porteOuverte2.jpg","porteFerme2.jpg",1)
+        porte = Porte("porteOuverte.png","porteFerme.png",1)
         porte2 = Porte("porteOuverte2.jpg","porteFerme2.jpg",1)
         
         
 ####### Création de la fenêtre ########################
     
-        fenetre = pygame.display.set_mode((800, 530), pygame.RESIZABLE)
+        fenetre = pygame.display.set_mode((1000, 661), pygame.RESIZABLE)
         pygame.key.set_repeat(10, 30)
 
 ########## SELECTION DES NIVEAUX #######################
-
         niveau1 = True
         niveau2 = False
 
@@ -44,10 +43,10 @@ def selecteurNiveau():
             pygame.display.update()
             pygame.display.flip()
             if porte.verouille == 1:
-                fenetre.blit(porte.imageFerme, (350,175))
+                fenetre.blit(porte.imageFerme, (0,0))
                 pygame.display.flip()
             if porte.verouille == 0:
-                fenetre.blit(porte.imageOuverte, (350,150))
+                fenetre.blit(porte.imageOuverte, (0,0))
                 pygame.display.flip()
             for event in pygame.event.get():
                 if event.type == QUIT:
@@ -71,10 +70,10 @@ def selecteurNiveau():
             pygame.display.update()
             pygame.display.flip()
             if porte2.verouille == 1:
-                fenetre.blit(porte2.imageFerme, (350,175))
+                fenetre.blit(porte2.imageFerme, (400,310))
                 pygame.display.flip()
             if porte2.verouille == 0:
-                fenetre.blit(porte2.imageOuverte, (350,150))
+                fenetre.blit(porte2.imageOuverte, (400,310))
                 pygame.display.flip()
             for event in pygame.event.get():
                 if event.type == QUIT:
@@ -88,8 +87,27 @@ def selecteurNiveau():
                         pygame.quit()
 
 
-        
 
-selecteurNiveau()
+""" def selecteurNiveau():
+    gameStart = True
+    while gameStart == True:
+        fenetre_selection = Terrain("Gameover.png")
+        fenetre = pygame.display.set_mode((800, 530), pygame.RESIZABLE)
+        pygame.key.set_repeat(10, 30)
+        fenetre.blit(fenetre_selection.fond,(0,0))
+        for event in pygame.event.get():
+            if event.type == pygame.KEYDOWN:    
+                    if event.key == pygame.K_1 :
+                        bouclePrincipale(True,False)
+                        gameStart = False
+                    if event.key == pygame.K_2:
+                        bouclePrincipale(False,True)
+                        gameStart = False
+                    if event.key == pygame.K_a:
+                        gameStart = False
+                        pygame.quit() """
+
+
+bouclePrincipale()
                 
             
