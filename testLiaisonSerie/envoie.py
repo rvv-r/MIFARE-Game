@@ -1,7 +1,6 @@
 import serial
 
 nbSerialPort = str(input("Rentrez le numéro du port série : "))
-serialPort = 'COM'+nbSerialPort
 
 ser = 0
 var = True
