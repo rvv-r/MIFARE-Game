@@ -7,7 +7,7 @@ pygame.display.set_caption("Hack this Mifare")
 
 
 
-############ Boucle des niveaux  #####################
+############ Fonctions de la boucle des niveaux  #####################
 
 
 def bouclePrincipale(bool1, bool2):
@@ -32,7 +32,7 @@ def bouclePrincipale(bool1, bool2):
         fenetre = pygame.display.set_mode((1000, 661), pygame.RESIZABLE)
         pygame.key.set_repeat(10, 30)
 
-########## SELECTION DES NIVEAUX #######################
+################ BOUCLE DES NIVEAUX #######################
         niveau1 = bool1
         niveau2 = bool2
 
@@ -98,6 +98,8 @@ def bouclePrincipale(bool1, bool2):
                         niveau2 = False
                         pygame.quit()
 
+
+############ Fonction menu principale selection des niveaux  #############################
 
 
 def selecteurNiveau(): #Premiere interface qui permet de selectionner les niveaux
