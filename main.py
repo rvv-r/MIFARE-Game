@@ -1,5 +1,7 @@
 import pygame
+import serial
 import time
+from threading import Thread
 from pygame.locals import *
 from classe import *
 pygame.init()
@@ -54,6 +56,7 @@ def bouclePrincipale(bool1, bool2):
                 if event.type == pygame.KEYDOWN:
                     if event.key == pygame.K_p: #ouvre la porte (code a remplacé popur la detection de carte)
                         print("bravo la porte est ouverte")
+                        print(data)
                         porte.verouille = 0
                     if event.key == pygame.K_c and porte.verouille == 0:  #Permet de continuer seulement si la porte a été ouverte
                         niveau1 = False
@@ -85,6 +88,7 @@ def bouclePrincipale(bool1, bool2):
                 if event.type == pygame.KEYDOWN:    #ouvre la porte (code a remplacé popur la detection de carte)
                     if event.key == pygame.K_p :    
                         print("bravo la porte est ouverte")
+                        print(data)
                         porte2.verouille = 0
                     if event.key == pygame.K_c and porte2.verouille == 0 : #Permet de continuer seulement si la porte a été ouverte
                         selecteurNiveau() #Comme c'est le dernier niveau on retombe sur la sélection de menu """""""A CHANGER SI CE N'EST PLUS LE DERNIER NIVEAU"""""""""
@@ -122,7 +126,53 @@ def selecteurNiveau(): #Premiere interface qui permet de selectionner les niveau
                         gameStart = False
                         pygame.quit() 
 
+############ Définition du Thread #############################
 
+class Recevoir(Thread):
+    
+    def __init__(self):
+        Thread.__init__(self)
+
+        nbSerialPort = str(input("Rentrez le numéro du port série : "))
+        serialPort = 'COM'+nbSerialPort
+        ser = 0
+        
+
+        def init_serial(numeroPort):
+            global var
+            global ser
+            ser = serial.Serial()
+            ser.baudrate = 9600
+            ser.port = 'COM'+numeroPort
+            ser.timeout = 3
+            ser.open()
+
+            if ser.isOpen():
+                print('Open : ' + ser.portstr)
+            
+        init_serial(nbSerialPort)
+
+    def run(self):
+        global data
+        var = True
+        while var == True:
+            data = str(ser.readline())
+            data = data[2:-1]
+            print("reçu : " + data)
+            if data == "quit":
+                print("connection fermé")
+                var = False
+
+
+
+# Création des threads
+thread_1 = Recevoir()
+
+# Lancement des threads
+
+thread_1.start()
 selecteurNiveau()
+
+# Attend que les threads se terminent
                 
             
