@@ -4,8 +4,10 @@ import time
 from threading import Thread
 from pygame.locals import *
 from classe import *
+
 pygame.init()
 pygame.display.set_caption("Hack this Mifare")
+
 
 
 
@@ -14,8 +16,7 @@ pygame.display.set_caption("Hack this Mifare")
 
 def bouclePrincipale(bool1, bool2):
 
-
-
+        
 ####### CREATION DES FONDS ############################
 
         fenetre_niveau1 = Terrain("scene.jpg")
@@ -50,14 +51,15 @@ def bouclePrincipale(bool1, bool2):
             if porte.verouille == 0:
                 fenetre.blit(porte.imageOuverte, (0,0))
                 pygame.display.flip()
+            if thread_1.data == "ouvre": #permet d'ouvrir la porte quand on recoit le code ouvrir par le port série
+                porte.verouille = 0
             for event in pygame.event.get():
                 if event.type == QUIT:
                     pygame.quit()
                 if event.type == pygame.KEYDOWN:
-                    if event.key == pygame.K_p: #ouvre la porte (code a remplacé popur la detection de carte)
+                    """if event.key == pygame.K_p:    #ancien code qui ouvrait la porte avec p
                         print("bravo la porte est ouverte")
-                        print(data)
-                        porte.verouille = 0
+                        porte2.verouille = 0"""
                     if event.key == pygame.K_c and porte.verouille == 0:  #Permet de continuer seulement si la porte a été ouverte
                         niveau1 = False
                         niveau2 = True
@@ -72,24 +74,25 @@ def bouclePrincipale(bool1, bool2):
 
         while niveau2 == True:
             fenetre.blit(fenetre_niveau2.fond,(0,0))
-            clock = pygame.time.Clock()
-            clock.tick(30)
-            pygame.display.update()
-            pygame.display.flip()
+            #clock = pygame.time.Clock()
+            #clock.tick(30)
+            #pygame.display.update()
+            #pygame.display.flip()
             if porte2.verouille == 1:
                 fenetre.blit(porte2.imageFerme, (400,310))
                 pygame.display.flip()
             if porte2.verouille == 0:
                 fenetre.blit(porte2.imageOuverte, (400,310))
                 pygame.display.flip()
+            if thread_1.data == "ouvre": #permet d'ouvrir la porte quand on recoit le code ouvrir par le port série
+                porte.verouille = 0
             for event in pygame.event.get():
                 if event.type == QUIT:
                     pygame.quit()
-                if event.type == pygame.KEYDOWN:    #ouvre la porte (code a remplacé popur la detection de carte)
-                    if event.key == pygame.K_p :    
+                if event.type == pygame.KEYDOWN:    
+                    """if event.key == pygame.K_p:    #ancien code qui ouvrait la porte avec p
                         print("bravo la porte est ouverte")
-                        print(data)
-                        porte2.verouille = 0
+                        porte2.verouille = 0"""
                     if event.key == pygame.K_c and porte2.verouille == 0 : #Permet de continuer seulement si la porte a été ouverte
                         selecteurNiveau() #Comme c'est le dernier niveau on retombe sur la sélection de menu """""""A CHANGER SI CE N'EST PLUS LE DERNIER NIVEAU"""""""""
                         niveau1 = False
@@ -127,52 +130,12 @@ def selecteurNiveau(): #Premiere interface qui permet de selectionner les niveau
                         pygame.quit() 
 
 ############ Définition du Thread #############################
-
-class Recevoir(Thread):
-    
-    def __init__(self):
-        Thread.__init__(self)
-
-        nbSerialPort = str(input("Rentrez le numéro du port série : "))
-        serialPort = 'COM'+nbSerialPort
-        ser = 0
-        
-
-        def init_serial(numeroPort):
-            global var
-            global ser
-            ser = serial.Serial()
-            ser.baudrate = 9600
-            ser.port = 'COM'+numeroPort
-            ser.timeout = 3
-            ser.open()
-
-            if ser.isOpen():
-                print('Open : ' + ser.portstr)
-            
-        init_serial(nbSerialPort)
-
-    def run(self):
-        global data
-        var = True
-        while var == True:
-            data = str(ser.readline())
-            data = data[2:-1]
-            print("reçu : " + data)
-            if data == "quit":
-                print("connection fermé")
-                var = False
-
-
-
-# Création des threads
 thread_1 = Recevoir()
 
-# Lancement des threads
-
 thread_1.start()
+
+# Création des threads
+
 selecteurNiveau()
 
 # Attend que les threads se terminent
-                
-            
