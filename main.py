@@ -9,8 +9,6 @@ pygame.init()
 pygame.display.set_caption("Hack this Mifare")
 
 
-
-
 ############ Fonctions de la boucle des niveaux  #####################
 
 
@@ -40,11 +38,12 @@ def bouclePrincipale(bool1, bool2):
         niveau2 = bool2
 
         while niveau1 == True:
+            thread_1.data = ""
             fenetre.blit(fenetre_niveau1.fond,(0,0))
             clock = pygame.time.Clock()
-            clock.tick(30)
+            clock.tick(60)
             pygame.display.update()
-            pygame.display.flip()
+            #pygame.display.flip()
             if porte.verouille == 1:
                 fenetre.blit(porte.imageFerme, (0,0))
                 pygame.display.flip()
@@ -57,9 +56,9 @@ def bouclePrincipale(bool1, bool2):
                 if event.type == QUIT:
                     pygame.quit()
                 if event.type == pygame.KEYDOWN:
-                    """if event.key == pygame.K_p:    #ancien code qui ouvrait la porte avec p
+                    if event.key == pygame.K_p:    #ancien code qui ouvrait la porte avec p
                         print("bravo la porte est ouverte")
-                        porte2.verouille = 0"""
+                        porte.verouille = 0
                     if event.key == pygame.K_c and porte.verouille == 0:  #Permet de continuer seulement si la porte a été ouverte
                         niveau1 = False
                         niveau2 = True
@@ -73,10 +72,11 @@ def bouclePrincipale(bool1, bool2):
 
 
         while niveau2 == True:
+            thread_1.data = ""
             fenetre.blit(fenetre_niveau2.fond,(0,0))
-            #clock = pygame.time.Clock()
-            #clock.tick(30)
-            #pygame.display.update()
+            clock = pygame.time.Clock()
+            clock.tick(60)
+            pygame.display.update()
             #pygame.display.flip()
             if porte2.verouille == 1:
                 fenetre.blit(porte2.imageFerme, (400,310))
@@ -85,14 +85,14 @@ def bouclePrincipale(bool1, bool2):
                 fenetre.blit(porte2.imageOuverte, (400,310))
                 pygame.display.flip()
             if thread_1.data == "ouvre": #permet d'ouvrir la porte quand on recoit le code ouvrir par le port série
-                porte.verouille = 0
+                porte2.verouille = 0
             for event in pygame.event.get():
                 if event.type == QUIT:
                     pygame.quit()
                 if event.type == pygame.KEYDOWN:    
-                    """if event.key == pygame.K_p:    #ancien code qui ouvrait la porte avec p
+                    if event.key == pygame.K_p:    #ancien code qui ouvrait la porte avec p
                         print("bravo la porte est ouverte")
-                        porte2.verouille = 0"""
+                        porte2.verouille = 0
                     if event.key == pygame.K_c and porte2.verouille == 0 : #Permet de continuer seulement si la porte a été ouverte
                         selecteurNiveau() #Comme c'est le dernier niveau on retombe sur la sélection de menu """""""A CHANGER SI CE N'EST PLUS LE DERNIER NIVEAU"""""""""
                         niveau1 = False
