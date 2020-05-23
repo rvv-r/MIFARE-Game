@@ -139,10 +139,11 @@ def Start():
 
 
 
-def callback(*args):
+def fctderoulant1(*args):
+    if variable.get() == "0":
+        thread_1.nbSerialPort = "0"
     if variable.get() == "1":
         thread_1.nbSerialPort = "1"
-        print(thread_1.nbSerialPort)
     if variable.get() == "2":
         thread_1.nbSerialPort = "2"
     if variable.get() == "3":
@@ -150,33 +151,51 @@ def callback(*args):
     if variable.get() == "4":
         thread_1.nbSerialPort = "4" 
 
+def fctderoulant2(*args):
+    if variable2.get() == "Windows":
+        thread_1.environnementSerial = "COM"
+        print(thread_1.environnementSerial)
+    if variable2.get() == "Linux":
+        thread_1.environnementSerial = "/dev/ttyS"
+        print(thread_1.environnementSerial)
+
 
 #################  FENETRE TKINTER  #########################
 
-OptionList = ["1","2","3","4"] 
+OptionList = ["Numéro du port","0","1","2","3","4"] 
+OptionList2 = ["Système","Windows", "Linux"]
 
 app = tk.Tk()
 
 app.geometry('300x200')
 
+## Menu déroulant 1 ##
+
 variable = tk.StringVar(app)
 variable.set(OptionList[0])
-
 opt = tk.OptionMenu(app, variable, *OptionList)
-opt.config(width=10, font=('Helvetica', 12))
+opt.config(width=15, font=('Helvetica', 12))
 opt.pack(side="bottom")
+variable.trace("w", fctderoulant1) #application de la fonction pour le menu déroulant 1
 
-labelTest = tk.Label(text="", font=('Helvetica', 12), fg='red') #Menu déroulant
+## Menu déroulant 2 ##
+
+variable2 = tk.StringVar(app)
+variable2.set(OptionList2[0])
+opt2 = tk.OptionMenu(app, variable2, *OptionList2)
+opt2.config(width=15, font=('Helvetica', 12))
+opt2.pack(side="bottom")
+variable2.trace("w", fctderoulant2) #application de la fonction pour le menu déroulant 2
+
+labelTest = tk.Label(text="Configuration Hack This Mifare", font=('Helvetica', 12), fg='red')
 labelTest.pack(side="top")
 
-variable.trace("w", callback) #application de la fonction pour le menu déroulant
 
-bouton_quitter = Button(app, text="Quitter", command=quit)  #Bouton quitter
+bouton_quitter = Button(app, text="Quitter", command=quit, width=15)  #Bouton quitter
 bouton_quitter.pack(side='left')
 
-bouton_start = Button(app, text="Start", command=Start)   #Bouton Start
+bouton_start = Button(app, text="Start", command=Start, width=15)   #Bouton Start
 bouton_start.pack(side='right')
-
 
 
 app.mainloop()

@@ -31,9 +31,11 @@ class Recevoir(Thread):
         Thread.__init__(self)
         self.data = None
         self.nbSerialPort = ""
+        self.environnementSerial = ""
 
     def run(self):
-        serialPort = 'COM'+self.nbSerialPort
+        print(self.environnementSerial+self.nbSerialPort)
+        serialPort = self.environnementSerial+self.nbSerialPort
         ser = serial.Serial(serialPort, 9600, timeout=3)
         var = True
         while var == True:
@@ -43,4 +45,3 @@ class Recevoir(Thread):
             if self.data == "quit":
                 print("connection fermé")
                 var = False
-
