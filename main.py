@@ -1,6 +1,7 @@
 import pygame
 import serial
 import tkinter as tk
+from PIL import Image, ImageTk
 from threading import Thread
 from pygame.locals import *
 from classe import *
@@ -126,6 +127,7 @@ def selecteurNiveau(): #Premiere interface qui permet de selectionner les niveau
                     if event.key == pygame.K_a: #q en azerty pour quitter
                         gameStart = False
                         pygame.quit() 
+                        thread_1.var = False
 
 ############ Création du thread #############################
 
@@ -134,10 +136,9 @@ thread_1 = Recevoir()
 ############## Fonction pour gérer les bouton tkinter ###############
 
 def Start():
+    app.destroy()
     thread_1.start()
     selecteurNiveau()
-
-
 
 def fctderoulant1(*args):
     if variable.get() == "0":
@@ -167,7 +168,20 @@ OptionList2 = ["Système","Windows", "Linux"]
 
 app = tk.Tk()
 
-app.geometry('300x200')
+app.geometry('1000x631')
+
+"""image = PhotoImage(file="imageConfig.jpg")
+imagefond.create_image(0,0,anchor = tk.NW, image=image)
+imagefond.pack()
+
+imagefond = Canvas(app,width=image.size[0],height=image.size[1],bg='yellow',bd=8,relief="ridge")
+"""
+
+
+## Ecriture en haut ##
+
+labelTest = tk.Label(text="Configuration Hack This Mifare", font=('Helvetica', 12), fg='red')
+labelTest.pack(side="top")
 
 ## Menu déroulant 1 ##
 
@@ -187,16 +201,16 @@ opt2.config(width=15, font=('Helvetica', 12))
 opt2.pack(side="bottom")
 variable2.trace("w", fctderoulant2) #application de la fonction pour le menu déroulant 2
 
-labelTest = tk.Label(text="Configuration Hack This Mifare", font=('Helvetica', 12), fg='red')
-labelTest.pack(side="top")
-
+## Bouton Quitter ##
 
 bouton_quitter = Button(app, text="Quitter", command=quit, width=15)  #Bouton quitter
 bouton_quitter.pack(side='left')
 
+## Bouton Start ##
+
 bouton_start = Button(app, text="Start", command=Start, width=15)   #Bouton Start
 bouton_start.pack(side='right')
 
+######################  LANCEMENT DU JEU  ################################
 
 app.mainloop()
-# Attend que les threads se terminent
