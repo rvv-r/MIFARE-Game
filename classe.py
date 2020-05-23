@@ -2,6 +2,7 @@ import pygame
 import serial
 from threading import Thread
 from pygame.locals import *
+from tkinter import * 
 
 
 ##############     TERRAIN     #####################
@@ -29,10 +30,10 @@ class Recevoir(Thread):
     def __init__(self):
         Thread.__init__(self)
         self.data = None
+        self.nbSerialPort = ""
 
     def run(self):
-        nbSerialPort = str(input("Rentrez le numéro du port série : "))
-        serialPort = 'COM'+nbSerialPort
+        serialPort = 'COM'+self.nbSerialPort
         ser = serial.Serial(serialPort, 9600, timeout=3)
         var = True
         while var == True:
@@ -42,3 +43,4 @@ class Recevoir(Thread):
             if self.data == "quit":
                 print("connection fermé")
                 var = False
+

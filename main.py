@@ -1,6 +1,6 @@
 import pygame
 import serial
-import time
+import tkinter as tk
 from threading import Thread
 from pygame.locals import *
 from classe import *
@@ -43,7 +43,6 @@ def bouclePrincipale(bool1, bool2):
             clock = pygame.time.Clock()
             clock.tick(60)
             pygame.display.update()
-            #pygame.display.flip()
             if porte.verouille == 1:
                 fenetre.blit(porte.imageFerme, (0,0))
                 pygame.display.flip()
@@ -77,7 +76,6 @@ def bouclePrincipale(bool1, bool2):
             clock = pygame.time.Clock()
             clock.tick(60)
             pygame.display.update()
-            #pygame.display.flip()
             if porte2.verouille == 1:
                 fenetre.blit(porte2.imageFerme, (400,310))
                 pygame.display.flip()
@@ -129,13 +127,57 @@ def selecteurNiveau(): #Premiere interface qui permet de selectionner les niveau
                         gameStart = False
                         pygame.quit() 
 
-############ Définition du Thread #############################
+############ Création du thread #############################
+
 thread_1 = Recevoir()
 
-thread_1.start()
+############## Fonction pour gérer les bouton tkinter ###############
 
-# Création des threads
+def Start():
+    thread_1.start()
+    selecteurNiveau()
 
-selecteurNiveau()
 
+
+def callback(*args):
+    if variable.get() == "1":
+        thread_1.nbSerialPort = "1"
+        print(thread_1.nbSerialPort)
+    if variable.get() == "2":
+        thread_1.nbSerialPort = "2"
+    if variable.get() == "3":
+        thread_1.nbSerialPort = "3"
+    if variable.get() == "4":
+        thread_1.nbSerialPort = "4" 
+
+
+#################  FENETRE TKINTER  #########################
+
+OptionList = ["1","2","3","4"] 
+
+app = tk.Tk()
+
+app.geometry('300x200')
+
+variable = tk.StringVar(app)
+variable.set(OptionList[0])
+
+opt = tk.OptionMenu(app, variable, *OptionList)
+opt.config(width=10, font=('Helvetica', 12))
+opt.pack(side="bottom")
+
+labelTest = tk.Label(text="", font=('Helvetica', 12), fg='red') #Menu déroulant
+labelTest.pack(side="top")
+
+variable.trace("w", callback) #application de la fonction pour le menu déroulant
+
+bouton_quitter = Button(app, text="Quitter", command=quit)  #Bouton quitter
+bouton_quitter.pack(side='left')
+
+bouton_start = Button(app, text="Start", command=Start)   #Bouton Start
+bouton_start.pack(side='right')
+
+
+
+app.mainloop()
 # Attend que les threads se terminent
