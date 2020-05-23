@@ -18,15 +18,15 @@ def bouclePrincipale(bool1, bool2):
         
 ####### CREATION DES FONDS ############################
 
-        fenetre_niveau1 = Terrain("scene.jpg")
-        fenetre_niveau2 = Terrain("mur2.jpg")
+        fenetre_niveau1 = Terrain("image/scene.jpg")
+        fenetre_niveau2 = Terrain("image/mur2.jpg")
         #fenetre_gameover = Terrain("Gameover.png")
 
 
 ####### CREATION DE LA PORTE #########################
 
-        porte = Porte("porteOuverte.png","porteFerme.png",1)
-        porte2 = Porte("porteOuverte2.jpg","porteFerme2.jpg",1)
+        porte = Porte("image/porteOuverte.png","image/porteFerme.png",1)
+        porte2 = Porte("image/porteOuverte2.jpg","image/porteFerme2.jpg",1)
         
         
 ####### Création de la fenêtre ########################
@@ -57,7 +57,6 @@ def bouclePrincipale(bool1, bool2):
                     pygame.quit()
                 if event.type == pygame.KEYDOWN:
                     if event.key == pygame.K_p:    #ancien code qui ouvrait la porte avec p
-                        print("bravo la porte est ouverte")
                         porte.verouille = 0
                     if event.key == pygame.K_c and porte.verouille == 0:  #Permet de continuer seulement si la porte a été ouverte
                         niveau1 = False
@@ -69,6 +68,7 @@ def bouclePrincipale(bool1, bool2):
                     if event.key == pygame.K_a: #qwerty de base il faut appuyer sur q pour un azerty Permet de quitter
                         niveau1 = False
                         pygame.quit()
+                        thread_1.var = False
 
 
         while niveau2 == True:
@@ -83,14 +83,13 @@ def bouclePrincipale(bool1, bool2):
             if porte2.verouille == 0:
                 fenetre.blit(porte2.imageOuverte, (400,310))
                 pygame.display.flip()
-            if thread_1.data == "ouvre": #permet d'ouvrir la porte quand on recoit le code ouvrir par le port série
+            if thread_1.data == "ouvre2": #permet d'ouvrir la porte quand on recoit le code ouvrir par le port série
                 porte2.verouille = 0
             for event in pygame.event.get():
                 if event.type == QUIT:
                     pygame.quit()
                 if event.type == pygame.KEYDOWN:    
                     if event.key == pygame.K_p:    #ancien code qui ouvrait la porte avec p
-                        print("bravo la porte est ouverte")
                         porte2.verouille = 0
                     if event.key == pygame.K_c and porte2.verouille == 0 : #Permet de continuer seulement si la porte a été ouverte
                         selecteurNiveau() #Comme c'est le dernier niveau on retombe sur la sélection de menu """""""A CHANGER SI CE N'EST PLUS LE DERNIER NIVEAU"""""""""
@@ -103,6 +102,7 @@ def bouclePrincipale(bool1, bool2):
                     if event.key == pygame.K_a: #qwerty de base il faut appuyer sur q pour un azerty
                         niveau2 = False
                         pygame.quit()
+                        thread_1.var = False
 
 
 ############ Fonction menu principale selection des niveaux  #############################
@@ -113,7 +113,7 @@ def selecteurNiveau(): #Premiere interface qui permet de selectionner les niveau
 
     while gameStart == True:
         fenetre = pygame.display.set_mode((1000, 661), pygame.RESIZABLE)
-        fenetre_selection = Terrain("selection.png")
+        fenetre_selection = Terrain("image/selection.png")
         fenetre.blit(fenetre_selection.fond,(0,0))
         pygame.display.update()
         for event in pygame.event.get():
@@ -155,10 +155,8 @@ def fctderoulant1(*args):
 def fctderoulant2(*args):
     if variable2.get() == "Windows":
         thread_1.environnementSerial = "COM"
-        print(thread_1.environnementSerial)
     if variable2.get() == "Linux":
         thread_1.environnementSerial = "/dev/ttyS"
-        print(thread_1.environnementSerial)
 
 
 #################  FENETRE TKINTER  #########################
@@ -167,20 +165,20 @@ OptionList = ["Numéro du port","0","1","2","3","4"]
 OptionList2 = ["Système","Windows", "Linux"]
 
 app = tk.Tk()
+app.title("Hack this Mifare")
 
-app.geometry('1000x631')
+app.geometry('866x631')
 
-"""image = PhotoImage(file="imageConfig.jpg")
-imagefond.create_image(0,0,anchor = tk.NW, image=image)
-imagefond.pack()
+canvas = Canvas(app, width = 866, height = 366)
+canvas.pack()
 
-imagefond = Canvas(app,width=image.size[0],height=image.size[1],bg='yellow',bd=8,relief="ridge")
-"""
+imagefond = PhotoImage(file="image/imageConfig.gif")
+canvas.create_image(0,0,anchor=NW, image=imagefond)
 
 
 ## Ecriture en haut ##
 
-labelTest = tk.Label(text="Configuration Hack This Mifare", font=('Helvetica', 12), fg='red')
+labelTest = tk.Label(text="Configuration", font=('Helvetica', 16), fg='red')
 labelTest.pack(side="top")
 
 ## Menu déroulant 1 ##

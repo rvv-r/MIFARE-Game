@@ -32,7 +32,7 @@ class Recevoir(Thread):
         self.data = None         # Données reçues par le port série
         self.nbSerialPort = ""   # permet la configuration du numéro de port
         self.environnementSerial = ""  #'COM' pour windows, '/dev/ttyS' pour Linux
-        self.var = True
+        self.var = True             #Variable qui permettra d'arrêter le thread
 
     def run(self):
         serialPort = self.environnementSerial+self.nbSerialPort 
