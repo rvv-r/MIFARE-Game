@@ -158,6 +158,23 @@ def fctderoulant2(*args):
     if variable2.get() == "Linux":
         thread_1.environnementSerial = "/dev/ttyS"
 
+def fctderoulant3(*args):
+    if variable3.get() == "0":
+        #thread_1.nbSerialPort = "0"
+        print("")
+    if variable3.get() == "1":
+        #thread_1.nbSerialPort = "1"
+        print("")
+    if variable3.get() == "2":
+        #thread_1.nbSerialPort = "2"
+        print("")
+    if variable3.get() == "3":
+        #thread_1.nbSerialPort = "3"
+        print("")
+    if variable3.get() == "4":
+        #thread_1.nbSerialPort = "4" 
+        print("")
+
 
 #################  FENETRE TKINTER  #########################
 
@@ -165,49 +182,73 @@ OptionList = ["Numéro du port","0","1","2","3","4"]
 OptionList2 = ["Système","Windows", "Linux"]
 
 app = tk.Tk()
-app.title("Hack this Mifare")
+app.title("Hack this Mifare Configuration")
 
 app.geometry('866x631')
 
-canvas = Canvas(app, width = 866, height = 366)
+canvas = Canvas(app, width = 866, height = 380)
 canvas.pack()
+
+## Zone blanche ou sont positionner les boutons
+zoneSelection = Frame(app, bg = 'white', width = 800, height = 200) 
+zoneSelection.pack_propagate(0) #Evite que la frame ne s'adapte aux boutons
+zoneSelection.pack()
 
 imagefond = PhotoImage(file="image/imageConfig.gif")
 canvas.create_image(0,0,anchor=NW, image=imagefond)
 
 
-## Ecriture en haut ##
+## Zone de texte ##
 
-labelTest = tk.Label(text="Configuration", font=('Helvetica', 16), fg='red')
+labelTest = tk.Label(zoneSelection, bg = 'white', text="Configuration", font=('Helvetica', 16), fg='black')
 labelTest.pack(side="top")
+
+texteDeroulant1 = tk.Label(zoneSelection, bg = 'white', text = "Système d'exploitation", font=('Helvetica', 11))
+texteDeroulant1.place(x = 190 , y = 65)
+
+texteDeroulant1 = tk.Label(zoneSelection, bg = 'white', text = "Numéro de port", font=('Helvetica', 11))
+texteDeroulant1.place(x = 190 , y = 105)
+
+texteDeroulant1 = tk.Label(zoneSelection, bg = 'white', text = "Numéro de port du lecteur", font=('Helvetica', 11))
+texteDeroulant1.place(x = 190 , y = 145)
 
 ## Menu déroulant 1 ##
 
 variable = tk.StringVar(app)
 variable.set(OptionList[0])
-opt = tk.OptionMenu(app, variable, *OptionList)
+opt = tk.OptionMenu(zoneSelection, variable, *OptionList)
 opt.config(width=15, font=('Helvetica', 12))
-opt.pack(side="bottom")
+opt.place(x = 400, y = 100)
 variable.trace("w", fctderoulant1) #application de la fonction pour le menu déroulant 1
 
 ## Menu déroulant 2 ##
 
 variable2 = tk.StringVar(app)
 variable2.set(OptionList2[0])
-opt2 = tk.OptionMenu(app, variable2, *OptionList2)
+opt2 = tk.OptionMenu(zoneSelection, variable2, *OptionList2)
 opt2.config(width=15, font=('Helvetica', 12))
-opt2.pack(side="bottom")
+opt2.place(x = 400, y = 60)
 variable2.trace("w", fctderoulant2) #application de la fonction pour le menu déroulant 2
+
+## Menu déroulant 2 ##
+
+variable3 = tk.StringVar(app)
+variable3.set(OptionList[0])
+opt3 = tk.OptionMenu(zoneSelection, variable3, *OptionList)
+opt3.config(width=15, font=('Helvetica', 12))
+opt3.place(x = 400, y = 140)
+variable2.trace("w", fctderoulant3) #application de la fonction pour le menu déroulant 2
+
 
 ## Bouton Quitter ##
 
-bouton_quitter = Button(app, text="Quitter", command=quit, width=15)  #Bouton quitter
-bouton_quitter.pack(side='left')
+bouton_quitter = Button(app, text="Quit", command=quit, width=15)  #Bouton quitter
+bouton_quitter.place(x = 600, y = 600)
 
 ## Bouton Start ##
 
 bouton_start = Button(app, text="Start", command=Start, width=15)   #Bouton Start
-bouton_start.pack(side='right')
+bouton_start.place(x = 730, y = 600)
 
 ######################  LANCEMENT DU JEU  ################################
 
