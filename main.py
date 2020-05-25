@@ -204,17 +204,17 @@ zoneSelection.pack_propagate(0) #Evite que la frame ne s'adapte aux boutons
 zoneSelection.pack()
 
 
-test2 = Frame(onglet)
-test2.pack()
+zoneTouches = Frame(onglet, bg = 'white', width = 800, height = 200)
+zoneTouches.pack()
 
 onglet.add(zoneSelection, text='Config')
-onglet.add(test2, text='onglet2')
+onglet.add(zoneTouches, text='Les touches du clavier')
 
 imagefond = PhotoImage(file="image/imageConfig.gif")
 canvas.create_image(0,0,anchor=NW, image=imagefond)
 
 
-## Zone de texte ##
+## Zone de texte pour Config ##
 
 texteDeroulant1 = tk.Label(zoneSelection, bg = 'white', text = "Système d'exploitation", font=('Helvetica', 11))
 texteDeroulant1.place(x = 190 , y = 45)
@@ -224,6 +224,17 @@ texteDeroulant1.place(x = 190 , y = 85)
 
 texteDeroulant1 = tk.Label(zoneSelection, bg = 'white', text = "Numéro de port du lecteur", font=('Helvetica', 11))
 texteDeroulant1.place(x = 190 , y = 125)
+
+## Zone de texte pour les touches du clavier ##
+
+texteDeroulant1 = tk.Label(zoneTouches, bg = 'white', text = "Q pour quitter", font=('Helvetica', 11))
+texteDeroulant1.place(x = 360 , y = 45)
+
+texteDeroulant1 = tk.Label(zoneTouches, bg = 'white', text = "R pour retourner à la sélection de niveau", font=('Helvetica', 11))
+texteDeroulant1.place(x = 280 , y = 85)
+
+texteDeroulant1 = tk.Label(zoneTouches, bg = 'white', text = "C pour continuer une fois la porte ouverte", font=('Helvetica', 11))
+texteDeroulant1.place(x = 275 , y = 125)
 
 ## Menu déroulant 1 ##
 
