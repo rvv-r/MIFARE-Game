@@ -1,7 +1,6 @@
 import pygame
 import serial
 import tkinter as tk
-from tkinter import ttk
 from PIL import Image, ImageTk
 from threading import Thread
 from pygame.locals import *
@@ -113,7 +112,7 @@ def selecteurNiveau(): #Premiere interface qui permet de selectionner les niveau
     gameStart = True
 
     while gameStart == True:
-        fenetre = pygame.display.set_mode((1000, 661))
+        fenetre = pygame.display.set_mode((1000, 661), pygame.RESIZABLE)
         fenetre_selection = Terrain("image/selection.png")
         fenetre.blit(fenetre_selection.fond,(0,0))
         pygame.display.update()
@@ -190,25 +189,10 @@ app.geometry('866x631')
 canvas = Canvas(app, width = 866, height = 380)
 canvas.pack()
 
-
 ## Zone blanche ou sont positionner les boutons
-zoneOnglet = Frame(app, bg = 'white', width = 800, height = 200) 
-zoneOnglet.pack_propagate(0) #Evite que la frame ne s'adapte aux boutons
-zoneOnglet.pack()
-
-onglet = ttk.Notebook(zoneOnglet)
-onglet.pack()
-
-zoneSelection = Frame(onglet, bg = 'white', width = 800, height = 200) 
+zoneSelection = Frame(app, bg = 'white', width = 800, height = 200) 
 zoneSelection.pack_propagate(0) #Evite que la frame ne s'adapte aux boutons
 zoneSelection.pack()
-
-
-test2 = Frame(onglet)
-test2.pack()
-
-onglet.add(zoneSelection, text='Config')
-onglet.add(test2, text='onglet2')
 
 imagefond = PhotoImage(file="image/imageConfig.gif")
 canvas.create_image(0,0,anchor=NW, image=imagefond)
@@ -216,14 +200,17 @@ canvas.create_image(0,0,anchor=NW, image=imagefond)
 
 ## Zone de texte ##
 
+labelTest = tk.Label(zoneSelection, bg = 'white', text="Configuration", font=('Helvetica', 16), fg='black')
+labelTest.pack(side="top")
+
 texteDeroulant1 = tk.Label(zoneSelection, bg = 'white', text = "Système d'exploitation", font=('Helvetica', 11))
-texteDeroulant1.place(x = 190 , y = 45)
+texteDeroulant1.place(x = 190 , y = 65)
 
 texteDeroulant1 = tk.Label(zoneSelection, bg = 'white', text = "Numéro de port", font=('Helvetica', 11))
-texteDeroulant1.place(x = 190 , y = 85)
+texteDeroulant1.place(x = 190 , y = 105)
 
 texteDeroulant1 = tk.Label(zoneSelection, bg = 'white', text = "Numéro de port du lecteur", font=('Helvetica', 11))
-texteDeroulant1.place(x = 190 , y = 125)
+texteDeroulant1.place(x = 190 , y = 145)
 
 ## Menu déroulant 1 ##
 
@@ -231,7 +218,7 @@ variable = tk.StringVar(app)
 variable.set(OptionList[0])
 opt = tk.OptionMenu(zoneSelection, variable, *OptionList)
 opt.config(width=15, font=('Helvetica', 12))
-opt.place(x = 400, y = 80)
+opt.place(x = 400, y = 100)
 variable.trace("w", fctderoulant1) #application de la fonction pour le menu déroulant 1
 
 ## Menu déroulant 2 ##
@@ -240,7 +227,7 @@ variable2 = tk.StringVar(app)
 variable2.set(OptionList2[0])
 opt2 = tk.OptionMenu(zoneSelection, variable2, *OptionList2)
 opt2.config(width=15, font=('Helvetica', 12))
-opt2.place(x = 400, y = 40)
+opt2.place(x = 400, y = 60)
 variable2.trace("w", fctderoulant2) #application de la fonction pour le menu déroulant 2
 
 ## Menu déroulant 2 ##
@@ -249,7 +236,7 @@ variable3 = tk.StringVar(app)
 variable3.set(OptionList[0])
 opt3 = tk.OptionMenu(zoneSelection, variable3, *OptionList)
 opt3.config(width=15, font=('Helvetica', 12))
-opt3.place(x = 400, y = 120)
+opt3.place(x = 400, y = 140)
 variable2.trace("w", fctderoulant3) #application de la fonction pour le menu déroulant 2
 
 
