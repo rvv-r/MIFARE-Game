@@ -41,6 +41,18 @@ class Bouton:
     def reinit(self):
         self.imageLoad = pygame.image.load(self.imageBouton)
 
+class PanneauNiveau:
+    def __init__(self,imageVide, imagePanneau):
+        self.imageLoad = pygame.image.load(imageVide)
+        self.imageVide = imageVide
+        self.imagePanneau = imagePanneau
+    
+    def affichePanneau(self):
+        self.imageLoad = pygame.image.load(self.imagePanneau)
+    
+    def reinitPanneau(self):
+        self.imageLoad = pygame.image.load(self.imageVide)
+
 
 
 #################  THREAD POUR LA COMMUNICATION SERIE   #################

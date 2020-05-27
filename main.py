@@ -116,6 +116,10 @@ def selecteurNiveau(): #Premiere interface qui permet de selectionner les niveau
     bouton1 = Bouton("image/boutonPorte.png", "image/boutonPorteHoover.png", "image/boutonPorteSelect.png")
     bouton2 = Bouton("image/boutonDistributeur.png", "image/boutonDistributeurHoover.png", "image/boutonDistributeurSelect.png")
     bouton3 = Bouton("image/boutonHotel.png", "image/boutonHotelHoover.png", "image/boutonHotelSelect.png")
+    bouton4 = Bouton("image/boutonHotel.png", "image/boutonHotelHoover.png", "image/boutonHotelSelect.png")
+    panneauPorte = PanneauNiveau("image/presqueRien.png", "image/niveauPorte.png")
+    panneauDistributeur = PanneauNiveau("image/presqueRien.png", "image/niveauDistributeur.png")
+    panneauHotel = PanneauNiveau("image/presqueRien.png", "image/niveauHotel.png")
 
     while gameStart == True:
         fenetre = pygame.display.set_mode((1000, 661))
@@ -123,7 +127,24 @@ def selecteurNiveau(): #Premiere interface qui permet de selectionner les niveau
         fenetre.blit(bouton1.imageLoad,(200,255))
         fenetre.blit(bouton2.imageLoad,(200, 355))
         fenetre.blit(bouton3.imageLoad, (200, 455))
+        fenetre.blit(panneauPorte.imageLoad, (475,200))
+        fenetre.blit(panneauDistributeur.imageLoad, (475,200))
+        fenetre.blit(panneauHotel.imageLoad, (475,200))
         pygame.display.update()
+
+        if bouton1.etat == True:
+            panneauPorte.affichePanneau()
+            panneauDistributeur.reinitPanneau()
+            panneauHotel.reinitPanneau()
+        if bouton2.etat == True:
+            panneauPorte.reinitPanneau()
+            panneauDistributeur.affichePanneau()
+            panneauHotel.reinitPanneau()
+        if bouton3.etat == True:
+            panneauPorte.reinitPanneau()
+            panneauDistributeur.reinitPanneau()
+            panneauHotel.affichePanneau()
+
         for event in pygame.event.get():
             ###### BOUTON POUR LA PORTE #####
             if event.type == MOUSEMOTION and event.pos[0] <= 413 and event.pos[0] >= 200 and event.pos[1] <= 336 and event.pos[1] >= 255:
@@ -132,7 +153,16 @@ def selecteurNiveau(): #Premiere interface qui permet de selectionner les niveau
                 bouton1.reinit()
             if event.type == MOUSEBUTTONDOWN and event.button == 1 and event.pos[0] <= 413 and event.pos[0] >= 200 and event.pos[1] <= 336 and event.pos[1] >= 255:
                 bouton1.select()
-            
+                bouton1.etat = True
+                bouton2.etat = False
+                bouton3.etat = False
+            if bouton1.etat == True:
+                if event.type == MOUSEBUTTONDOWN and event.button == 1 and event.pos[0] <= 700 and event.pos[0] >= 525 and event.pos[1] <= 320 and event.pos[1] >= 245:
+                    bouclePrincipale(True,False)
+                    bouton1.etat = False
+                if event.type == MOUSEBUTTONDOWN and event.button == 1 and event.pos[0] <= 905 and event.pos[0] >= 730 and event.pos[1] <= 320 and event.pos[1] >= 245:
+                    bouclePrincipale(False,True)
+                    bouton1.etat = False
             ###### BOUTON POUR LE DISTRIBUTEUR ######
             if event.type == MOUSEMOTION and event.pos[0] <= 413 and event.pos[0] >= 200 and event.pos[1] <= 436 and event.pos[1] >= 355:
                 bouton2.hoover()
@@ -140,6 +170,10 @@ def selecteurNiveau(): #Premiere interface qui permet de selectionner les niveau
                 bouton2.reinit()
             if event.type == MOUSEBUTTONDOWN and event.button == 1 and event.pos[0] <= 413 and event.pos[0] >= 200 and event.pos[1] <= 436 and event.pos[1] >= 355:
                 bouton2.select()
+                bouton1.etat = False
+                bouton2.etat = True
+                bouton3.etat = False
+
             
             ###### BOUTON POUR L'HOTEL ######
             if event.type == MOUSEMOTION and event.pos[0] <= 413 and event.pos[0] >= 200 and event.pos[1] <= 536 and event.pos[1] >= 455:
@@ -148,6 +182,9 @@ def selecteurNiveau(): #Premiere interface qui permet de selectionner les niveau
                 bouton3.reinit()
             if event.type == MOUSEBUTTONDOWN and event.button == 1 and event.pos[0] <= 413 and event.pos[0] >= 200 and event.pos[1] <= 536 and event.pos[1] >= 455:
                 bouton3.select()
+                bouton1.etat = False
+                bouton2.etat = False
+                bouton3.etat = True
 
             if event.type == pygame.KEYDOWN:    
                     if event.key == pygame.K_1 : #On appuie sur 1(&) pour choisir le niveau 1
