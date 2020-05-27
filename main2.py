@@ -22,6 +22,9 @@ def bouclePrincipale(bool1, bool2):
         fenetre_niveau1 = Terrain("image/scene.jpg")
         fenetre_niveau2 = Terrain("image/mur2.jpg")
         #fenetre_gameover = Terrain("Gameover.png")
+        bouton_quitter = Bouton("image/boutonQuitter.png", "image/boutonQuitterHoover.png", "image/boutonQuitterSelect.png")
+        bouton_continuer = Bouton("image/boutonContinuer.png", "image/boutonContinuerHoover.png", "image/boutonContinuerSelect.png")
+        bouton_retour = Bouton("image/boutonRetour.png", "image/boutonRetourHoover.png", "image/boutonRetourSelect.png")
 
 
 ####### CREATION DE LA PORTE #########################
@@ -42,6 +45,8 @@ def bouclePrincipale(bool1, bool2):
         while niveau1 == True:
             thread_1.data = ""
             fenetre.blit(fenetre_niveau1.fond,(0,0))
+            fenetre.blit(bouton_quitter.imageLoad, (20, 20))
+            fenetre.blit(bouton_retour.imageLoad, (249, 20))
             clock = pygame.time.Clock()
             clock.tick(30)
             pygame.display.update()
@@ -50,12 +55,53 @@ def bouclePrincipale(bool1, bool2):
                 pygame.display.flip()
             if porte.verouille == 0:
                 fenetre.blit(porte.imageOuverte, (0,0))
+                fenetre.blit(bouton_continuer.imageLoad, (20, 560))
                 pygame.display.flip()
             if thread_1.data == "ouvre": #permet d'ouvrir la porte quand on recoit le code ouvrir par le port série
                 porte.verouille = 0
             for event in pygame.event.get():
                 if event.type == QUIT:
                     pygame.quit()
+                ###### BOUTON POUR QUITTER #####
+                if event.type == MOUSEMOTION and event.pos[0] <= 233 and event.pos[0] >= 20 and event.pos[1] <= 101 and event.pos[1] >= 20 and bouton_quitter.etat == False:
+                    bouton_quitter.hoover()
+                if event.type == MOUSEMOTION and (event.pos[0] >= 233 or event.pos[0] <= 20 or event.pos[1] >= 101 or event.pos[1] <= 20) and bouton_quitter.etat == False:
+                    bouton_quitter.reinit()
+                if event.type == MOUSEBUTTONDOWN and event.button == 1 and event.pos[0] <= 233 and event.pos[0] >= 20 and event.pos[1] <= 101 and event.pos[1] >= 20:
+                    bouton_quitter.select()
+                    bouton_quitter.etat = True
+                    bouton_retour.etat = False
+                    bouton_continuer.etat = False
+                    niveau1 = False
+                    pygame.quit()
+                    thread_1.var = False
+                ###### BOUTON POUR REVENIR A LA SELECTION DE NIVEAU #####
+                if event.type == MOUSEMOTION and event.pos[0] <= 462 and event.pos[0] >= 249 and event.pos[1] <= 101 and event.pos[1] >= 20 and bouton_retour.etat == False:
+                    bouton_retour.hoover()
+                if event.type == MOUSEMOTION and (event.pos[0] >= 462 or event.pos[0] <= 249 or event.pos[1] >= 101 or event.pos[1] <= 20) and bouton_retour.etat == False:
+                    bouton_retour.reinit()
+                if event.type == MOUSEBUTTONDOWN and event.button == 1 and event.pos[0] <= 462 and event.pos[0] >= 249 and event.pos[1] <= 101 and event.pos[1] >= 20:
+                    bouton_retour.select()
+                    bouton_quitter.etat = False
+                    bouton_retour.etat = True
+                    bouton_continuer.etat = False
+                    selecteurNiveau()
+                    niveau1 = False
+                    niveau2 = False
+                ###### BOUTON POUR CONTINUER QUE SI LA PORTE EST OUVERTE #####
+                if porte.verouille == 0:
+                    if event.type == MOUSEMOTION and event.pos[0] <= 233 and event.pos[0] >= 20 and event.pos[1] <= 641 and event.pos[1] >= 560 and bouton_continuer.etat == False:
+                        bouton_continuer.hoover()
+                    if event.type == MOUSEMOTION and (event.pos[0] >= 233 or event.pos[0] <= 20 or event.pos[1] >= 641 or event.pos[1] <= 560) and bouton_continuer.etat == False:
+                        bouton_continuer.reinit()
+                    if event.type == MOUSEBUTTONDOWN and event.button == 1 and event.pos[0] <= 233 and event.pos[0] >= 20 and event.pos[1] <= 641 and event.pos[1] >= 560:
+                        bouton_continuer.select()
+                        bouton_quitter.etat = False
+                        bouton_retour.etat = False
+                        bouton_continuer.etat = True
+                        niveau1 = False
+                        niveau2 = True
+                        bouton_continuer.etat = False #Pour rénitialiser le bouton continuer entre les niveaux
                 if event.type == pygame.KEYDOWN:
                     if event.key == pygame.K_p:    #ancien code qui ouvrait la porte avec p
                         porte.verouille = 0
@@ -75,20 +121,63 @@ def bouclePrincipale(bool1, bool2):
         while niveau2 == True:
             thread_1.data = ""
             fenetre.blit(fenetre_niveau2.fond,(0,0))
+            fenetre.blit(bouton_quitter.imageLoad, (20, 20))
+            fenetre.blit(bouton_retour.imageLoad, (249, 20))
             clock = pygame.time.Clock()
-            clock.tick(60)
+            clock.tick(30)
             pygame.display.update()
             if porte2.verouille == 1:
                 fenetre.blit(porte2.imageFerme, (400,310))
                 pygame.display.flip()
             if porte2.verouille == 0:
                 fenetre.blit(porte2.imageOuverte, (400,310))
+                fenetre.blit(bouton_continuer.imageLoad, (20, 560))
                 pygame.display.flip()
             if thread_1.data == "ouvre2": #permet d'ouvrir la porte quand on recoit le code ouvrir par le port série
                 porte2.verouille = 0
             for event in pygame.event.get():
                 if event.type == QUIT:
                     pygame.quit()
+                ###### BOUTON POUR QUITTER #####
+                if event.type == MOUSEMOTION and event.pos[0] <= 233 and event.pos[0] >= 20 and event.pos[1] <= 101 and event.pos[1] >= 20 and bouton_quitter.etat == False:
+                    bouton_quitter.hoover()
+                if event.type == MOUSEMOTION and (event.pos[0] >= 233 or event.pos[0] <= 20 or event.pos[1] >= 101 or event.pos[1] <= 20) and bouton_quitter.etat == False:
+                    bouton_quitter.reinit()
+                if event.type == MOUSEBUTTONDOWN and event.button == 1 and event.pos[0] <= 233 and event.pos[0] >= 20 and event.pos[1] <= 101 and event.pos[1] >= 20:
+                    bouton_quitter.select()
+                    bouton_quitter.etat = True
+                    bouton_retour.etat = False
+                    bouton_continuer.etat = False
+                    niveau2 = False
+                    pygame.quit()
+                    thread_1.var = False
+                ###### BOUTON POUR REVENIR A LA SELECTION DE NIVEAU #####
+                if event.type == MOUSEMOTION and event.pos[0] <= 462 and event.pos[0] >= 249 and event.pos[1] <= 101 and event.pos[1] >= 20 and bouton_retour.etat == False:
+                    bouton_retour.hoover()
+                if event.type == MOUSEMOTION and (event.pos[0] >= 462 or event.pos[0] <= 249 or event.pos[1] >= 101 or event.pos[1] <= 20) and bouton_retour.etat == False:
+                    bouton_retour.reinit()
+                if event.type == MOUSEBUTTONDOWN and event.button == 1 and event.pos[0] <= 462 and event.pos[0] >= 249 and event.pos[1] <= 101 and event.pos[1] >= 20:
+                    bouton_retour.select()
+                    bouton_quitter.etat = False
+                    bouton_retour.etat = True
+                    bouton_continuer.etat = False
+                    selecteurNiveau()
+                    niveau1 = False
+                    niveau2 = False
+                ###### BOUTON POUR CONTINUER QUE SI LA PORTE EST OUVERTE #####
+                if porte2.verouille == 0:
+                    if event.type == MOUSEMOTION and event.pos[0] <= 233 and event.pos[0] >= 20 and event.pos[1] <= 641 and event.pos[1] >= 560 and bouton_continuer.etat == False:
+                        bouton_continuer.hoover()
+                    if event.type == MOUSEMOTION and (event.pos[0] >= 233 or event.pos[0] <= 20 or event.pos[1] >= 641 or event.pos[1] <= 560) and bouton_continuer.etat == False:
+                        bouton_continuer.reinit()
+                    if event.type == MOUSEBUTTONDOWN and event.button == 1 and event.pos[0] <= 233 and event.pos[0] >= 20 and event.pos[1] <= 641 and event.pos[1] >= 560:
+                        bouton_continuer.select()
+                        bouton_quitter.etat = False
+                        bouton_retour.etat = False
+                        bouton_continuer.etat = True
+                        selecteurNiveau() #Comme c'est le dernier niveau on retombe sur la sélection de menu """""""A CHANGER SI CE N'EST PLUS LE DERNIER NIVEAU"""""""""
+                        niveau1 = False
+                        niveau2 = False
                 if event.type == pygame.KEYDOWN:    
                     if event.key == pygame.K_p:    #ancien code qui ouvrait la porte avec p
                         porte2.verouille = 0
@@ -113,10 +202,10 @@ def selecteurNiveau(): #Premiere interface qui permet de selectionner les niveau
     gameStart = True
 
     fenetre_selection = Terrain("image/selection2.jpg")
-    bouton1 = Bouton("image/boutonPorte.png", "image/boutonPorteHoover.png", "image/boutonPorteSelect.png")
-    bouton2 = Bouton("image/boutonDistributeur.png", "image/boutonDistributeurHoover.png", "image/boutonDistributeurSelect.png")
-    bouton3 = Bouton("image/boutonHotel.png", "image/boutonHotelHoover.png", "image/boutonHotelSelect.png")
-    bouton4 = Bouton("image/boutonHotel.png", "image/boutonHotelHoover.png", "image/boutonHotelSelect.png")
+    bouton_porte = Bouton("image/boutonPorte.png", "image/boutonPorteHoover.png", "image/boutonPorteSelect.png")
+    bouton_distributeur = Bouton("image/boutonDistributeur.png", "image/boutonDistributeurHoover.png", "image/boutonDistributeurSelect.png")
+    bouton_hotel = Bouton("image/boutonHotel.png", "image/boutonHotelHoover.png", "image/boutonHotelSelect.png")
+    bouton_quitter = Bouton("image/boutonQuitter.png", "image/boutonQuitterHoover.png", "image/boutonQuitterSelect.png")
     panneauPorte = PanneauNiveau("image/presqueRien.png", "image/niveauPorte.png")
     panneauDistributeur = PanneauNiveau("image/presqueRien.png", "image/niveauDistributeur.png")
     panneauHotel = PanneauNiveau("image/presqueRien.png", "image/niveauHotel.png")
@@ -124,67 +213,89 @@ def selecteurNiveau(): #Premiere interface qui permet de selectionner les niveau
     while gameStart == True:
         fenetre = pygame.display.set_mode((1000, 661))
         fenetre.blit(fenetre_selection.fond,(0,0))
-        fenetre.blit(bouton1.imageLoad,(200,255))
-        fenetre.blit(bouton2.imageLoad,(200, 355))
-        fenetre.blit(bouton3.imageLoad, (200, 455))
+        fenetre.blit(bouton_porte.imageLoad,(200,255))
+        fenetre.blit(bouton_distributeur.imageLoad,(200, 355))
+        fenetre.blit(bouton_hotel.imageLoad, (200, 455))
+        fenetre.blit(bouton_quitter.imageLoad, (200, 555))
         fenetre.blit(panneauPorte.imageLoad, (475,200))
         fenetre.blit(panneauDistributeur.imageLoad, (475,200))
         fenetre.blit(panneauHotel.imageLoad, (475,200))
         pygame.display.update()
 
-        if bouton1.etat == True:
+        if bouton_porte.etat == True:
             panneauPorte.affichePanneau()
             panneauDistributeur.reinitPanneau()
             panneauHotel.reinitPanneau()
-        if bouton2.etat == True:
+        if bouton_distributeur.etat == True:
             panneauPorte.reinitPanneau()
             panneauDistributeur.affichePanneau()
             panneauHotel.reinitPanneau()
-        if bouton3.etat == True:
+        if bouton_hotel.etat == True:
             panneauPorte.reinitPanneau()
             panneauDistributeur.reinitPanneau()
             panneauHotel.affichePanneau()
 
         for event in pygame.event.get():
             ###### BOUTON POUR LA PORTE #####
-            if event.type == MOUSEMOTION and event.pos[0] <= 413 and event.pos[0] >= 200 and event.pos[1] <= 336 and event.pos[1] >= 255:
-                bouton1.hoover()
-            if event.type == MOUSEMOTION and (event.pos[0] >= 413 or event.pos[0] <= 200 or event.pos[1] >= 336 or event.pos[1] <= 255):
-                bouton1.reinit()
+            if event.type == MOUSEMOTION and event.pos[0] <= 413 and event.pos[0] >= 200 and event.pos[1] <= 336 and event.pos[1] >= 255 and bouton_porte.etat == False:
+                bouton_porte.hoover()
+            if event.type == MOUSEMOTION and (event.pos[0] >= 413 or event.pos[0] <= 200 or event.pos[1] >= 336 or event.pos[1] <= 255) and bouton_porte.etat == False:
+                bouton_porte.reinit()
             if event.type == MOUSEBUTTONDOWN and event.button == 1 and event.pos[0] <= 413 and event.pos[0] >= 200 and event.pos[1] <= 336 and event.pos[1] >= 255:
-                bouton1.select()
-                bouton1.etat = True
-                bouton2.etat = False
-                bouton3.etat = False
-            if bouton1.etat == True:
+                bouton_porte.select()
+                bouton_porte.etat = True
+                bouton_distributeur.etat = False
+                bouton_hotel.etat = False
+                bouton_quitter.etat = False
+            if bouton_porte.etat == True:
                 if event.type == MOUSEBUTTONDOWN and event.button == 1 and event.pos[0] <= 700 and event.pos[0] >= 525 and event.pos[1] <= 320 and event.pos[1] >= 245:
                     bouclePrincipale(True,False)
-                    bouton1.etat = False
+                    bouton_porte.etat = False
+                    gameStart = False
                 if event.type == MOUSEBUTTONDOWN and event.button == 1 and event.pos[0] <= 905 and event.pos[0] >= 730 and event.pos[1] <= 320 and event.pos[1] >= 245:
                     bouclePrincipale(False,True)
-                    bouton1.etat = False
-            ###### BOUTON POUR LE DISTRIBUTEUR ######
-            if event.type == MOUSEMOTION and event.pos[0] <= 413 and event.pos[0] >= 200 and event.pos[1] <= 436 and event.pos[1] >= 355:
-                bouton2.hoover()
-            if event.type == MOUSEMOTION and (event.pos[0] >= 413 or event.pos[0] <= 200 or event.pos[1] >= 436 or event.pos[1] <= 355):
-                bouton2.reinit()
-            if event.type == MOUSEBUTTONDOWN and event.button == 1 and event.pos[0] <= 413 and event.pos[0] >= 200 and event.pos[1] <= 436 and event.pos[1] >= 355:
-                bouton2.select()
-                bouton1.etat = False
-                bouton2.etat = True
-                bouton3.etat = False
+                    bouton_porte.etat = False
+                    gameStart = False
 
+            ###### BOUTON POUR LE DISTRIBUTEUR ######
+            if event.type == MOUSEMOTION and event.pos[0] <= 413 and event.pos[0] >= 200 and event.pos[1] <= 436 and event.pos[1] >= 355 and bouton_distributeur.etat == False:
+                bouton_distributeur.hoover()
+            if event.type == MOUSEMOTION and (event.pos[0] >= 413 or event.pos[0] <= 200 or event.pos[1] >= 436 or event.pos[1] <= 355) and bouton_distributeur.etat == False:
+                bouton_distributeur.reinit()
+            if event.type == MOUSEBUTTONDOWN and event.button == 1 and event.pos[0] <= 413 and event.pos[0] >= 200 and event.pos[1] <= 436 and event.pos[1] >= 355:
+                bouton_distributeur.select()
+                bouton_porte.etat = False
+                bouton_distributeur.etat = True
+                bouton_hotel.etat = False
+                bouton_quitter.etat = False
             
             ###### BOUTON POUR L'HOTEL ######
-            if event.type == MOUSEMOTION and event.pos[0] <= 413 and event.pos[0] >= 200 and event.pos[1] <= 536 and event.pos[1] >= 455:
-                bouton3.hoover()
-            if event.type == MOUSEMOTION and (event.pos[0] >= 413 or event.pos[0] <= 200 or event.pos[1] >= 536 or event.pos[1] <= 455):
-                bouton3.reinit()
+            if event.type == MOUSEMOTION and event.pos[0] <= 413 and event.pos[0] >= 200 and event.pos[1] <= 536 and event.pos[1] >= 455 and bouton_hotel.etat == False:
+                bouton_hotel.hoover()
+            if event.type == MOUSEMOTION and (event.pos[0] >= 413 or event.pos[0] <= 200 or event.pos[1] >= 536 or event.pos[1] <= 455) and bouton_hotel.etat == False:
+                bouton_hotel.reinit()
             if event.type == MOUSEBUTTONDOWN and event.button == 1 and event.pos[0] <= 413 and event.pos[0] >= 200 and event.pos[1] <= 536 and event.pos[1] >= 455:
-                bouton3.select()
-                bouton1.etat = False
-                bouton2.etat = False
-                bouton3.etat = True
+                bouton_hotel.select()
+                bouton_porte.etat = False
+                bouton_distributeur.etat = False
+                bouton_hotel.etat = True
+                bouton_quitter.etat = False
+
+            ###### BOUTON POUR QUITTER ######
+            if event.type == MOUSEMOTION and event.pos[0] <= 413 and event.pos[0] >= 200 and event.pos[1] <= 636 and event.pos[1] >= 555 and bouton_hotel.etat == False:
+                bouton_quitter.hoover()
+            if event.type == MOUSEMOTION and (event.pos[0] >= 413 or event.pos[0] <= 200 or event.pos[1] >= 636 or event.pos[1] <= 555) and bouton_hotel.etat == False:
+                bouton_quitter.reinit()
+            if event.type == MOUSEBUTTONDOWN and event.button == 1 and event.pos[0] <= 413 and event.pos[0] >= 200 and event.pos[1] <= 636 and event.pos[1] >= 555:
+                bouton_quitter.select()
+                bouton_porte.etat = False
+                bouton_distributeur.etat = False
+                bouton_hotel.etat = False
+                bouton_quitter.etat = True
+            if bouton_quitter.etat == True:
+                gameStart = False
+                pygame.quit() 
+                thread_1.var = False
 
             if event.type == pygame.KEYDOWN:    
                     if event.key == pygame.K_1 : #On appuie sur 1(&) pour choisir le niveau 1
