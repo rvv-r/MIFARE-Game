@@ -22,6 +22,26 @@ class Porte:
         self.imageFerme = pygame.image.load(imageFerme)
         self.verouille = a #Variable permettant de gérer la porte ouverte ou non
 
+############  BOUTON      #####################
+
+class Bouton:
+    def __init__(self, imageBouton, imageHoover, imageSelect):
+        self.imageLoad = pygame.image.load(imageBouton)
+        self.imageHoover = imageHoover
+        self.imageSelect = imageSelect
+        self.imageBouton = imageBouton
+        self.etat = False #essaie de voir si on peut bloquer l'image select avec cette variable
+    
+    def hoover(self):
+        self.imageLoad = pygame.image.load(self.imageHoover)
+    
+    def select(self):
+        self.imageLoad = pygame.image.load(self.imageSelect)
+    
+    def reinit(self):
+        self.imageLoad = pygame.image.load(self.imageBouton)
+
+
 
 #################  THREAD POUR LA COMMUNICATION SERIE   #################
 

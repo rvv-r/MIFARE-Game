@@ -32,7 +32,7 @@ def bouclePrincipale(bool1, bool2):
         
 ####### Création de la fenêtre ########################
     
-        fenetre = pygame.display.set_mode((1000, 661), pygame.RESIZABLE)
+        fenetre = pygame.display.set_mode((1000, 661))
         pygame.key.set_repeat(10, 30)
 
 ################ BOUCLE DES NIVEAUX #######################
@@ -43,7 +43,7 @@ def bouclePrincipale(bool1, bool2):
             thread_1.data = ""
             fenetre.blit(fenetre_niveau1.fond,(0,0))
             clock = pygame.time.Clock()
-            clock.tick(60)
+            clock.tick(30)
             pygame.display.update()
             if porte.verouille == 1:
                 fenetre.blit(porte.imageFerme, (0,0))
@@ -112,12 +112,43 @@ def bouclePrincipale(bool1, bool2):
 def selecteurNiveau(): #Premiere interface qui permet de selectionner les niveaux
     gameStart = True
 
+    fenetre_selection = Terrain("image/selection2.jpg")
+    bouton1 = Bouton("image/boutonPorte.png", "image/boutonPorteHoover.png", "image/boutonPorteSelect.png")
+    bouton2 = Bouton("image/boutonDistributeur.png", "image/boutonDistributeurHoover.png", "image/boutonDistributeurSelect.png")
+    bouton3 = Bouton("image/boutonHotel.png", "image/boutonHotelHoover.png", "image/boutonHotelSelect.png")
+
     while gameStart == True:
         fenetre = pygame.display.set_mode((1000, 661))
-        fenetre_selection = Terrain("image/selection.png")
         fenetre.blit(fenetre_selection.fond,(0,0))
+        fenetre.blit(bouton1.imageLoad,(200,255))
+        fenetre.blit(bouton2.imageLoad,(200, 355))
+        fenetre.blit(bouton3.imageLoad, (200, 455))
         pygame.display.update()
         for event in pygame.event.get():
+            ###### BOUTON POUR LA PORTE #####
+            if event.type == MOUSEMOTION and event.pos[0] <= 413 and event.pos[0] >= 200 and event.pos[1] <= 336 and event.pos[1] >= 255:
+                bouton1.hoover()
+            if event.type == MOUSEMOTION and (event.pos[0] >= 413 or event.pos[0] <= 200 or event.pos[1] >= 336 or event.pos[1] <= 255):
+                bouton1.reinit()
+            if event.type == MOUSEBUTTONDOWN and event.button == 1 and event.pos[0] <= 413 and event.pos[0] >= 200 and event.pos[1] <= 336 and event.pos[1] >= 255:
+                bouton1.select()
+            
+            ###### BOUTON POUR LE DISTRIBUTEUR ######
+            if event.type == MOUSEMOTION and event.pos[0] <= 413 and event.pos[0] >= 200 and event.pos[1] <= 436 and event.pos[1] >= 355:
+                bouton2.hoover()
+            if event.type == MOUSEMOTION and (event.pos[0] >= 413 or event.pos[0] <= 200 or event.pos[1] >= 436 or event.pos[1] <= 355):
+                bouton2.reinit()
+            if event.type == MOUSEBUTTONDOWN and event.button == 1 and event.pos[0] <= 413 and event.pos[0] >= 200 and event.pos[1] <= 436 and event.pos[1] >= 355:
+                bouton2.select()
+            
+            ###### BOUTON POUR L'HOTEL ######
+            if event.type == MOUSEMOTION and event.pos[0] <= 413 and event.pos[0] >= 200 and event.pos[1] <= 536 and event.pos[1] >= 455:
+                bouton3.hoover()
+            if event.type == MOUSEMOTION and (event.pos[0] >= 413 or event.pos[0] <= 200 or event.pos[1] >= 536 or event.pos[1] <= 455):
+                bouton3.reinit()
+            if event.type == MOUSEBUTTONDOWN and event.button == 1 and event.pos[0] <= 413 and event.pos[0] >= 200 and event.pos[1] <= 536 and event.pos[1] >= 455:
+                bouton3.select()
+
             if event.type == pygame.KEYDOWN:    
                     if event.key == pygame.K_1 : #On appuie sur 1(&) pour choisir le niveau 1
                         bouclePrincipale(True,False)
@@ -152,6 +183,16 @@ def fctderoulant1(*args):
         thread_1.nbSerialPort = "3"
     if variable.get() == "4":
         thread_1.nbSerialPort = "4" 
+    if variable.get() == "5":
+        thread_1.nbSerialPort = "5"
+    if variable.get() == "6":
+        thread_1.nbSerialPort = "6"
+    if variable.get() == "7":
+        thread_1.nbSerialPort = "7"
+    if variable.get() == "8":
+        thread_1.nbSerialPort = "8"
+    if variable.get() == "9":
+        thread_1.nbSerialPort = "9" 
 
 def fctderoulant2(*args):
     if variable2.get() == "Windows":
@@ -175,11 +216,26 @@ def fctderoulant3(*args):
     if variable3.get() == "4":
         #thread_1.nbSerialPort = "4" 
         print("")
+    if variable3.get() == "5":
+        #thread_1.nbSerialPort = "4" 
+        print("")
+    if variable3.get() == "6":
+        #thread_1.nbSerialPort = "4" 
+        print("")
+    if variable3.get() == "7":
+        #thread_1.nbSerialPort = "4" 
+        print("")
+    if variable3.get() == "8":
+        #thread_1.nbSerialPort = "4" 
+        print("")
+    if variable3.get() == "9":
+        #thread_1.nbSerialPort = "4" 
+        print("")
 
 
 #################  FENETRE TKINTER  #########################
 
-OptionList = ["Numéro du port","0","1","2","3","4"] 
+OptionList = ["Numéro du port","0","1","2","3","4","5","6","7","8","9"] 
 OptionList2 = ["Système","Windows", "Linux"]
 
 app = tk.Tk()
