@@ -20,7 +20,7 @@ def bouclePrincipale(bool1, bool2):
 ####### CREATION DES FONDS ############################
 
         fenetre_niveau1 = Terrain("image/scene.jpg")
-        fenetre_niveau2 = Terrain("image/mur2.jpg")
+        fenetre_niveau2 = Terrain("image/Mur2.jpg")
         #fenetre_gameover = Terrain("Gameover.png")
         bouton_quitter = Bouton("image/boutonQuitter.png", "image/boutonQuitterHoover.png", "image/boutonQuitterSelect.png")
         bouton_continuer = Bouton("image/boutonContinuer.png", "image/boutonContinuerHoover.png", "image/boutonContinuerSelect.png")
@@ -30,7 +30,7 @@ def bouclePrincipale(bool1, bool2):
 ####### CREATION DE LA PORTE #########################
 
         porte = Porte("image/porteOuverte.png","image/porteFerme.png",1)
-        porte2 = Porte("image/porteOuverte2.jpg","image/porteFerme2.jpg",1)
+        porte2 = Porte("image/porteouverte2.jpg","image/porteferme2.jpg",1)
         
         
 ####### Création de la fenêtre ########################
@@ -201,7 +201,7 @@ def bouclePrincipale(bool1, bool2):
 def selecteurNiveau(): #Premiere interface qui permet de selectionner les niveaux
     gameStart = True
 
-    fenetre_selection = Terrain("image/selection2.jpg")
+    fenetre_selection = Terrain("image/Selection2.jpg")
     bouton_porte = Bouton("image/boutonPorte.png", "image/boutonPorteHoover.png", "image/boutonPorteSelect.png")
     bouton_distributeur = Bouton("image/boutonDistributeur.png", "image/boutonDistributeurHoover.png", "image/boutonDistributeurSelect.png")
     bouton_hotel = Bouton("image/boutonHotel.png", "image/boutonHotelHoover.png", "image/boutonHotelSelect.png")
@@ -346,7 +346,7 @@ def fctderoulant2(*args):
     if variable2.get() == "Windows":
         thread_1.environnementSerial = "COM"
     if variable2.get() == "Linux":
-        thread_1.environnementSerial = "/dev/ttyS"
+        thread_1.environnementSerial = "/dev/pts/"
 
 def fctderoulant3(*args):
     if variable3.get() == "0":
