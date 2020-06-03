@@ -25,6 +25,7 @@ def bouclePrincipale(boolp1, boolp2):
         bouton_continuer = Bouton("image/boutonContinuer.png", "image/boutonContinuerHoover.png", "image/boutonContinuerSelect.png")
         bouton_retour = Bouton("image/boutonRetour.png", "image/boutonRetourHoover.png", "image/boutonRetourSelect.png")
         bouton_suivant = Bouton("image/boutonSuivant.png", "image/boutonSuivantHoover.png", "image/boutonSuivantSelect.png")
+        bouton_aide = Bouton("image/boutonAide.png", "image/boutonAideHoover.png", "image/boutonAideSelect.png")
         testAide = PanneauNiveau("image/presqueRien.png", "image/texteAide.png")
 
 
@@ -42,6 +43,7 @@ def bouclePrincipale(boolp1, boolp2):
 ################ BOUCLE DES NIVEAUX #######################
         porteNiveau1 = boolp1
         porteNiveau2 = boolp2
+        aide1 = True
         #distributeurNiveau1 = boold1
 
         while porteNiveau1 == True:
@@ -50,20 +52,26 @@ def bouclePrincipale(boolp1, boolp2):
             fenetre.blit(bouton_quitter.imageLoad, (20, 20))
             fenetre.blit(bouton_retour.imageLoad, (249, 20))
             fenetre.blit(testAide.imageLoad, (60,200))
-            fenetre.blit(bouton_suivant.imageLoad, (300,500))
-            testAide.affichePanneau()
-            clock = pygame.time.Clock()
-            clock.tick(60)
-            pygame.display.update()
+            
+
+            if aide1 == True:
+                testAide.affichePanneau()
+                fenetre.blit(bouton_suivant.imageLoad, (300,500))
+                fenetre.blit(bouton_aide.imageLoad, (3000,5000))
+            if aide1 == False:
+                testAide.reinitPanneau()
+                fenetre.blit(bouton_suivant.imageLoad, (3000,5000))
+                fenetre.blit(bouton_aide.imageLoad, (260, 560))
             if porteN1.verouille == 1:
                 fenetre.blit(porteN1.imageFerme, (0,0))
-                pygame.display.flip()
             if porteN1.verouille == 0:
                 fenetre.blit(porteN1.imageOuverte, (0,0))
                 fenetre.blit(bouton_continuer.imageLoad, (20, 560))
-                pygame.display.flip()
             if thread_1.data == "ouvre": #permet d'ouvrir la porte quand on recoit le code ouvrir par le port série
                 porteN1.verouille = 0
+            
+            pygame.display.update()
+
             for event in pygame.event.get():
                 if event.type == QUIT:
                     pygame.quit()
@@ -108,16 +116,25 @@ def bouclePrincipale(boolp1, boolp2):
                         porteNiveau2 = True
                         bouton_continuer.etat = False #Pour rénitialiser le bouton continuer entre les niveaux
                 ####### BOUTON SUIVANT DANS L'AIDE  #######
-                if event.type == MOUSEMOTION and event.pos[0] <= 513 and event.pos[0] >= 300 and event.pos[1] <= 581 and event.pos[1] >= 500 and bouton_retour.etat == False:
+                if event.type == MOUSEMOTION and event.pos[0] <= 513 and event.pos[0] >= 300 and event.pos[1] <= 581 and event.pos[1] >= 500 and bouton_suivant.etat == False:
                     bouton_suivant.hoover()
-                if event.type == MOUSEMOTION and (event.pos[0] >= 513 or event.pos[0] <= 300 or event.pos[1] >= 581 or event.pos[1] <= 500) and bouton_retour.etat == False:
+                if event.type == MOUSEMOTION and (event.pos[0] >= 513 or event.pos[0] <= 300 or event.pos[1] >= 581 or event.pos[1] <= 500) and bouton_suivant.etat == False:
                     bouton_suivant.reinit()
                 if event.type == MOUSEBUTTONDOWN and event.button == 1 and event.pos[0] <= 513 and event.pos[0] >= 300 and event.pos[1] <= 581 and event.pos[1] >= 500:
                     bouton_suivant.select()
-                    testAide.reinitPanneau()
+                    aide1 = False
+                
+                ###### BOUTON AIDE ######
 
+                if event.type == MOUSEMOTION and event.pos[0] <= 473 and event.pos[0] >= 260 and event.pos[1] <= 641 and event.pos[1] >= 560 and bouton_aide.etat == False:
+                    bouton_aide.hoover()
+                if event.type == MOUSEMOTION and (event.pos[0] >= 473 or event.pos[0] <= 260 or event.pos[1] >= 641 or event.pos[1] <= 560) and bouton_aide.etat == False:
+                    bouton_aide.reinit()
+                if event.type == MOUSEBUTTONDOWN and event.button == 1 and event.pos[0] <= 473 and event.pos[0] >= 260 and event.pos[1] <= 641 and event.pos[1] >= 560:
+                    bouton_aide.select()
+                    aide1 = True
 
-
+                ########  TOUCHE DU CLAVIER POUR LES TEST ############
                 if event.type == pygame.KEYDOWN:
                     if event.key == pygame.K_p:    #ancien code qui ouvrait la porte avec p
                         porteN1.verouille = 0
@@ -139,18 +156,18 @@ def bouclePrincipale(boolp1, boolp2):
             fenetre.blit(fenetre_porteNiveau2.fond,(0,0))
             fenetre.blit(bouton_quitter.imageLoad, (20, 20))
             fenetre.blit(bouton_retour.imageLoad, (249, 20))
-            clock = pygame.time.Clock()
-            clock.tick(60)
-            pygame.display.update()
             if porteN2.verouille == 1:
                 fenetre.blit(porteN2.imageFerme, (0,0))
-                pygame.display.flip()
             if porteN2.verouille == 0:
                 fenetre.blit(porteN2.imageOuverte, (0,0))
                 fenetre.blit(bouton_continuer.imageLoad, (20, 560))
-                pygame.display.flip()
             if thread_1.data == "ouvre2": #permet d'ouvrir la porte quand on recoit le code ouvrir par le port série
                 porteN2.verouille = 0
+
+
+            pygame.display.update()
+
+
             for event in pygame.event.get():
                 if event.type == QUIT:
                     pygame.quit()
