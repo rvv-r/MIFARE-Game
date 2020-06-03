@@ -20,17 +20,18 @@ def bouclePrincipale(boolp1, boolp2):
 ####### CREATION DES FONDS ############################
 
         fenetre_porteNiveau1 = Terrain("image/scene.jpg")
-        fenetre_porteNiveau2 = Terrain("image/mur2.jpg")
-        #fenetre_gameover = Terrain("Gameover.png")
+        fenetre_porteNiveau2 = Terrain("image/scene2.png")
         bouton_quitter = Bouton("image/boutonQuitter.png", "image/boutonQuitterHoover.png", "image/boutonQuitterSelect.png")
         bouton_continuer = Bouton("image/boutonContinuer.png", "image/boutonContinuerHoover.png", "image/boutonContinuerSelect.png")
         bouton_retour = Bouton("image/boutonRetour.png", "image/boutonRetourHoover.png", "image/boutonRetourSelect.png")
+        bouton_suivant = Bouton("image/boutonSuivant.png", "image/boutonSuivantHoover.png", "image/boutonSuivantSelect.png")
+        testAide = PanneauNiveau("image/presqueRien.png", "image/texteAide.png")
 
 
 ####### CREATION DE LA PORTE #########################
 
         porteN1 = Porte("image/porteOuverte.png","image/porteFerme.png",1)
-        porteN2 = Porte("image/porteouverte2.jpg","image/porteFerme2.jpg",1)
+        porteN2 = Porte("image/porteouverte2.png","image/porteFerme2.png",1)
 
 
 ####### Création de la fenêtre ########################
@@ -48,8 +49,11 @@ def bouclePrincipale(boolp1, boolp2):
             fenetre.blit(fenetre_porteNiveau1.fond,(0,0))
             fenetre.blit(bouton_quitter.imageLoad, (20, 20))
             fenetre.blit(bouton_retour.imageLoad, (249, 20))
+            fenetre.blit(testAide.imageLoad, (60,200))
+            fenetre.blit(bouton_suivant.imageLoad, (300,500))
+            testAide.affichePanneau()
             clock = pygame.time.Clock()
-            clock.tick(30)
+            clock.tick(60)
             pygame.display.update()
             if porteN1.verouille == 1:
                 fenetre.blit(porteN1.imageFerme, (0,0))
@@ -103,6 +107,17 @@ def bouclePrincipale(boolp1, boolp2):
                         porteNiveau1 = False
                         porteNiveau2 = True
                         bouton_continuer.etat = False #Pour rénitialiser le bouton continuer entre les niveaux
+                ####### BOUTON SUIVANT DANS L'AIDE  #######
+                if event.type == MOUSEMOTION and event.pos[0] <= 513 and event.pos[0] >= 300 and event.pos[1] <= 581 and event.pos[1] >= 500 and bouton_retour.etat == False:
+                    bouton_suivant.hoover()
+                if event.type == MOUSEMOTION and (event.pos[0] >= 513 or event.pos[0] <= 300 or event.pos[1] >= 581 or event.pos[1] <= 500) and bouton_retour.etat == False:
+                    bouton_suivant.reinit()
+                if event.type == MOUSEBUTTONDOWN and event.button == 1 and event.pos[0] <= 513 and event.pos[0] >= 300 and event.pos[1] <= 581 and event.pos[1] >= 500:
+                    bouton_suivant.select()
+                    testAide.reinitPanneau()
+
+
+
                 if event.type == pygame.KEYDOWN:
                     if event.key == pygame.K_p:    #ancien code qui ouvrait la porte avec p
                         porteN1.verouille = 0
@@ -125,13 +140,13 @@ def bouclePrincipale(boolp1, boolp2):
             fenetre.blit(bouton_quitter.imageLoad, (20, 20))
             fenetre.blit(bouton_retour.imageLoad, (249, 20))
             clock = pygame.time.Clock()
-            clock.tick(30)
+            clock.tick(60)
             pygame.display.update()
             if porteN2.verouille == 1:
-                fenetre.blit(porteN2.imageFerme, (400,310))
+                fenetre.blit(porteN2.imageFerme, (0,0))
                 pygame.display.flip()
             if porteN2.verouille == 0:
-                fenetre.blit(porteN2.imageOuverte, (400,310))
+                fenetre.blit(porteN2.imageOuverte, (0,0))
                 fenetre.blit(bouton_continuer.imageLoad, (20, 560))
                 pygame.display.flip()
             if thread_1.data == "ouvre2": #permet d'ouvrir la porte quand on recoit le code ouvrir par le port série
@@ -284,9 +299,9 @@ def selecteurNiveau(): #Premiere interface qui permet de selectionner les niveau
                 bouton_quitter.etat = False
 
             ###### BOUTON POUR QUITTER ######
-            if event.type == MOUSEMOTION and event.pos[0] <= 413 and event.pos[0] >= 200 and event.pos[1] <= 636 and event.pos[1] >= 555 and bouton_hotel.etat == False:
+            if event.type == MOUSEMOTION and event.pos[0] <= 413 and event.pos[0] >= 200 and event.pos[1] <= 636 and event.pos[1] >= 555 and bouton_quitter.etat == False:
                 bouton_quitter.hoover()
-            if event.type == MOUSEMOTION and (event.pos[0] >= 413 or event.pos[0] <= 200 or event.pos[1] >= 636 or event.pos[1] <= 555) and bouton_hotel.etat == False:
+            if event.type == MOUSEMOTION and (event.pos[0] >= 413 or event.pos[0] <= 200 or event.pos[1] >= 636 or event.pos[1] <= 555) and bouton_quitter.etat == False:
                 bouton_quitter.reinit()
             if event.type == MOUSEBUTTONDOWN and event.button == 1 and event.pos[0] <= 413 and event.pos[0] >= 200 and event.pos[1] <= 636 and event.pos[1] >= 555:
                 bouton_quitter.select()
@@ -311,6 +326,38 @@ def selecteurNiveau(): #Premiere interface qui permet de selectionner les niveau
                         pygame.quit()
                         thread_1.var = False
 
+################### FENETRE INTRO JEU   ####################################
+
+def intro():
+    gameIntro = True
+
+    fenetre_intro = Terrain("image/intro.png")
+    bouton_suivant = Bouton("image/boutonSuivant.png", "image/boutonSuivantHoover.png", "image/boutonSuivantSelect.png")
+
+    while gameIntro == True:
+        fenetre = pygame.display.set_mode((1000, 661))
+        fenetre.blit(fenetre_intro.fond,(0,0))
+        fenetre.blit(bouton_suivant.imageLoad,(700,530))
+        pygame.display.update()
+
+        for event in pygame.event.get():
+            if event.type == pygame.KEYDOWN:    
+                        if event.key == pygame.K_1 : #On appuie sur 1(&) pour choisir le niveau 1
+                            selecteurNiveau()
+                            gameIntro = False
+                        if event.key == pygame.K_a: #q en azerty pour quitter
+                            gameIntro = False
+                            pygame.quit() 
+                            thread_1.var = False
+            if event.type == MOUSEMOTION and event.pos[0] <= 913 and event.pos[0] >= 700 and event.pos[1] <= 611 and event.pos[1] >= 530:
+                bouton_suivant.hoover()
+            if event.type == MOUSEMOTION and (event.pos[0] >= 913 or event.pos[0] <= 700 or event.pos[1] >= 611 or event.pos[1] <= 530):
+                bouton_suivant.reinit()
+            if event.type == MOUSEBUTTONDOWN and event.button == 1 and event.pos[0] <= 913 and event.pos[0] >= 700 and event.pos[1] <= 611 and event.pos[1] >= 530:
+                bouton_suivant.select()
+                selecteurNiveau()
+                gameIntro = False
+
 ############ Création du thread #############################
 
 thread_1 = Recevoir()
@@ -320,7 +367,7 @@ thread_1 = Recevoir()
 def Start():
     app.destroy()
     thread_1.start()
-    selecteurNiveau()
+    intro()
 
 def fctderoulant1(*args):
     if variable.get() == "0":

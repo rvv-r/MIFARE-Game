@@ -41,6 +41,8 @@ class Bouton:
     def reinit(self):
         self.imageLoad = pygame.image.load(self.imageBouton)
 
+############## PANNEAU DE NIVEAU DANS SELECTEUR DE NIVEAU #####################
+
 class PanneauNiveau:
     def __init__(self,imageVide, imagePanneau):
         self.imageLoad = pygame.image.load(imageVide)
