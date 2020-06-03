@@ -44,6 +44,7 @@ def bouclePrincipale(boolp1, boolp2):
         porteNiveau1 = boolp1
         porteNiveau2 = boolp2
         aide1 = True
+        aide2 = True
         #distributeurNiveau1 = boold1
 
         while porteNiveau1 == True:
@@ -156,6 +157,16 @@ def bouclePrincipale(boolp1, boolp2):
             fenetre.blit(fenetre_porteNiveau2.fond,(0,0))
             fenetre.blit(bouton_quitter.imageLoad, (20, 20))
             fenetre.blit(bouton_retour.imageLoad, (249, 20))
+            fenetre.blit(testAide.imageLoad, (450,200))
+
+            if aide2 == True:
+                testAide.affichePanneau()
+                fenetre.blit(bouton_suivant.imageLoad, (700,500))
+                fenetre.blit(bouton_aide.imageLoad, (3000,5000))
+            if aide2 == False:
+                testAide.reinitPanneau()
+                fenetre.blit(bouton_suivant.imageLoad, (3000,5000))
+                fenetre.blit(bouton_aide.imageLoad, (260, 560))
             if porteN2.verouille == 1:
                 fenetre.blit(porteN2.imageFerme, (0,0))
             if porteN2.verouille == 0:
@@ -211,6 +222,26 @@ def bouclePrincipale(boolp1, boolp2):
                         selecteurNiveau() #Comme c'est le dernier niveau on retombe sur la sélection de menu """""""A CHANGER SI CE N'EST PLUS LE DERNIER NIVEAU"""""""""
                         porteNiveau1 = False
                         porteNiveau2 = False
+                
+                ####### BOUTON SUIVANT DANS L'AIDE  #######
+                if event.type == MOUSEMOTION and event.pos[0] <= 913 and event.pos[0] >= 700 and event.pos[1] <= 581 and event.pos[1] >= 500 and bouton_suivant.etat == False:
+                    bouton_suivant.hoover()
+                if event.type == MOUSEMOTION and (event.pos[0] >= 913 or event.pos[0] <= 700 or event.pos[1] >= 581 or event.pos[1] <= 500) and bouton_suivant.etat == False:
+                    bouton_suivant.reinit()
+                if event.type == MOUSEBUTTONDOWN and event.button == 1 and event.pos[0] <= 913 and event.pos[0] >= 700 and event.pos[1] <= 581 and event.pos[1] >= 500:
+                    bouton_suivant.select()
+                    aide2 = False
+                
+                ###### BOUTON AIDE ######
+
+                if event.type == MOUSEMOTION and event.pos[0] <= 473 and event.pos[0] >= 260 and event.pos[1] <= 641 and event.pos[1] >= 560 and bouton_aide.etat == False:
+                    bouton_aide.hoover()
+                if event.type == MOUSEMOTION and (event.pos[0] >= 473 or event.pos[0] <= 260 or event.pos[1] >= 641 or event.pos[1] <= 560) and bouton_aide.etat == False:
+                    bouton_aide.reinit()
+                if event.type == MOUSEBUTTONDOWN and event.button == 1 and event.pos[0] <= 473 and event.pos[0] >= 260 and event.pos[1] <= 641 and event.pos[1] >= 560:
+                    bouton_aide.select()
+                    aide2 = True
+
                 if event.type == pygame.KEYDOWN:
                     if event.key == pygame.K_p:    #ancien code qui ouvrait la porte avec p
                         porteN2.verouille = 0
