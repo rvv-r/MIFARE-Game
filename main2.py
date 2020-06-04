@@ -139,17 +139,6 @@ def bouclePrincipale(boolp1, boolp2):
                 if event.type == pygame.KEYDOWN:
                     if event.key == pygame.K_p:    #ancien code qui ouvrait la porte avec p
                         porteN1.verouille = 0
-                    if event.key == pygame.K_c and porteN1.verouille == 0:  #Permet de continuer seulement si la porte a été ouverte
-                        porteNiveau1 = False
-                        porteNiveau2 = True
-                    if event.key == pygame.K_r :  #Retourne à la selection de niveau
-                        selecteurNiveau()
-                        porteNiveau1 = False
-                        porteNiveau2 = False
-                    if event.key == pygame.K_a: #qwerty de base il faut appuyer sur q pour un azerty Permet de quitter
-                        porteNiveau1 = False
-                        pygame.quit()
-                        thread_1.var = False
 
 
         while porteNiveau2 == True:
@@ -242,22 +231,9 @@ def bouclePrincipale(boolp1, boolp2):
                     bouton_aide.select()
                     aide2 = True
 
-                if event.type == pygame.KEYDOWN:
+                if event.type == pygame.KEYDOWN:  ##### UTILE POUR LE DEBUG
                     if event.key == pygame.K_p:    #ancien code qui ouvrait la porte avec p
                         porteN2.verouille = 0
-                    if event.key == pygame.K_c and porteN2.verouille == 0 : #Permet de continuer seulement si la porte a été ouverte
-                        selecteurNiveau() #Comme c'est le dernier niveau on retombe sur la sélection de menu """""""A CHANGER SI CE N'EST PLUS LE DERNIER NIVEAU"""""""""
-                        porteNiveau1 = False
-                        porteNiveau2 = False
-                    if event.key == pygame.K_r :  #Retourne à la selection de niveau
-                        selecteurNiveau()
-                        porteNiveau1 = False
-                        porteNiveau2 = False
-                    if event.key == pygame.K_a: #qwerty de base il faut appuyer sur q pour un azerty
-                        porteNiveau2 = False
-                        pygame.quit()
-                        thread_1.var = False
-
 
 
 ############ Fonction menu principale selection des niveaux  #############################
@@ -528,13 +504,13 @@ texteDeroulant1.place(x = 190 , y = 125)
 
 ## Zone de texte pour les touches du clavier ##
 
-texteDeroulant1 = tk.Label(zoneTouches, bg = 'white', text = "Q pour quitter", font=('Helvetica', 11))
+texteDeroulant1 = tk.Label(zoneTouches, bg = 'white', text = "Voir les numéros de ports", font=('Helvetica', 11))
 texteDeroulant1.place(x = 360 , y = 45)
 
-texteDeroulant1 = tk.Label(zoneTouches, bg = 'white', text = "R pour retourner à la sélection de niveau", font=('Helvetica', 11))
+texteDeroulant1 = tk.Label(zoneTouches, bg = 'white', text = "Windows : Aller dans gestionnaires de périphérique puis l'onglet 'PORT'.", font=('Helvetica', 11))
 texteDeroulant1.place(x = 280 , y = 85)
 
-texteDeroulant1 = tk.Label(zoneTouches, bg = 'white', text = "C pour continuer une fois la porte ouverte", font=('Helvetica', 11))
+texteDeroulant1 = tk.Label(zoneTouches, bg = 'white', text = "Linux : faut se démerder", font=('Helvetica', 11))
 texteDeroulant1.place(x = 275 , y = 125)
 
 ## Menu déroulant 1 ##
