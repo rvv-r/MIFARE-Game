@@ -32,7 +32,7 @@ def bouclePrincipale(boolp1, boolp2):
 ####### CREATION DE LA PORTE #########################
 
         porteN1 = Porte("image/porteOuverte.png","image/porteFerme.png",1)
-        porteN2 = Porte("image/porteouverte2.png","image/porteFerme2.png",1)
+        porteN2 = Porte("image/porteOuverte2.png","image/porteFerme2.png",1)
 
 
 ####### Création de la fenêtre ########################
@@ -53,7 +53,7 @@ def bouclePrincipale(boolp1, boolp2):
             fenetre.blit(bouton_quitter.imageLoad, (20, 20))
             fenetre.blit(bouton_retour.imageLoad, (249, 20))
             fenetre.blit(testAide.imageLoad, (60,200))
-            
+
 
             if aide1 == True:
                 testAide.affichePanneau()
@@ -70,7 +70,7 @@ def bouclePrincipale(boolp1, boolp2):
                 fenetre.blit(bouton_continuer.imageLoad, (20, 560))
             if thread_1.data == "ouvre": #permet d'ouvrir la porte quand on recoit le code ouvrir par le port série
                 porteN1.verouille = 0
-            
+
             pygame.display.update()
 
             for event in pygame.event.get():
@@ -124,7 +124,7 @@ def bouclePrincipale(boolp1, boolp2):
                 if event.type == MOUSEBUTTONDOWN and event.button == 1 and event.pos[0] <= 513 and event.pos[0] >= 300 and event.pos[1] <= 581 and event.pos[1] >= 500:
                     bouton_suivant.select()
                     aide1 = False
-                
+
                 ###### BOUTON AIDE ######
 
                 if event.type == MOUSEMOTION and event.pos[0] <= 473 and event.pos[0] >= 260 and event.pos[1] <= 641 and event.pos[1] >= 560 and bouton_aide.etat == False:
@@ -211,7 +211,7 @@ def bouclePrincipale(boolp1, boolp2):
                         selecteurNiveau() #Comme c'est le dernier niveau on retombe sur la sélection de menu """""""A CHANGER SI CE N'EST PLUS LE DERNIER NIVEAU"""""""""
                         porteNiveau1 = False
                         porteNiveau2 = False
-                
+
                 ####### BOUTON SUIVANT DANS L'AIDE  #######
                 if event.type == MOUSEMOTION and event.pos[0] <= 913 and event.pos[0] >= 700 and event.pos[1] <= 581 and event.pos[1] >= 500 and bouton_suivant.etat == False:
                     bouton_suivant.hoover()
@@ -220,7 +220,7 @@ def bouclePrincipale(boolp1, boolp2):
                 if event.type == MOUSEBUTTONDOWN and event.button == 1 and event.pos[0] <= 913 and event.pos[0] >= 700 and event.pos[1] <= 581 and event.pos[1] >= 500:
                     bouton_suivant.select()
                     aide2 = False
-                
+
                 ###### BOUTON AIDE ######
 
                 if event.type == MOUSEMOTION and event.pos[0] <= 473 and event.pos[0] >= 260 and event.pos[1] <= 641 and event.pos[1] >= 560 and bouton_aide.etat == False:
@@ -365,13 +365,13 @@ def intro():
         pygame.display.update()
 
         for event in pygame.event.get():
-            if event.type == pygame.KEYDOWN:    
+            if event.type == pygame.KEYDOWN:
                         if event.key == pygame.K_1 : #On appuie sur 1(&) pour choisir le niveau 1
                             selecteurNiveau()
                             gameIntro = False
                         if event.key == pygame.K_a: #q en azerty pour quitter
                             gameIntro = False
-                            pygame.quit() 
+                            pygame.quit()
                             thread_1.var = False
             if event.type == MOUSEMOTION and event.pos[0] <= 913 and event.pos[0] >= 700 and event.pos[1] <= 611 and event.pos[1] >= 530:
                 bouton_suivant.hoover()
