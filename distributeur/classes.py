@@ -13,12 +13,14 @@ class Item:
             pass
         self.stock -= 1
 
-
+class Solde:
+    def __init__(self):
+        self.amount = 30
 
 class Distributeur:
     def __init__(self):
-        self.amount = 0
         self.items = []
+        self.solde = Solde().amount
 
     def addItem(self, item):
         self.items.append(item)
@@ -38,13 +40,13 @@ class Distributeur:
     #     self.amount = self.amount + money
 
     def buyItem(self, item):
-        if self.amount < item.price:
+        if self.solde < item.price:
             print('Vous ne pouvez pas acheter cet objet. Insérez plus de pièces.')
         else:
-            self.amount -= item.price
+            self.solde -= item.price
             item.buyFromStock()
             print('Vous avez acheté ' +item.name)
-            print('Argent restant : ' + str(self.amount))
+            print('Argent restant : ' + str(self.solde))
 
     def containsItem(self, wanted):
         ret = False
@@ -64,12 +66,12 @@ class Distributeur:
 
     def insertAmountForItem(self, item):
         price = item.price
-        while self.amount < price:
-                self.amount = self.amount + float(input('Insérez ' + str(price - self.amount) + ': '))
+        while self.solde < price:
+                self.solde = self.solde + float(input('Insérez ' + str(price - self.solde) + ': '))
 
     def checkRefund(self):
-        if self.amount > 0:
-            print(self.amount + " rendu.")
-            self.amount = 0
+        if self.solde > 0:
+            print(str(self.solde) + "€ rendu.")
+            self.solde = 0
 
         print('Bonne journée !\n')
