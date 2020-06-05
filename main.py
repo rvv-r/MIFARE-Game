@@ -268,6 +268,8 @@ def bouclePrincipale(boolp1, boolp2, boold1):
                 selecteurNiveau()
                 porteNiveau1 = False
                 porteNiveau2 = False
+                distributeurNiveau1 = False
+
             
             
             if event.type == MOUSEBUTTONDOWN and event.button == 1 and (event.pos[0] >= 675 or event.pos[0] <= 600 or event.pos[1] >= 350 or event.pos[1] <= 300):
