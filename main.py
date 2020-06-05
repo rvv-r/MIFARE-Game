@@ -11,6 +11,7 @@ pygame.init()
 pygame.display.set_caption("Hack this Mifare")
 
 
+
 ############ Fonctions de la boucle des niveaux  #####################
 
 
@@ -34,6 +35,13 @@ def bouclePrincipale(boolp1, boolp2, boold1):
     bouton_evian = Bouton("image/boutonEvian.png", "image/boutonEvian.png", "image/boutonEvianSelect.png")
     bouton_sprite = Bouton("image/boutonSprite.png", "image/boutonSprite.png", "image/boutonSpriteSelect.png")
     bouton_iceTea = Bouton("image/boutonIceTea.png", "image/boutonIceTea.png", "image/boutonIceTeaSelect.png")
+
+    screen = pygame.image.load("image/screen.png")
+
+    texte_coca = texte("Coca", None, 50, "#000000")
+    texte_evian = texte("Evian", None, 50, "#000000")
+    texte_sprite = texte("Sprite", None, 50, "#000000")
+    texte_iceTea = texte("Ice Tea", None, 50, "#000000")
 
 ####### CREATION DE LA PORTE #########################
 
@@ -248,6 +256,18 @@ def bouclePrincipale(boolp1, boolp2, boold1):
         fenetre.blit(bouton_sprite.imageLoad, (600, 420))
         fenetre.blit(bouton_iceTea.imageLoad, (600, 480))
         fenetre.blit(testAide.imageLoad, (60,200))
+        fenetre.blit(screen, (350,70))
+
+
+        if bouton_coca.etat == True:
+            fenetre.blit(texte_coca, (450,120))
+        if bouton_evian.etat == True:
+            fenetre.blit(texte_evian, (450,120))
+        if bouton_sprite.etat == True:
+            fenetre.blit(texte_sprite, (450, 120))
+        if bouton_iceTea.etat == True:
+            fenetre.blit(texte_iceTea, (450, 120))
+        
         pygame.display.update()
 
 
@@ -274,23 +294,31 @@ def bouclePrincipale(boolp1, boolp2, boold1):
             
             if event.type == MOUSEBUTTONDOWN and event.button == 1 and (event.pos[0] >= 675 or event.pos[0] <= 600 or event.pos[1] >= 350 or event.pos[1] <= 300):
                 bouton_coca.reinit()
+                bouton_coca.etat = False
             if event.type == MOUSEBUTTONDOWN and event.button == 1 and event.pos[0] <= 675 and event.pos[0] >= 600 and event.pos[1] <= 350 and event.pos[1] >= 300:
                 bouton_coca.select()
+                bouton_coca.etat = True
             
             if event.type == MOUSEBUTTONDOWN and event.button == 1 and (event.pos[0] >= 675 or event.pos[0] <= 600 or event.pos[1] >= 410 or event.pos[1] <= 360):
                 bouton_evian.reinit()
+                bouton_evian.etat = False
             if event.type == MOUSEBUTTONDOWN and event.button == 1 and event.pos[0] <= 675 and event.pos[0] >= 600 and event.pos[1] <= 410 and event.pos[1] >= 360:
                 bouton_evian.select()
-            
+                bouton_evian.etat = True
+
             if event.type == MOUSEBUTTONDOWN and event.button == 1 and (event.pos[0] >= 675 or event.pos[0] <= 600 or event.pos[1] >= 470 or event.pos[1] <= 420):
                 bouton_sprite.reinit()
+                bouton_sprite.etat = False
             if event.type == MOUSEBUTTONDOWN and event.button == 1 and event.pos[0] <= 675 and event.pos[0] >= 600 and event.pos[1] <= 470 and event.pos[1] >= 420:
                 bouton_sprite.select()
+                bouton_sprite.etat = True
             
             if event.type == MOUSEBUTTONDOWN and event.button == 1 and (event.pos[0] >= 675 or event.pos[0] <= 600 or event.pos[1] >= 530 or event.pos[1] <= 480):
                 bouton_iceTea.reinit()
+                bouton_iceTea.etat = False
             if event.type == MOUSEBUTTONDOWN and event.button == 1 and event.pos[0] <= 675 and event.pos[0] >= 600 and event.pos[1] <= 530 and event.pos[1] >= 480:
                 bouton_iceTea.select()
+                bouton_iceTea.etat = True
 
 
 

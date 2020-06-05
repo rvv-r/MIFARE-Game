@@ -77,3 +77,8 @@ class Recevoir(Thread):
             if self.data == "quit": # si on reçoit quit ferme la connection
                 print("connection fermé")
                 self.var = False
+
+def texte(Texte, Police, Taille, Couleur):
+    police = pygame.font.Font(Police, Taille)
+    text = police.render(Texte, True, pygame.Color(Couleur))
+    return(text)
