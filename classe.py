@@ -41,6 +41,56 @@ class Bouton:
     def reinit(self):
         self.imageLoad = pygame.image.load(self.imageBouton)
 
+
+############   OBJETS DU DISTRIBUTEUR    #####################
+
+class Item:
+    def __init__(self, name, price, stock):
+        self.name = name
+        self.price = price
+        self.stock = stock
+
+    def updateStock(self, stock):
+        self.stock = stock
+
+    def buyFromStock(self):
+        if self.stock == 0:
+            # raise not item exception
+            pass
+        self.stock -= 1
+
+############   SOLDE DU CLIENT    ##################### (en attendant d'avoir la carte)
+
+class Solde:
+    def __init__(self):
+        self.amount = 30
+
+############   DISTRIBUTEUR    #####################
+
+class Distributeur:
+    def __init__(self):
+        self.items = []
+        self.solde = Solde().amount
+
+    def addItem(self, item):
+        self.items.append(item)
+
+    def containsItem(self, wanted):
+        ret = False
+        for item in self.items:
+            if item.name == wanted:
+                ret = True
+                break
+        return ret
+
+    def getItem(self, wanted):
+        ret = None
+        for item in self.items:
+            if item.name == wanted:
+                ret = item
+                break
+        return ret
+
 ############## PANNEAU DE NIVEAU DANS SELECTEUR DE NIVEAU #####################
 
 class PanneauNiveau:
@@ -79,6 +129,6 @@ class Recevoir(Thread):
                 self.var = False
 
 def texte(Texte, Police, Taille, Couleur):
-    police = pygame.font.Font(Police, Taille)
+    police = pygame.font.SysFont(Police, Taille)
     text = police.render(Texte, True, pygame.Color(Couleur))
     return(text)
