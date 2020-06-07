@@ -458,7 +458,8 @@ def bouclePrincipale(boolp1, boolp2, boold1):
                 bouton_coca.reinit()
             if event.type == MOUSEBUTTONDOWN and event.button == 1 and event.pos[0] <= 642 and event.pos[0] >= 585 and event.pos[1] <= 327 and event.pos[1] >= 296:
                 bouton_coca.select()
-                bouton_coca.etat = True
+                if machine.solde >= 0:
+                    bouton_coca.etat = True
 
                 
             ###### BOUTON EVIAN ######
@@ -466,21 +467,24 @@ def bouclePrincipale(boolp1, boolp2, boold1):
                 bouton_evian.reinit()
             if event.type == MOUSEBUTTONDOWN and event.button == 1 and event.pos[0] <= 642 and event.pos[0] >= 585 and event.pos[1] <= 365 and event.pos[1] >= 334:
                 bouton_evian.select()
-                bouton_evian.etat = True
+                if machine.solde >= 0:
+                    bouton_evian.etat = True
 
             ###### BOUTON SPRITE ######
             if event.type == MOUSEBUTTONUP and event.button == 1:
                 bouton_sprite.reinit()
             if event.type == MOUSEBUTTONDOWN and event.button == 1 and event.pos[0] <= 642 and event.pos[0] >= 585 and event.pos[1] <= 404 and event.pos[1] >= 373:
                 bouton_sprite.select()
-                bouton_sprite.etat = True
+                if machine.solde >= 0:
+                    bouton_sprite.etat = True
 
             ####### BOUTON ICE TEA ######
             if event.type == MOUSEBUTTONUP and event.button == 1:
                 bouton_iceTea.reinit()
             if event.type == MOUSEBUTTONDOWN and event.button == 1 and event.pos[0] <= 642 and event.pos[0] >= 585 and event.pos[1] <= 442 and event.pos[1] >= 411:
                 bouton_iceTea.select()
-                bouton_iceTea.etat = True
+                if machine.solde >= 0:
+                    bouton_iceTea.etat = True
 
 
 
