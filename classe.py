@@ -63,7 +63,7 @@ class Item:
 
 class Solde:
     def __init__(self):
-        self.amount = 30
+        self.amount = -1
 
 ############   DISTRIBUTEUR    #####################
 

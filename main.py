@@ -31,6 +31,7 @@ def bouclePrincipale(boolp1, boolp2, boold1):
     fenetre_porteNiveau1 = Terrain("image/scene.jpg")
     fenetre_porteNiveau2 = Terrain("image/scene2.png")
     fenetre_distribNiveau1 = Terrain("image/sceneDistrib1.jpg")
+    screen = pygame.image.load("image/screenDistrib1.jpg")
 
     bouton_coca = Bouton("image/boutonCoca.png", "image/boutonCocac.png", "image/boutonCocaSelect.png")
     bouton_evian = Bouton("image/boutonEvian.png", "image/boutonEvian.png", "image/boutonEvianSelect.png")
@@ -46,6 +47,7 @@ def bouclePrincipale(boolp1, boolp2, boold1):
     texte_iceTea = texte("Ice Tea", None, 20, "#000000")
     texte_bienvenue = texte("Bienvenue sur le distributeur !", None, 20, "#000000")
     texte_Objets_Dispo = texte("Objets Disponibles :", None, 20, "#000000")
+    texte_Cartes = texte("Veuillez poser votre carte", None, 20, "#000000")
     texte_Selection_Objets = texte("Sélectionnez une boisson", None, 20, "#000000")
     texte_Pas_Bras_Pas_De_Chocolat = texte("Vous ne pouvez pas acheter cet objet. Insérez plus de pièces.", None, 20, "#000000")
     texte_etoiles = texte("***************", None, 20, "#000000")
@@ -276,139 +278,156 @@ def bouclePrincipale(boolp1, boolp2, boold1):
         fenetre.blit(bouton_sprite.imageLoad, (0, 0))
         fenetre.blit(bouton_iceTea.imageLoad, (0, 0))
         fenetre.blit(testAide.imageLoad, (60,200))
-        fenetre.blit(texte_bienvenue, (350, 150))
-        fenetre.blit(texte_etoiles, (350, 160))
-        fenetre.blit(texte_Selection_Objets, (350, 180))
-        fenetre.blit(texte_etoiles, (350, 190))
+        fenetre.blit(texte_bienvenue, (355, 85))
+        fenetre.blit(texte_etoiles, (355, 95))
+        fenetre.blit(texte_Cartes, (355, 105))
+        fenetre.blit(texte_etoiles, (355, 115))
+
+        try:
+            machine.solde = int(thread_1.data)
+        except ValueError:
+            pass
+
+        if machine.solde >= 0:
+
+            fenetre.blit(texte_Selection_Objets, (355, 125))
+            fenetre.blit(texte_etoiles, (355, 135))
+            pygame.display.flip()
+
+            if bouton_coca.etat == True:
+                ########### GET ITEM ###########
+                item = machine.getItem("Coca")
+                            
+                ########## BUY ITEM ############
+
+                if machine.solde < item.price:
+                    fenetre.blit(screen, (355,85))
+                    fenetre.blit(texte_Pas_Bras_Pas_De_Chocolat, (355,85))
+                    fenetre.blit(texte_etoiles, (355, 95))
+                    pygame.display.flip()
+                    pygame.time.wait(2000)
+                    bouton_coca.etat = False
+
+                else:
+                    machine.solde -= item.price
+                    item.buyFromStock()
+                    fenetre.blit(screen, (355,85))
+                    fenetre.blit(texte("Vous avez acheté : " + str(item.name), None, 20, "#000000"), (355,85))
+                    fenetre.blit(texte_etoiles, (355, 95))
+                    fenetre.blit(texte("Argent restant : " + str(machine.solde), None, 20, "#000000"), (355,105))
+                    fenetre.blit(texte_etoiles, (355, 115))
+
+                    ######### CHECK REFUND #########
+                    if machine.solde > 0:
+                        fenetre.blit(texte(str(machine.solde) + "€ rendu.", None, 20, "#000000"), (355,125))
+                        fenetre.blit(texte_etoiles, (355, 135))
+                        fenetre.blit(texte("Bonne Journée !", None, 20, "#000000"), (355,145))
+                        fenetre.blit(texte_etoiles, (355, 155))
+                    pygame.display.flip()
+                    pygame.time.wait(2000)
+                    bouton_coca.etat = False
 
 
+            if bouton_evian.etat == True:
+                ########### GET ITEM ###########
+                item = machine.getItem("Evian")
+                            
+                ########## BUY ITEM ############
 
-        if bouton_coca.etat == True:
-            ########### GET ITEM ###########
-            item = machine.getItem("Coca")
-                        
-            ########## BUY ITEM ############
+                if machine.solde < item.price:
+                    fenetre.blit(screen, (355,85))
+                    fenetre.blit(texte_Pas_Bras_Pas_De_Chocolat, (355,85))
+                    fenetre.blit(texte_etoiles, (355, 95))
+                    pygame.display.flip()
+                    pygame.time.wait(2000)
+                    bouton_evian.etat = False
 
-            if machine.solde < item.price:
-                fenetre.blit(texte_Pas_Bras_Pas_De_Chocolat, (340,150))
-                fenetre.blit(texte_etoiles, (350, 160))
-                pygame.display.flip()
-                pygame.time.wait(2000)
-                bouton_coca.etat = False
+                else:
+                    machine.solde -= item.price
+                    item.buyFromStock()
+                    fenetre.blit(screen, (355,85))
+                    fenetre.blit(texte("Vous avez acheté : " + str(item.name), None, 20, "#000000"), (355,85))
+                    fenetre.blit(texte_etoiles, (355, 95))
+                    fenetre.blit(texte("Argent restant : " + str(machine.solde), None, 20, "#000000"), (355,105))
+                    fenetre.blit(texte_etoiles, (355, 115))
 
-            else:
-                machine.solde -= item.price
-                item.buyFromStock()
-                fenetre.blit(texte("Vous avez acheté : " + str(item.name), None, 20, "#000000"), (340,150))
-                fenetre.blit(texte_etoiles, (350, 160))
-                fenetre.blit(texte("Argent restant : " + str(machine.solde), None, 20, "#000000"), (340,180))
-                fenetre.blit(texte_etoiles, (350, 190))
-
-                ######### CHECK REFUND #########
-                if machine.solde > 0:
-                    fenetre.blit(texte(str(machine.solde) + "€ rendu.", None, 20, "#000000"), (340,210))
-                    fenetre.blit(texte_etoiles, (350, 220))
-                    fenetre.blit(texte("Bonne Journée !", None, 20, "#000000"), (340,240))
-                    fenetre.blit(texte_etoiles, (350, 250))
-                pygame.display.flip()
-                pygame.time.wait(2000)
-                bouton_coca.etat = False
-
-
-        if bouton_evian.etat == True:
-            ########### GET ITEM ###########
-            item = machine.getItem("Evian")
-                        
-            ########## BUY ITEM ############
-
-            if machine.solde < item.price:
-                fenetre.blit(texte_Pas_Bras_Pas_De_Chocolat, (340,150))
-                fenetre.blit(texte_etoiles, (350, 160))
-                pygame.display.flip()
-                pygame.time.wait(2000)
-                bouton_evian.etat = False
-
-            else:
-                machine.solde -= item.price
-                item.buyFromStock()
-                fenetre.blit(texte("Vous avez acheté : " + str(item.name), None, 20, "#000000"), (340,150))
-                fenetre.blit(texte_etoiles, (350, 160))
-                fenetre.blit(texte("Argent restant : " + str(machine.solde), None, 20, "#000000"), (340,180))
-                fenetre.blit(texte_etoiles, (350, 190))
-
-                ######### CHECK REFUND #########
-                if machine.solde > 0:
-                    fenetre.blit(texte(str(machine.solde) + "€ rendu.", None, 20, "#000000"), (340,210))
-                    fenetre.blit(texte_etoiles, (350, 220))
-                    fenetre.blit(texte("Bonne Journée !", None, 20, "#000000"), (340,240))
-                    fenetre.blit(texte_etoiles, (350, 250))
-                pygame.display.flip()
-                pygame.time.wait(2000)
-                bouton_evian.etat = False
+                    ######### CHECK REFUND #########
+                    if machine.solde > 0:
+                        fenetre.blit(texte(str(machine.solde) + "€ rendu.", None, 20, "#000000"), (355,125))
+                        fenetre.blit(texte_etoiles, (355, 135))
+                        fenetre.blit(texte("Bonne Journée !", None, 20, "#000000"), (355,145))
+                        fenetre.blit(texte_etoiles, (355, 155))
+                    pygame.display.flip()
+                    pygame.time.wait(2000)
+                    bouton_evian.etat = False
 
 
-        if bouton_sprite.etat == True:
-            ########### GET ITEM ###########
-            item = machine.getItem("Sprite")
-                        
-            ########## BUY ITEM ############
+            if bouton_sprite.etat == True:
+                ########### GET ITEM ###########
+                item = machine.getItem("Sprite")
+                            
+                ########## BUY ITEM ############
 
-            if machine.solde < item.price:
-                fenetre.blit(texte_Pas_Bras_Pas_De_Chocolat, (340,150))
-                fenetre.blit(texte_etoiles, (350, 160))
-                pygame.display.flip()
-                pygame.time.wait(2000)
-                bouton_sprite.etat = False
+                if machine.solde < item.price:
+                    fenetre.blit(screen, (355,85))
+                    fenetre.blit(texte_Pas_Bras_Pas_De_Chocolat, (355,85))
+                    fenetre.blit(texte_etoiles, (355, 95))
+                    pygame.display.flip()
+                    pygame.time.wait(2000)
+                    bouton_sprite.etat = False
 
-            else:
-                machine.solde -= item.price
-                item.buyFromStock()
-                fenetre.blit(texte("Vous avez acheté : " + str(item.name), None, 20, "#000000"), (340,150))
-                fenetre.blit(texte_etoiles, (350, 160))
-                fenetre.blit(texte("Argent restant : " + str(machine.solde), None, 20, "#000000"), (340,180))
-                fenetre.blit(texte_etoiles, (350, 190))
+                else:
+                    machine.solde -= item.price
+                    item.buyFromStock()
+                    fenetre.blit(screen, (355,85))
+                    fenetre.blit(texte("Vous avez acheté : " + str(item.name), None, 20, "#000000"), (355,85))
+                    fenetre.blit(texte_etoiles, (355, 95))
+                    fenetre.blit(texte("Argent restant : " + str(machine.solde), None, 20, "#000000"), (355,105))
+                    fenetre.blit(texte_etoiles, (355, 115))
 
-                ######### CHECK REFUND #########
-                if machine.solde > 0:
-                    fenetre.blit(texte(str(machine.solde) + "€ rendu.", None, 20, "#000000"), (340,210))
-                    fenetre.blit(texte_etoiles, (350, 220))
-                    fenetre.blit(texte("Bonne Journée !", None, 20, "#000000"), (340,240))
-                    fenetre.blit(texte_etoiles, (350, 250))
-                pygame.display.flip()
-                pygame.time.wait(2000)
-                bouton_sprite.etat = False
+                    ######### CHECK REFUND #########
+                    if machine.solde > 0:
+                        fenetre.blit(texte(str(machine.solde) + "€ rendu.", None, 20, "#000000"), (355,125))
+                        fenetre.blit(texte_etoiles, (355, 135))
+                        fenetre.blit(texte("Bonne Journée !", None, 20, "#000000"), (355,145))
+                        fenetre.blit(texte_etoiles, (355, 155))
+                    pygame.display.flip()
+                    pygame.time.wait(2000)
+                    bouton_sprite.etat = False
 
 
-        if bouton_iceTea.etat == True:
-            ########### GET ITEM ###########
-            item = machine.getItem("Ice Tea")
-                        
-            ########## BUY ITEM ############
+            if bouton_iceTea.etat == True:
+                ########### GET ITEM ###########
+                item = machine.getItem("Ice Tea")
+                            
+                ########## BUY ITEM ############
 
-            if machine.solde < item.price:
-                fenetre.blit(texte_Pas_Bras_Pas_De_Chocolat, (340,150))
-                fenetre.blit(texte_etoiles, (350, 160))
-                pygame.display.flip()
-                pygame.time.wait(2000)
-                bouton_iceTea.etat = False
+                if machine.solde < item.price:
+                    fenetre.blit(screen, (355,85))
+                    fenetre.blit(texte_Pas_Bras_Pas_De_Chocolat, (355,85))
+                    fenetre.blit(texte_etoiles, (355, 95))
+                    pygame.display.flip()
+                    pygame.time.wait(2000)
+                    bouton_iceTea.etat = False
 
-            else:
-                machine.solde -= item.price
-                item.buyFromStock()
-                fenetre.blit(texte("Vous avez acheté : " + str(item.name), None, 20, "#000000"), (340,150))
-                fenetre.blit(texte_etoiles, (350, 160))
-                fenetre.blit(texte("Argent restant : " + str(machine.solde), None, 20, "#000000"), (340,180))
-                fenetre.blit(texte_etoiles, (350, 190))
+                else:
+                    machine.solde -= item.price
+                    item.buyFromStock()
+                    fenetre.blit(screen, (355,85))
+                    fenetre.blit(texte("Vous avez acheté : " + str(item.name), None, 20, "#000000"), (355,85))
+                    fenetre.blit(texte_etoiles, (355, 95))
+                    fenetre.blit(texte("Argent restant : " + str(machine.solde), None, 20, "#000000"), (355,105))
+                    fenetre.blit(texte_etoiles, (355, 115))
 
-                ######### CHECK REFUND #########
-                if machine.solde > 0:
-                    fenetre.blit(texte(str(machine.solde) + "€ rendu.", None, 20, "#000000"), (340,210))
-                    fenetre.blit(texte_etoiles, (350, 220))
-                    fenetre.blit(texte("Bonne Journée !", None, 20, "#000000"), (340,240))
-                    fenetre.blit(texte_etoiles, (350, 250))
-                pygame.display.flip()
-                pygame.time.wait(2000)
-                bouton_iceTea.etat = False
+                    ######### CHECK REFUND #########
+                    if machine.solde > 0:
+                        fenetre.blit(texte(str(machine.solde) + "€ rendu.", None, 20, "#000000"), (355,125))
+                        fenetre.blit(texte_etoiles, (355, 135))
+                        fenetre.blit(texte("Bonne Journée !", None, 20, "#000000"), (355,145))
+                        fenetre.blit(texte_etoiles, (355, 155))
+                    pygame.display.flip()
+                    pygame.time.wait(2000)
+                    bouton_iceTea.etat = False
 
         pygame.display.update()
 
