@@ -612,7 +612,6 @@ def bouclePrincipale(boolp1, boolp2, boolp3, boolp4, boold1, boold2, boold3, boo
 
 
 
-
         for event in pygame.event.get():
             if event.type == QUIT:
                 pygame.quit()
@@ -630,8 +629,6 @@ def bouclePrincipale(boolp1, boolp2, boolp3, boolp4, boold1, boold2, boold3, boo
                 distributeurNiveau1 = False
                 
 
-
-            
             ##### BOUTON COCA ######
             if event.type == MOUSEBUTTONUP and event.button == 1:
                 bouton_coca.reinit()
@@ -670,7 +667,6 @@ def bouclePrincipale(boolp1, boolp2, boolp3, boolp4, boold1, boold2, boold3, boo
 
 
 
-
 ################################# Fonction menu principale selection des niveaux  ##############################################
 
 
@@ -685,7 +681,7 @@ def selecteurNiveau(): #
     bouton_porte = Bouton("image/boutonPorte.png", "image/boutonPorteHoover.png", "image/boutonPorteSelect.png")
     bouton_distributeur = Bouton("image/boutonDistributeur.png", "image/boutonDistributeurHoover.png", "image/boutonDistributeurSelect.png")
     bouton_hotel = Bouton("image/boutonHotel.png", "image/boutonHotelHoover.png", "image/boutonHotelSelect.png")
-    bouton_quitter = Bouton("image/boutonQuitter.png", "image/boutonQuitterHoover.png", "image/boutonQuitterSelect.png")
+    bouton_quitter = Bouton("image/boutonQuitter.png", "image/boutonQuitterHoover.png", "image/boutonQuitter.png")
     panneauPorte = PanneauNiveau("image/presqueRien.png", "image/niveauPorte.png")
     panneauDistributeur = PanneauNiveau("image/presqueRien.png", "image/niveauDistributeur.png")
     panneauHotel = PanneauNiveau("image/presqueRien.png", "image/niveauHotel.png")
@@ -693,10 +689,10 @@ def selecteurNiveau(): #
     while gameStart == True:
         fenetre = pygame.display.set_mode((1000, 661))
         fenetre.blit(fenetre_selection.fond,(0,0))
-        fenetre.blit(bouton_porte.imageLoad,(200,255))
-        fenetre.blit(bouton_distributeur.imageLoad,(200, 355))
-        fenetre.blit(bouton_hotel.imageLoad, (200, 455))
-        fenetre.blit(bouton_quitter.imageLoad, (200, 555))
+        fenetre.blit(bouton_porte.imageLoad,(100,255))
+        fenetre.blit(bouton_distributeur.imageLoad,(100, 375))
+        fenetre.blit(bouton_hotel.imageLoad, (100, 495))
+        fenetre.blit(bouton_quitter.imageLoad, (40, 40))
         fenetre.blit(panneauPorte.imageLoad, (475,200))
         fenetre.blit(panneauDistributeur.imageLoad, (475,200))
         fenetre.blit(panneauHotel.imageLoad, (475,200))
@@ -719,11 +715,11 @@ def selecteurNiveau(): #
 
         for event in pygame.event.get():
             ###### BOUTON POUR LA PORTE #####
-            if event.type == MOUSEMOTION and event.pos[0] <= 413 and event.pos[0] >= 200 and event.pos[1] <= 336 and event.pos[1] >= 255 and bouton_porte.etat == False:
+            if event.type == MOUSEMOTION and event.pos[0] <= 320 and event.pos[0] >= 100 and event.pos[1] <= 335 and event.pos[1] >= 255 and bouton_porte.etat == False:
                 bouton_porte.hoover()
-            if event.type == MOUSEMOTION and (event.pos[0] >= 413 or event.pos[0] <= 200 or event.pos[1] >= 336 or event.pos[1] <= 255) and bouton_porte.etat == False:
+            if event.type == MOUSEMOTION and (event.pos[0] >= 320 or event.pos[0] <= 100 or event.pos[1] >= 335 or event.pos[1] <= 255) and bouton_porte.etat == False:
                 bouton_porte.reinit()
-            if event.type == MOUSEBUTTONDOWN and event.button == 1 and event.pos[0] <= 413 and event.pos[0] >= 200 and event.pos[1] <= 336 and event.pos[1] >= 255:
+            if event.type == MOUSEBUTTONDOWN and event.button == 1 and event.pos[0] <= 320 and event.pos[0] >= 100 and event.pos[1] <= 335 and event.pos[1] >= 255:
                 bouton_porte.select()
                 bouton_porte.etat = True
                 bouton_distributeur.etat = False
@@ -753,11 +749,11 @@ def selecteurNiveau(): #
                     gameStart = False
 
             ###### BOUTON POUR LE DISTRIBUTEUR ######
-            if event.type == MOUSEMOTION and event.pos[0] <= 413 and event.pos[0] >= 200 and event.pos[1] <= 436 and event.pos[1] >= 355 and bouton_distributeur.etat == False:
+            if event.type == MOUSEMOTION and event.pos[0] <= 320 and event.pos[0] >= 100 and event.pos[1] <= 455 and event.pos[1] >= 375 and bouton_distributeur.etat == False:
                 bouton_distributeur.hoover()
-            if event.type == MOUSEMOTION and (event.pos[0] >= 413 or event.pos[0] <= 200 or event.pos[1] >= 436 or event.pos[1] <= 355) and bouton_distributeur.etat == False:
+            if event.type == MOUSEMOTION and (event.pos[0] >= 320 or event.pos[0] <= 100 or event.pos[1] >= 455 or event.pos[1] <= 375) and bouton_distributeur.etat == False:
                 bouton_distributeur.reinit()
-            if event.type == MOUSEBUTTONDOWN and event.button == 1 and event.pos[0] <= 413 and event.pos[0] >= 200 and event.pos[1] <= 436 and event.pos[1] >= 355:
+            if event.type == MOUSEBUTTONDOWN and event.button == 1 and event.pos[0] <= 320 and event.pos[0] >= 100 and event.pos[1] <= 455 and event.pos[1] >= 375:
                 bouton_distributeur.select()
                 bouton_porte.etat = False
                 bouton_distributeur.etat = True
@@ -772,11 +768,11 @@ def selecteurNiveau(): #
 
 
             ###### BOUTON POUR L'HOTEL ######
-            if event.type == MOUSEMOTION and event.pos[0] <= 413 and event.pos[0] >= 200 and event.pos[1] <= 536 and event.pos[1] >= 455 and bouton_hotel.etat == False:
+            if event.type == MOUSEMOTION and event.pos[0] <= 320 and event.pos[0] >= 100 and event.pos[1] <= 575 and event.pos[1] >= 495 and bouton_hotel.etat == False:
                 bouton_hotel.hoover()
-            if event.type == MOUSEMOTION and (event.pos[0] >= 413 or event.pos[0] <= 200 or event.pos[1] >= 536 or event.pos[1] <= 455) and bouton_hotel.etat == False:
+            if event.type == MOUSEMOTION and (event.pos[0] >= 320 or event.pos[0] <= 100 or event.pos[1] >= 575 or event.pos[1] <= 495) and bouton_hotel.etat == False:
                 bouton_hotel.reinit()
-            if event.type == MOUSEBUTTONDOWN and event.button == 1 and event.pos[0] <= 413 and event.pos[0] >= 200 and event.pos[1] <= 536 and event.pos[1] >= 455:
+            if event.type == MOUSEBUTTONDOWN and event.button == 1 and event.pos[0] <= 320 and event.pos[0] >= 100 and event.pos[1] <= 575 and event.pos[1] >= 495:
                 bouton_hotel.select()
                 bouton_porte.etat = False
                 bouton_distributeur.etat = False
@@ -784,11 +780,11 @@ def selecteurNiveau(): #
                 bouton_quitter.etat = False
 
             ###### BOUTON POUR QUITTER ######
-            if event.type == MOUSEMOTION and event.pos[0] <= 413 and event.pos[0] >= 200 and event.pos[1] <= 636 and event.pos[1] >= 555 and bouton_quitter.etat == False:
+            if event.type == MOUSEMOTION and event.pos[0] <= 120 and event.pos[0] >= 40 and event.pos[1] <= 120 and event.pos[1] >= 40 and bouton_quitter.etat == False:
                 bouton_quitter.hoover()
-            if event.type == MOUSEMOTION and (event.pos[0] >= 413 or event.pos[0] <= 200 or event.pos[1] >= 636 or event.pos[1] <= 555) and bouton_quitter.etat == False:
+            if event.type == MOUSEMOTION and (event.pos[0] >= 120 or event.pos[0] <= 40 or event.pos[1] >= 120 or event.pos[1] <= 40) and bouton_quitter.etat == False:
                 bouton_quitter.reinit()
-            if event.type == MOUSEBUTTONDOWN and event.button == 1 and event.pos[0] <= 413 and event.pos[0] >= 200 and event.pos[1] <= 636 and event.pos[1] >= 555:
+            if event.type == MOUSEBUTTONDOWN and event.button == 1 and event.pos[0] <= 120 and event.pos[0] >= 40 and event.pos[1] <= 120 and event.pos[1] >= 40:
                 bouton_quitter.select()
                 bouton_porte.etat = False
                 bouton_distributeur.etat = False
