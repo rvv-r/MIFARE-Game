@@ -65,6 +65,15 @@ class Solde:
     def __init__(self):
         self.amount = -1
 
+############### Portique metro #################
+
+class Portique:
+    def __init__(self, imageOuverte, imageFerme, a):
+        self.imageOuverte = pygame.image.load(imageOuverte)
+        self.imageFerme = pygame.image.load(imageFerme)
+        self.verouille = a #Variable permettant de gérer la porte ouverte ou non
+        self.passage = 0
+
 ############   DISTRIBUTEUR    #####################
 
 class Distributeur:
