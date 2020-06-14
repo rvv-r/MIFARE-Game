@@ -23,17 +23,23 @@ def bouclePrincipale(boolp1, boolp2, boolp3, boolp4, boold1, boold2, boold3, boo
 
     fenetre_porteNiveau1 = Terrain("image/scene/scene.jpg")
     fenetre_porteNiveau2 = Terrain("image/scene/scene2.png")
-    fenetre_porteNiveau3 = Terrain("image/scene/scene.jpg")
+    fenetre_porteNiveau3_1 = Terrain("image/scene/scenePorte3_1.jpg")
+    fenetre_porteNiveau3_2 = Terrain("image/scene/scenePorte3_2.jpg")
     fenetre_porteNiveau4 = Terrain("image/scene/scene2.png")
     fenetre_distribNiveau1 = Terrain("image/scene/sceneDistrib1.jpg")
     fenetre_hotelNiveau1_1 = Terrain("image/scene/sceneMetro1.jpg")
     fenetre_hotelNiveau1_2 = Terrain("image/scene/sceneMetro2.png")
     fenetre_hotelNiveau1_3 = Terrain("image/scene/sceneMetro3.jpg")
+
+######## AUTRE IMAGE  ############################
+
+    habitScientifique = pygame.image.load("image/habitScientifique.png")
     screen = pygame.image.load("image/screenDistrib1.jpg")
 
 
 ####### CREATION DES BOUTONS #####################
 
+    #boutons interaction
     bouton_quitter = Bouton("image/boutons/boutonQuitter.png", "image/boutons/boutonQuitterHoover.png", "image/boutons/boutonQuitterSelect.png")
     bouton_continuer = Bouton("image/boutons/boutonContinuer.png", "image/boutons/boutonContinuerHoover.png", "image/boutons/boutonContinuer.png")
     bouton_retour = Bouton("image/boutons/boutonRetour2.png", "image/boutons/boutonRetourHoover2.png", "image/boutons/boutonRetour2.png")
@@ -41,6 +47,10 @@ def bouclePrincipale(boolp1, boolp2, boolp3, boolp4, boold1, boold2, boold3, boo
     bouton_aide = Bouton("image/boutons/boutonAide2.png", "image/boutons/boutonAideHoover2.png", "image/boutons/boutonAide2.png")
     testAide = PanneauNiveau("image/presqueRien.png", "image/texteAide2.png")
 
+    #bouton blouse niveau 3_1
+    bouton_blouse = Bouton("image/boutons/boutonBlouse.png", "image/boutons/boutonBlouseHoover.png", "image/boutons/boutonBlouse.png")
+
+    #bouton distributeur
     bouton_coca = Bouton("image/boutons/boutonCoca.png", "image/boutons/boutonCoca.png", "image/boutons/boutonCocaSelect.png")
     bouton_evian = Bouton("image/boutons/boutonEvian.png", "image/boutons/boutonEvian.png", "image/boutons/boutonEvianSelect.png")
     bouton_sprite = Bouton("image/boutons/boutonSprite.png", "image/boutons/boutonSprite.png", "image/boutons/boutonSpriteSelect.png")
@@ -71,7 +81,7 @@ def bouclePrincipale(boolp1, boolp2, boolp3, boolp4, boold1, boold2, boold3, boo
 
     porteN1 = Porte("image/portes/porteOuverte.png","image/portes/porteFerme.png",1)
     porteN2 = Porte("image/portes/porteOuverte2.png","image/portes/porteFerme2.png",1)
-    porteN3 = Porte("image/portes/porteOuverte.png","image/portes/porteFerme.png",1)
+    porteN3 = Porte("image/portes/porteOuverte3.png","image/portes/porteFerme3.png",1)
     porteN4 = Porte("image/portes/porteOuverte2.png","image/portes/porteFerme2.png",1)
     porteNH1_1 = Portique("image/portes/metroOuvert.png", "image/portes/metroFerme.png", 1)
     porteNH1_2 = Portique("image/portes/metroOuvert.png", "image/portes/metroFerme.png", 1)
@@ -87,7 +97,9 @@ def bouclePrincipale(boolp1, boolp2, boolp3, boolp4, boold1, boold2, boold3, boo
 
     porteNiveau1 = boolp1
     porteNiveau2 = boolp2
-    porteNiveau3 = boolp3
+    porteNiveau3_1 = boolp3
+    suivant3_1 = False
+    porteNiveau3_2 = False
     porteNiveau4 = boolp4
     distributeurNiveau1 = boold1
     distributeurNiveau2 = boold2
@@ -276,33 +288,128 @@ def bouclePrincipale(boolp1, boolp2, boolp3, boolp4, boold1, boold2, boold3, boo
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_p:    #ancien code qui ouvrait la porte avec p
                     porteN2.verouille = 0
-                    
+
 
 ##################################################################################################
 #                                                                                                #
-#                                       Niveau 3 Porte                                           #
+#                                       Niveau 3_1 Porte                                         #
 #                                                                                                #
 ##################################################################################################
 
-    while porteNiveau3 == True:
+    while porteNiveau3_1 == True:
         thread_1.data = ""
-        fenetre.blit(fenetre_porteNiveau3.fond,(0,0))
-        fenetre.blit(bouton_retour.imageLoad, (20, 20))
+        fenetre.blit(fenetre_porteNiveau3_1.fond,(0,0))
+        fenetre.blit(bouton_retour.imageLoad, (30, -10))
+        fenetre.blit(bouton_blouse.imageLoad, (0,0))
+        
+
+        if suivant3_1 == True:
+            fenetre.blit(habitScientifique, (0,0))
+            fenetre.blit(bouton_continuer.imageLoad, (50, 560))
+            
         fenetre.blit(testAide.imageLoad, (60,200))
+        if aideP1 == True:
+            testAide.affichePanneau()
+            fenetre.blit(bouton_suivant.imageLoad, (350,500))
+            fenetre.blit(bouton_aide.imageLoad, (3000,5000))
+        if aideP1 == False:
+            testAide.reinitPanneau()
+            fenetre.blit(bouton_suivant.imageLoad, (3000,5000))
+            fenetre.blit(bouton_aide.imageLoad, (900, 10))
+        
+        
+
+        pygame.display.update()
+
+        for event in pygame.event.get():
+            if event.type == QUIT:
+                pygame.quit()
+            ###### BOUTON POUR RETOUR #####
+            if event.type == MOUSEMOTION and event.pos[0] <= 191 and event.pos[0] >= 30 and event.pos[1] <= 82 and event.pos[1] >= 0 and bouton_quitter.etat == False:
+                bouton_retour.hoover()
+            if event.type == MOUSEMOTION and (event.pos[0] >= 191 or event.pos[0] <= 30 or event.pos[1] >= 82 or event.pos[1] <= 0) and bouton_quitter.etat == False:
+                bouton_retour.reinit()
+            if event.type == MOUSEBUTTONDOWN and event.button == 1 and event.pos[0] <= 191 and event.pos[0] >= 30 and event.pos[1] <= 82 and event.pos[1] >= 0:
+                bouton_retour.select()
+                bouton_quitter.etat = False
+                bouton_retour.etat = True
+                bouton_continuer.etat = False
+                selecteurNiveau()
+                porteNiveau1 = False
+            
+            ###### BOUTON POUR SELECTIONNER BLOUSE #####
+            if event.type == MOUSEMOTION and event.pos[0] <= 280 and event.pos[0] >= 150 and event.pos[1] <= 530 and event.pos[1] >= 220 and bouton_quitter.etat == False:
+                bouton_blouse.hoover()
+            if event.type == MOUSEMOTION and (event.pos[0] >= 280 or event.pos[0] <= 150 or event.pos[1] >= 530 or event.pos[1] <= 220) and bouton_quitter.etat == False:
+                bouton_blouse.reinit()
+            if event.type == MOUSEBUTTONDOWN and event.button == 1 and event.pos[0] <= 500 and event.pos[0] >= 200 and event.pos[1] <= 500 and event.pos[1] >= 200:
+                suivant3_1 = True
+            
+            ###### BOUTON POUR CONTINUER QUE SI LA BLOUSE EST PRISE #####
+            if suivant3_1 == True:
+                if event.type == MOUSEMOTION and event.pos[0] <= 211 and event.pos[0] >= 50 and event.pos[1] <= 630 and event.pos[1] >= 560 and bouton_continuer.etat == False:
+                    bouton_continuer.hoover()
+                if event.type == MOUSEMOTION and (event.pos[0] >= 211 or event.pos[0] <= 50 or event.pos[1] >= 630 or event.pos[1] <= 560) and bouton_continuer.etat == False:
+                    bouton_continuer.reinit()
+                if event.type == MOUSEBUTTONDOWN and event.button == 1 and event.pos[0] <= 233 and event.pos[0] >= 50 and event.pos[1] <= 630 and event.pos[1] >= 560:
+                    bouton_continuer.select()
+                    bouton_quitter.etat = False
+                    bouton_retour.etat = False
+                    bouton_continuer.etat = True
+                    porteNiveau3_1 = False
+                    suivant3_1 = False
+                    porteNiveau3_2 = True
+                    bouton_continuer.etat = False #Pour rénitialiser le bouton continuer entre les niveaux
+
+            ####### BOUTON SUIVANT DANS L'AIDE  #######
+            if event.type == MOUSEMOTION and event.pos[0] <= 511 and event.pos[0] >= 350 and event.pos[1] <= 570 and event.pos[1] >= 500 and bouton_suivant.etat == False:
+                bouton_suivant.hoover()
+            if event.type == MOUSEMOTION and (event.pos[0] >= 511 or event.pos[0] <= 350 or event.pos[1] >= 570 or event.pos[1] <= 500) and bouton_suivant.etat == False:
+                bouton_suivant.reinit()
+            if event.type == MOUSEBUTTONDOWN and event.button == 1 and event.pos[0] <= 511 and event.pos[0] >= 350 and event.pos[1] <= 570 and event.pos[1] >= 500:
+                bouton_suivant.select()
+                aideP1 = False
+
+            ###### BOUTON AIDE ######
+
+            if event.type == MOUSEMOTION and event.pos[0] <= 970 and event.pos[0] >= 900 and event.pos[1] <= 80 and event.pos[1] >= 10 and bouton_aide.etat == False:
+                bouton_aide.hoover()
+            if event.type == MOUSEMOTION and (event.pos[0] >= 970 or event.pos[0] <= 900 or event.pos[1] >= 80 or event.pos[1] <= 10) and bouton_aide.etat == False:
+                bouton_aide.reinit()
+            if event.type == MOUSEBUTTONDOWN and event.button == 1 and event.pos[0] <= 970 and event.pos[0] >= 900 and event.pos[1] <= 80 and event.pos[1] >= 10:
+                bouton_aide.select()
+                aideP1 = True
+
+            ########  TOUCHE DU CLAVIER POUR LES TEST ############
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_p:    #ancien code qui ouvrait la porte avec p
+                    porteN1.verouille = 0
+
+##################################################################################################
+#                                                                                                #
+#                                       Niveau 3_2 Porte                                           #
+#                                                                                                #
+##################################################################################################
+
+    while porteNiveau3_2 == True:
+        thread_1.data = ""
+        fenetre.blit(fenetre_porteNiveau3_2.fond,(0,0))
+        fenetre.blit(bouton_retour.imageLoad, (30, -10))
+        fenetre.blit(testAide.imageLoad, (450,200))
 
         if aideP3 == True:
             testAide.affichePanneau()
-            fenetre.blit(bouton_suivant.imageLoad, (300,500))
+            fenetre.blit(bouton_suivant.imageLoad, (740,500))
             fenetre.blit(bouton_aide.imageLoad, (3000,5000))
         if aideP3 == False:
             testAide.reinitPanneau()
             fenetre.blit(bouton_suivant.imageLoad, (3000,5000))
-            fenetre.blit(bouton_aide.imageLoad, (260, 560))
+            fenetre.blit(bouton_aide.imageLoad, (900, 10))
         if porteN3.verouille == 1:
             fenetre.blit(porteN3.imageFerme, (0,0))
         if porteN3.verouille == 0:
             fenetre.blit(porteN3.imageOuverte, (0,0))
-            fenetre.blit(bouton_continuer.imageLoad, (20, 560))
+            fenetre.blit(bouton_continuer.imageLoad, (50, 560))
         if thread_1.data == "ouvre3": #permet d'ouvrir la porte quand on recoit le code ouvrir par le port série
             porteN3.verouille = 0
 
@@ -314,11 +421,11 @@ def bouclePrincipale(boolp1, boolp2, boolp3, boolp4, boold1, boold2, boold3, boo
             if event.type == QUIT:
                 pygame.quit()
             ###### BOUTON POUR RETOUR #####
-            if event.type == MOUSEMOTION and event.pos[0] <= 233 and event.pos[0] >= 20 and event.pos[1] <= 101 and event.pos[1] >= 20 and bouton_quitter.etat == False:
+            if event.type == MOUSEMOTION and event.pos[0] <= 191 and event.pos[0] >= 30 and event.pos[1] <= 82 and event.pos[1] >= 0 and bouton_quitter.etat == False:
                 bouton_retour.hoover()
-            if event.type == MOUSEMOTION and (event.pos[0] >= 233 or event.pos[0] <= 20 or event.pos[1] >= 101 or event.pos[1] <= 20) and bouton_quitter.etat == False:
+            if event.type == MOUSEMOTION and (event.pos[0] >= 191 or event.pos[0] <= 30 or event.pos[1] >= 82 or event.pos[1] <= 0) and bouton_quitter.etat == False:
                 bouton_retour.reinit()
-            if event.type == MOUSEBUTTONDOWN and event.button == 1 and event.pos[0] <= 233 and event.pos[0] >= 20 and event.pos[1] <= 101 and event.pos[1] >= 20:
+            if event.type == MOUSEBUTTONDOWN and event.button == 1 and event.pos[0] <= 191 and event.pos[0] >= 30 and event.pos[1] <= 82 and event.pos[1] >= 0:
                 bouton_retour.select()
                 bouton_quitter.etat = False
                 bouton_retour.etat = True
@@ -328,34 +435,34 @@ def bouclePrincipale(boolp1, boolp2, boolp3, boolp4, boold1, boold2, boold3, boo
            
             ###### BOUTON POUR CONTINUER QUE SI LA PORTE EST OUVERTE #####
             if porteN3.verouille == 0:
-                if event.type == MOUSEMOTION and event.pos[0] <= 233 and event.pos[0] >= 20 and event.pos[1] <= 641 and event.pos[1] >= 560 and bouton_continuer.etat == False:
+                if event.type == MOUSEMOTION and event.pos[0] <= 211 and event.pos[0] >= 50 and event.pos[1] <= 630 and event.pos[1] >= 560 and bouton_continuer.etat == False:
                     bouton_continuer.hoover()
-                if event.type == MOUSEMOTION and (event.pos[0] >= 233 or event.pos[0] <= 20 or event.pos[1] >= 641 or event.pos[1] <= 560) and bouton_continuer.etat == False:
+                if event.type == MOUSEMOTION and (event.pos[0] >= 211 or event.pos[0] <= 50 or event.pos[1] >= 630 or event.pos[1] <= 560) and bouton_continuer.etat == False:
                     bouton_continuer.reinit()
-                if event.type == MOUSEBUTTONDOWN and event.button == 1 and event.pos[0] <= 233 and event.pos[0] >= 20 and event.pos[1] <= 641 and event.pos[1] >= 560:
+                if event.type == MOUSEBUTTONDOWN and event.button == 1 and event.pos[0] <= 233 and event.pos[0] >= 50 and event.pos[1] <= 630 and event.pos[1] >= 560:
                     bouton_continuer.select()
                     bouton_quitter.etat = False
                     bouton_retour.etat = False
                     bouton_continuer.etat = True
-                    porteNiveau3 = False
+                    porteNiveau3_2 = False
                     porteNiveau4 = True
 
             ####### BOUTON SUIVANT DANS L'AIDE  #######
-            if event.type == MOUSEMOTION and event.pos[0] <= 513 and event.pos[0] >= 300 and event.pos[1] <= 581 and event.pos[1] >= 500 and bouton_suivant.etat == False:
+            if event.type == MOUSEMOTION and event.pos[0] <= 901 and event.pos[0] >= 740 and event.pos[1] <= 570 and event.pos[1] >= 500 and bouton_suivant.etat == False:
                 bouton_suivant.hoover()
-            if event.type == MOUSEMOTION and (event.pos[0] >= 513 or event.pos[0] <= 300 or event.pos[1] >= 581 or event.pos[1] <= 500) and bouton_suivant.etat == False:
+            if event.type == MOUSEMOTION and (event.pos[0] >= 901 or event.pos[0] <= 740 or event.pos[1] >= 570 or event.pos[1] <= 500) and bouton_suivant.etat == False:
                 bouton_suivant.reinit()
-            if event.type == MOUSEBUTTONDOWN and event.button == 1 and event.pos[0] <= 513 and event.pos[0] >= 300 and event.pos[1] <= 581 and event.pos[1] >= 500:
+            if event.type == MOUSEBUTTONDOWN and event.button == 1 and event.pos[0] <= 901 and event.pos[0] >= 740 and event.pos[1] <= 570 and event.pos[1] >= 500:
                 bouton_suivant.select()
                 aideP3 = False
 
             ###### BOUTON AIDE ######
 
-            if event.type == MOUSEMOTION and event.pos[0] <= 473 and event.pos[0] >= 260 and event.pos[1] <= 641 and event.pos[1] >= 560 and bouton_aide.etat == False:
+            if event.type == MOUSEMOTION and event.pos[0] <= 970 and event.pos[0] >= 900 and event.pos[1] <= 80 and event.pos[1] >= 10 and bouton_aide.etat == False:
                 bouton_aide.hoover()
-            if event.type == MOUSEMOTION and (event.pos[0] >= 473 or event.pos[0] <= 260 or event.pos[1] >= 641 or event.pos[1] <= 560) and bouton_aide.etat == False:
+            if event.type == MOUSEMOTION and (event.pos[0] >= 970 or event.pos[0] <= 900 or event.pos[1] >= 80 or event.pos[1] <= 10) and bouton_aide.etat == False:
                 bouton_aide.reinit()
-            if event.type == MOUSEBUTTONDOWN and event.button == 1 and event.pos[0] <= 473 and event.pos[0] >= 260 and event.pos[1] <= 641 and event.pos[1] >= 560:
+            if event.type == MOUSEBUTTONDOWN and event.button == 1 and event.pos[0] <= 970 and event.pos[0] >= 900 and event.pos[1] <= 80 and event.pos[1] >= 10:
                 bouton_aide.select()
                 aideP3 = True
 
