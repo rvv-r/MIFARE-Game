@@ -262,9 +262,9 @@ def bouclePrincipale(boolp1, boolp2, boolp3, boolp4, boold1, boold2, boold3, boo
                     bouton_continuer.select()
                     bouton_quitter.etat = False
                     bouton_retour.etat = False
-                    bouton_continuer.etat = True
+                    bouton_continuer.etat = False
                     porteNiveau2 = False
-                    porteNiveau3 = True
+                    porteNiveau3_1 = True
 
             ####### BOUTON SUIVANT DANS L'AIDE  #######
             if event.type == MOUSEMOTION and event.pos[0] <= 901 and event.pos[0] >= 740 and event.pos[1] <= 570 and event.pos[1] >= 500 and bouton_suivant.etat == False:
@@ -306,7 +306,7 @@ def bouclePrincipale(boolp1, boolp2, boolp3, boolp4, boold1, boold2, boold3, boo
         if suivant3_1 == True:
             fenetre.blit(habitScientifique, (0,0))
             fenetre.blit(bouton_continuer.imageLoad, (50, 560))
-            
+
         fenetre.blit(testAide.imageLoad, (60,200))
         if aideP1 == True:
             testAide.affichePanneau()
@@ -443,7 +443,7 @@ def bouclePrincipale(boolp1, boolp2, boolp3, boolp4, boold1, boold2, boold3, boo
                     bouton_continuer.select()
                     bouton_quitter.etat = False
                     bouton_retour.etat = False
-                    bouton_continuer.etat = True
+                    bouton_continuer.etat = False
                     porteNiveau3_2 = False
                     porteNiveau4 = True
 
