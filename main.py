@@ -911,6 +911,7 @@ def bouclePrincipale(boolp1, boolp2, boolp3, boolp4, boold1, boold2, boold3, boo
         thread_1.data = ""
         fenetre.blit(fenetre_hotelNiveau1_2.fond,(0,0))
         fenetre.blit(bouton_retour.imageLoad, (30, -10))
+        fenetre.blit(testAide.imageLoad, (450,200))
 
         try:
             porteNH1_2.passage = int(thread_1.data)
@@ -926,8 +927,6 @@ def bouclePrincipale(boolp1, boolp2, boolp3, boolp4, boold1, boold2, boold3, boo
             fenetre.blit(porteNH1_2.imageOuverte, (0,0))
             fenetre.blit(bouton_continuer.imageLoad, (50, 560))
         
-
-        fenetre.blit(testAide.imageLoad, (450,200))
 
         if aideH1 == True:
             testAide.affichePanneau()
