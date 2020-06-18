@@ -131,7 +131,6 @@ def bouclePrincipale(boolp1, boolp2, boolp3, boolp4, boold1, boold2, boold3, boo
         fenetre.blit(bouton_retour.imageLoad, (30, -10))
         fenetre.blit(testAide.imageLoad, (60,200))
 
-
         if aideP1 == True:
             testAide.affichePanneau()
             fenetre.blit(bouton_suivant.imageLoad, (350,500))
@@ -145,7 +144,7 @@ def bouclePrincipale(boolp1, boolp2, boolp3, boolp4, boold1, boold2, boold3, boo
         if porteN1.verouille == 0:
             fenetre.blit(porteN1.imageOuverte, (0,0))
             fenetre.blit(bouton_continuer.imageLoad, (50, 560))
-        if thread_1.data == "ouvre": #permet d'ouvrir la porte quand on recoit le code ouvrir par le port série
+        if thread_1.indexNiveau1 >= 0: #permet d'ouvrir la porte quand on recoit le code ouvrir par le port série
             porteN1.verouille = 0
 
         pygame.display.update()

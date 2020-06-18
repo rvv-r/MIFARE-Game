@@ -126,6 +126,7 @@ class Recevoir(Thread):
         self.nbSerialPort = ""   # permet la configuration du numéro de port
         self.environnementSerial = ""  #'COM' pour windows, '/dev/pts/' pour Linux
         self.var = True             #Variable qui permettra d'arrêter le thread
+        self.indexNiveau1 = 0
 
     def run(self):
         serialPort = self.environnementSerial+self.nbSerialPort 
@@ -133,6 +134,7 @@ class Recevoir(Thread):
         while self.var == True:
             self.data = str(ser.readline()) #lit les données envoie sur le port série
             self.data = self.data[2:-1]  #on recoit b'message' permet d'avoir juste message
+            self.indexNiveau1 = self.data.find("132C4A1B")
             if self.data == "quit": # si on reçoit quit ferme la connection
                 print("connection fermé")
                 self.var = False
