@@ -27,6 +27,8 @@ def bouclePrincipale(boolp1, boolp2, boolp3, boolp4, boold1, boold2, boold3, boo
     fenetre_porteNiveau3_2 = Terrain("image/scene/scenePorte3_2.jpg")
     fenetre_porteNiveau4 = Terrain("image/scene/scenePorte4.jpg")
     fenetre_distribNiveau1 = Terrain("image/scene/sceneDistrib1.jpg")
+    fenetre_distribNiveau2 = Terrain("image/scene/sceneDistrib1.jpg")
+    fenetre_distribNiveau3 = Terrain("image/scene/sceneDistrib1.jpg")
     fenetre_hotelNiveau1_1 = Terrain("image/scene/sceneMetro1.jpg")
     fenetre_hotelNiveau1_2 = Terrain("image/scene/sceneMetro2.png")
     fenetre_hotelNiveau1_3 = Terrain("image/scene/sceneMetro3.jpg")
@@ -68,15 +70,27 @@ def bouclePrincipale(boolp1, boolp2, boolp3, boolp4, boold1, boold2, boold3, boo
 
 ########### CREATION DU DISTRIBUTEUR #################
 
-    machine = Distributeur()
+    distributeur1 = Distributeur()
     item1 = Item('Coca',  2,  2)
     item2 = Item('Evian', 1,  1)
     item3 = Item('Ice Tea',  1.5,  3)
     item4 = Item('Sprite',  2, 1)
-    machine.addItem(item1)
-    machine.addItem(item2)
-    machine.addItem(item3)
-    machine.addItem(item4)
+    distributeur1.addItem(item1)
+    distributeur1.addItem(item2)
+    distributeur1.addItem(item3)
+    distributeur1.addItem(item4)
+
+    distributeur2 = Distributeur()
+    distributeur2.addItem(item1)
+    distributeur2.addItem(item2)
+    distributeur2.addItem(item3)
+    distributeur2.addItem(item4)
+
+    distributeur3 = Distributeur()
+    distributeur3.addItem(item1)
+    distributeur3.addItem(item2)
+    distributeur3.addItem(item3)
+    distributeur3.addItem(item4)
 
 ####### CREATION DES PORTES #########################
 
@@ -116,6 +130,8 @@ def bouclePrincipale(boolp1, boolp2, boolp3, boolp4, boold1, boold2, boold3, boo
     aideP3 = True
     aideP4 = True
     aideD1 = True
+    aideD2 = True
+    aideD3 = True
     aideH1 = True
     aideH2 = True
 
@@ -590,11 +606,11 @@ def bouclePrincipale(boolp1, boolp2, boolp3, boolp4, boold1, boold2, boold3, boo
             fenetre.blit(bouton_aide.imageLoad, (900, 10))
 
         try:
-            machine.solde = int(thread_1.data)
+            distributeur1.solde = int(thread_1.data)
         except ValueError:
             pass
 
-        if machine.solde >= 0:
+        if distributeur1.solde >= 0:
 
             fenetre.blit(texte_Selection_Objets, (355, 125))
             fenetre.blit(texte_etoiles, (355, 135))
@@ -602,11 +618,11 @@ def bouclePrincipale(boolp1, boolp2, boolp3, boolp4, boold1, boold2, boold3, boo
 
             if bouton_coca.etat == True:
                 ########### GET ITEM ###########
-                item = machine.getItem("Coca")
+                item = distributeur1.getItem("Coca")
                             
                 ########## BUY ITEM ############
 
-                if machine.solde < item.price:
+                if distributeur1.solde < item.price:
                     fenetre.blit(screen, (355,85))
                     fenetre.blit(texte_Pas_Bras_Pas_De_Chocolat, (355,85))
                     fenetre.blit(texte_etoiles, (355, 95))
@@ -615,17 +631,17 @@ def bouclePrincipale(boolp1, boolp2, boolp3, boolp4, boold1, boold2, boold3, boo
                     bouton_coca.etat = False
 
                 else:
-                    machine.solde -= item.price
+                    distributeur1.solde -= item.price
                     item.buyFromStock()
                     fenetre.blit(screen, (355,85))
                     fenetre.blit(texte("Vous avez acheté : " + str(item.name), None, 20, "#000000"), (355,85))
                     fenetre.blit(texte_etoiles, (355, 95))
-                    fenetre.blit(texte("Argent restant : " + str(machine.solde), None, 20, "#000000"), (355,105))
+                    fenetre.blit(texte("Argent restant : " + str(distributeur1.solde), None, 20, "#000000"), (355,105))
                     fenetre.blit(texte_etoiles, (355, 115))
 
                     ######### CHECK REFUND #########
-                    if machine.solde > 0:
-                        fenetre.blit(texte(str(machine.solde) + "€ rendu.", None, 20, "#000000"), (355,125))
+                    if distributeur1.solde > 0:
+                        fenetre.blit(texte(str(distributeur1.solde) + "€ rendu.", None, 20, "#000000"), (355,125))
                         fenetre.blit(texte_etoiles, (355, 135))
                         fenetre.blit(texte("Bonne Journée !", None, 20, "#000000"), (355,145))
                         fenetre.blit(texte_etoiles, (355, 155))
@@ -636,11 +652,11 @@ def bouclePrincipale(boolp1, boolp2, boolp3, boolp4, boold1, boold2, boold3, boo
 
             if bouton_evian.etat == True:
                 ########### GET ITEM ###########
-                item = machine.getItem("Evian")
+                item = distributeur1.getItem("Evian")
                             
                 ########## BUY ITEM ############
 
-                if machine.solde < item.price:
+                if distributeur1.solde < item.price:
                     fenetre.blit(screen, (355,85))
                     fenetre.blit(texte_Pas_Bras_Pas_De_Chocolat, (355,85))
                     fenetre.blit(texte_etoiles, (355, 95))
@@ -649,17 +665,17 @@ def bouclePrincipale(boolp1, boolp2, boolp3, boolp4, boold1, boold2, boold3, boo
                     bouton_evian.etat = False
 
                 else:
-                    machine.solde -= item.price
+                    distributeur1.solde -= item.price
                     item.buyFromStock()
                     fenetre.blit(screen, (355,85))
                     fenetre.blit(texte("Vous avez acheté : " + str(item.name), None, 20, "#000000"), (355,85))
                     fenetre.blit(texte_etoiles, (355, 95))
-                    fenetre.blit(texte("Argent restant : " + str(machine.solde), None, 20, "#000000"), (355,105))
+                    fenetre.blit(texte("Argent restant : " + str(distributeur1.solde), None, 20, "#000000"), (355,105))
                     fenetre.blit(texte_etoiles, (355, 115))
 
                     ######### CHECK REFUND #########
-                    if machine.solde > 0:
-                        fenetre.blit(texte(str(machine.solde) + "€ rendu.", None, 20, "#000000"), (355,125))
+                    if distributeur1.solde > 0:
+                        fenetre.blit(texte(str(distributeur1.solde) + "€ rendu.", None, 20, "#000000"), (355,125))
                         fenetre.blit(texte_etoiles, (355, 135))
                         fenetre.blit(texte("Bonne Journée !", None, 20, "#000000"), (355,145))
                         fenetre.blit(texte_etoiles, (355, 155))
@@ -670,11 +686,11 @@ def bouclePrincipale(boolp1, boolp2, boolp3, boolp4, boold1, boold2, boold3, boo
 
             if bouton_sprite.etat == True:
                 ########### GET ITEM ###########
-                item = machine.getItem("Sprite")
+                item = distributeur1.getItem("Sprite")
                             
                 ########## BUY ITEM ############
 
-                if machine.solde < item.price:
+                if distributeur1.solde < item.price:
                     fenetre.blit(screen, (355,85))
                     fenetre.blit(texte_Pas_Bras_Pas_De_Chocolat, (355,85))
                     fenetre.blit(texte_etoiles, (355, 95))
@@ -683,17 +699,17 @@ def bouclePrincipale(boolp1, boolp2, boolp3, boolp4, boold1, boold2, boold3, boo
                     bouton_sprite.etat = False
 
                 else:
-                    machine.solde -= item.price
+                    distributeur1.solde -= item.price
                     item.buyFromStock()
                     fenetre.blit(screen, (355,85))
                     fenetre.blit(texte("Vous avez acheté : " + str(item.name), None, 20, "#000000"), (355,85))
                     fenetre.blit(texte_etoiles, (355, 95))
-                    fenetre.blit(texte("Argent restant : " + str(machine.solde), None, 20, "#000000"), (355,105))
+                    fenetre.blit(texte("Argent restant : " + str(distributeur1.solde), None, 20, "#000000"), (355,105))
                     fenetre.blit(texte_etoiles, (355, 115))
 
                     ######### CHECK REFUND #########
-                    if machine.solde > 0:
-                        fenetre.blit(texte(str(machine.solde) + "€ rendu.", None, 20, "#000000"), (355,125))
+                    if distributeur1.solde > 0:
+                        fenetre.blit(texte(str(distributeur1.solde) + "€ rendu.", None, 20, "#000000"), (355,125))
                         fenetre.blit(texte_etoiles, (355, 135))
                         fenetre.blit(texte("Bonne Journée !", None, 20, "#000000"), (355,145))
                         fenetre.blit(texte_etoiles, (355, 155))
@@ -704,11 +720,11 @@ def bouclePrincipale(boolp1, boolp2, boolp3, boolp4, boold1, boold2, boold3, boo
 
             if bouton_iceTea.etat == True:
                 ########### GET ITEM ###########
-                item = machine.getItem("Ice Tea")
+                item = distributeur1.getItem("Ice Tea")
                             
                 ########## BUY ITEM ############
 
-                if machine.solde < item.price:
+                if distributeur1.solde < item.price:
                     fenetre.blit(screen, (355,85))
                     fenetre.blit(texte_Pas_Bras_Pas_De_Chocolat, (355,85))
                     fenetre.blit(texte_etoiles, (355, 95))
@@ -717,17 +733,17 @@ def bouclePrincipale(boolp1, boolp2, boolp3, boolp4, boold1, boold2, boold3, boo
                     bouton_iceTea.etat = False
 
                 else:
-                    machine.solde -= item.price
+                    distributeur1.solde -= item.price
                     item.buyFromStock()
                     fenetre.blit(screen, (355,85))
                     fenetre.blit(texte("Vous avez acheté : " + str(item.name), None, 20, "#000000"), (355,85))
                     fenetre.blit(texte_etoiles, (355, 95))
-                    fenetre.blit(texte("Argent restant : " + str(machine.solde), None, 20, "#000000"), (355,105))
+                    fenetre.blit(texte("Argent restant : " + str(distributeur1.solde), None, 20, "#000000"), (355,105))
                     fenetre.blit(texte_etoiles, (355, 115))
 
                     ######### CHECK REFUND #########
-                    if machine.solde > 0:
-                        fenetre.blit(texte(str(machine.solde) + "€ rendu.", None, 20, "#000000"), (355,125))
+                    if distributeur1.solde > 0:
+                        fenetre.blit(texte(str(distributeur1.solde) + "€ rendu.", None, 20, "#000000"), (355,125))
                         fenetre.blit(texte_etoiles, (355, 135))
                         fenetre.blit(texte("Bonne Journée !", None, 20, "#000000"), (355,145))
                         fenetre.blit(texte_etoiles, (355, 155))
@@ -754,6 +770,9 @@ def bouclePrincipale(boolp1, boolp2, boolp3, boolp4, boold1, boold2, boold3, boo
                 bouton_continuer.etat = False
                 selecteurNiveau()
                 distributeurNiveau1 = False
+                distributeurNiveau2 = False
+                distributeurNiveau3 = False
+
                 
 
             ##### BOUTON COCA ######
@@ -761,7 +780,7 @@ def bouclePrincipale(boolp1, boolp2, boolp3, boolp4, boold1, boold2, boold3, boo
                 bouton_coca.reinit()
             if event.type == MOUSEBUTTONDOWN and event.button == 1 and event.pos[0] <= 642 and event.pos[0] >= 585 and event.pos[1] <= 327 and event.pos[1] >= 296:
                 bouton_coca.select()
-                if machine.solde >= 0:
+                if distributeur1.solde >= 0:
                     bouton_coca.etat = True
 
                 
@@ -770,7 +789,7 @@ def bouclePrincipale(boolp1, boolp2, boolp3, boolp4, boold1, boold2, boold3, boo
                 bouton_evian.reinit()
             if event.type == MOUSEBUTTONDOWN and event.button == 1 and event.pos[0] <= 642 and event.pos[0] >= 585 and event.pos[1] <= 365 and event.pos[1] >= 334:
                 bouton_evian.select()
-                if machine.solde >= 0:
+                if distributeur1.solde >= 0:
                     bouton_evian.etat = True
 
             ###### BOUTON SPRITE ######
@@ -778,7 +797,7 @@ def bouclePrincipale(boolp1, boolp2, boolp3, boolp4, boold1, boold2, boold3, boo
                 bouton_sprite.reinit()
             if event.type == MOUSEBUTTONDOWN and event.button == 1 and event.pos[0] <= 642 and event.pos[0] >= 585 and event.pos[1] <= 404 and event.pos[1] >= 373:
                 bouton_sprite.select()
-                if machine.solde >= 0:
+                if distributeur1.solde >= 0:
                     bouton_sprite.etat = True
 
             ####### BOUTON ICE TEA ######
@@ -786,7 +805,7 @@ def bouclePrincipale(boolp1, boolp2, boolp3, boolp4, boold1, boold2, boold3, boo
                 bouton_iceTea.reinit()
             if event.type == MOUSEBUTTONDOWN and event.button == 1 and event.pos[0] <= 642 and event.pos[0] >= 585 and event.pos[1] <= 442 and event.pos[1] >= 411:
                 bouton_iceTea.select()
-                if machine.solde >= 0:
+                if distributeur1.solde >= 0:
                     bouton_iceTea.etat = True
             
 
@@ -808,6 +827,514 @@ def bouclePrincipale(boolp1, boolp2, boolp3, boolp4, boold1, boold2, boold3, boo
             if event.type == MOUSEBUTTONDOWN and event.button == 1 and event.pos[0] <= 970 and event.pos[0] >= 900 and event.pos[1] <= 80 and event.pos[1] >= 10:
                 bouton_aide.select()
                 aideD1 = True
+
+
+##################################################################################################
+#                                                                                                #
+#                                   Niveau 2 Distributeur                                        #
+#                                                                                                #
+##################################################################################################
+
+
+    while distributeurNiveau2 == True:
+        thread_1.data = ""
+
+        fenetre.blit(fenetre_distribNiveau2.fond,(0,0))
+        fenetre.blit(bouton_retour.imageLoad, (30, -10))
+        fenetre.blit(bouton_coca.imageLoad, (0, 0))
+        fenetre.blit(bouton_evian.imageLoad, (0, 0))
+        fenetre.blit(bouton_sprite.imageLoad, (0, 0))
+        fenetre.blit(bouton_iceTea.imageLoad, (0, 0))
+        fenetre.blit(testAide.imageLoad, (60,200))
+        fenetre.blit(texte_bienvenue, (355, 85))
+        fenetre.blit(texte_etoiles, (355, 95))
+        fenetre.blit(texte_Cartes, (355, 105))
+        fenetre.blit(texte_etoiles, (355, 115))
+
+        if aideD2 == True:
+            testAide.affichePanneau()
+            fenetre.blit(bouton_suivant.imageLoad, (350,500))
+            fenetre.blit(bouton_aide.imageLoad, (3000,5000))
+        if aideD2 == False:
+            testAide.reinitPanneau()
+            fenetre.blit(bouton_suivant.imageLoad, (3000,5000))
+            fenetre.blit(bouton_aide.imageLoad, (900, 10))
+
+        try:
+            distributeur2.solde = int(thread_1.data)
+        except ValueError:
+            pass
+
+        if distributeur2.solde >= 0:
+
+            fenetre.blit(texte_Selection_Objets, (355, 125))
+            fenetre.blit(texte_etoiles, (355, 135))
+            pygame.display.flip()
+
+            if bouton_coca.etat == True:
+                ########### GET ITEM ###########
+                item = distributeur2.getItem("Coca")
+                            
+                ########## BUY ITEM ############
+
+                if distributeur2.solde < item.price:
+                    fenetre.blit(screen, (355,85))
+                    fenetre.blit(texte_Pas_Bras_Pas_De_Chocolat, (355,85))
+                    fenetre.blit(texte_etoiles, (355, 95))
+                    pygame.display.flip()
+                    pygame.time.wait(2000)
+                    bouton_coca.etat = False
+
+                else:
+                    distributeur2.solde -= item.price
+                    item.buyFromStock()
+                    fenetre.blit(screen, (355,85))
+                    fenetre.blit(texte("Vous avez acheté : " + str(item.name), None, 20, "#000000"), (355,85))
+                    fenetre.blit(texte_etoiles, (355, 95))
+                    fenetre.blit(texte("Argent restant : " + str(distributeur2.solde), None, 20, "#000000"), (355,105))
+                    fenetre.blit(texte_etoiles, (355, 115))
+
+                    ######### CHECK REFUND #########
+                    if distributeur2.solde > 0:
+                        fenetre.blit(texte(str(distributeur2.solde) + "€ rendu.", None, 20, "#000000"), (355,125))
+                        fenetre.blit(texte_etoiles, (355, 135))
+                        fenetre.blit(texte("Bonne Journée !", None, 20, "#000000"), (355,145))
+                        fenetre.blit(texte_etoiles, (355, 155))
+                    pygame.display.flip()
+                    pygame.time.wait(2000)
+                    bouton_coca.etat = False
+
+
+            if bouton_evian.etat == True:
+                ########### GET ITEM ###########
+                item = distributeur2.getItem("Evian")
+                            
+                ########## BUY ITEM ############
+
+                if distributeur2.solde < item.price:
+                    fenetre.blit(screen, (355,85))
+                    fenetre.blit(texte_Pas_Bras_Pas_De_Chocolat, (355,85))
+                    fenetre.blit(texte_etoiles, (355, 95))
+                    pygame.display.flip()
+                    pygame.time.wait(2000)
+                    bouton_evian.etat = False
+
+                else:
+                    distributeur2.solde -= item.price
+                    item.buyFromStock()
+                    fenetre.blit(screen, (355,85))
+                    fenetre.blit(texte("Vous avez acheté : " + str(item.name), None, 20, "#000000"), (355,85))
+                    fenetre.blit(texte_etoiles, (355, 95))
+                    fenetre.blit(texte("Argent restant : " + str(distributeur2.solde), None, 20, "#000000"), (355,105))
+                    fenetre.blit(texte_etoiles, (355, 115))
+
+                    ######### CHECK REFUND #########
+                    if distributeur2.solde > 0:
+                        fenetre.blit(texte(str(distributeur2.solde) + "€ rendu.", None, 20, "#000000"), (355,125))
+                        fenetre.blit(texte_etoiles, (355, 135))
+                        fenetre.blit(texte("Bonne Journée !", None, 20, "#000000"), (355,145))
+                        fenetre.blit(texte_etoiles, (355, 155))
+                    pygame.display.flip()
+                    pygame.time.wait(2000)
+                    bouton_evian.etat = False
+
+
+            if bouton_sprite.etat == True:
+                ########### GET ITEM ###########
+                item = distributeur2.getItem("Sprite")
+                            
+                ########## BUY ITEM ############
+
+                if distributeur2.solde < item.price:
+                    fenetre.blit(screen, (355,85))
+                    fenetre.blit(texte_Pas_Bras_Pas_De_Chocolat, (355,85))
+                    fenetre.blit(texte_etoiles, (355, 95))
+                    pygame.display.flip()
+                    pygame.time.wait(2000)
+                    bouton_sprite.etat = False
+
+                else:
+                    distributeur2.solde -= item.price
+                    item.buyFromStock()
+                    fenetre.blit(screen, (355,85))
+                    fenetre.blit(texte("Vous avez acheté : " + str(item.name), None, 20, "#000000"), (355,85))
+                    fenetre.blit(texte_etoiles, (355, 95))
+                    fenetre.blit(texte("Argent restant : " + str(distributeur2.solde), None, 20, "#000000"), (355,105))
+                    fenetre.blit(texte_etoiles, (355, 115))
+
+                    ######### CHECK REFUND #########
+                    if distributeur2.solde > 0:
+                        fenetre.blit(texte(str(distributeur2.solde) + "€ rendu.", None, 20, "#000000"), (355,125))
+                        fenetre.blit(texte_etoiles, (355, 135))
+                        fenetre.blit(texte("Bonne Journée !", None, 20, "#000000"), (355,145))
+                        fenetre.blit(texte_etoiles, (355, 155))
+                    pygame.display.flip()
+                    pygame.time.wait(2000)
+                    bouton_sprite.etat = False
+
+
+            if bouton_iceTea.etat == True:
+                ########### GET ITEM ###########
+                item = distributeur2.getItem("Ice Tea")
+                            
+                ########## BUY ITEM ############
+
+                if distributeur2.solde < item.price:
+                    fenetre.blit(screen, (355,85))
+                    fenetre.blit(texte_Pas_Bras_Pas_De_Chocolat, (355,85))
+                    fenetre.blit(texte_etoiles, (355, 95))
+                    pygame.display.flip()
+                    pygame.time.wait(2000)
+                    bouton_iceTea.etat = False
+
+                else:
+                    distributeur2.solde -= item.price
+                    item.buyFromStock()
+                    fenetre.blit(screen, (355,85))
+                    fenetre.blit(texte("Vous avez acheté : " + str(item.name), None, 20, "#000000"), (355,85))
+                    fenetre.blit(texte_etoiles, (355, 95))
+                    fenetre.blit(texte("Argent restant : " + str(distributeur2.solde), None, 20, "#000000"), (355,105))
+                    fenetre.blit(texte_etoiles, (355, 115))
+
+                    ######### CHECK REFUND #########
+                    if distributeur2.solde > 0:
+                        fenetre.blit(texte(str(distributeur2.solde) + "€ rendu.", None, 20, "#000000"), (355,125))
+                        fenetre.blit(texte_etoiles, (355, 135))
+                        fenetre.blit(texte("Bonne Journée !", None, 20, "#000000"), (355,145))
+                        fenetre.blit(texte_etoiles, (355, 155))
+                    pygame.display.flip()
+                    pygame.time.wait(2000)
+                    bouton_iceTea.etat = False
+
+        pygame.display.update()
+
+
+
+        for event in pygame.event.get():
+            if event.type == QUIT:
+                pygame.quit()
+            ###### BOUTON RETOUR #####
+            if event.type == MOUSEMOTION and event.pos[0] <= 191 and event.pos[0] >= 30 and event.pos[1] <= 82 and event.pos[1] >= 0 and bouton_quitter.etat == False:
+                bouton_retour.hoover()
+            if event.type == MOUSEMOTION and (event.pos[0] >= 191 or event.pos[0] <= 30 or event.pos[1] >= 82 or event.pos[1] <= 0) and bouton_quitter.etat == False:
+                bouton_retour.reinit()
+            if event.type == MOUSEBUTTONDOWN and event.button == 1 and event.pos[0] <= 191 and event.pos[0] >= 30 and event.pos[1] <= 82 and event.pos[1] >= 0:
+                bouton_retour.select()
+                bouton_quitter.etat = False
+                bouton_retour.etat = True
+                bouton_continuer.etat = False
+                selecteurNiveau()
+                distributeurNiveau1 = False
+                distributeurNiveau2 = False
+                distributeurNiveau3 = False
+
+                
+
+            ##### BOUTON COCA ######
+            if event.type == MOUSEBUTTONUP and event.button == 1:
+                bouton_coca.reinit()
+            if event.type == MOUSEBUTTONDOWN and event.button == 1 and event.pos[0] <= 642 and event.pos[0] >= 585 and event.pos[1] <= 327 and event.pos[1] >= 296:
+                bouton_coca.select()
+                if distributeur2.solde >= 0:
+                    bouton_coca.etat = True
+
+                
+            ###### BOUTON EVIAN ######
+            if event.type == MOUSEBUTTONUP and event.button == 1:
+                bouton_evian.reinit()
+            if event.type == MOUSEBUTTONDOWN and event.button == 1 and event.pos[0] <= 642 and event.pos[0] >= 585 and event.pos[1] <= 365 and event.pos[1] >= 334:
+                bouton_evian.select()
+                if distributeur2.solde >= 0:
+                    bouton_evian.etat = True
+
+            ###### BOUTON SPRITE ######
+            if event.type == MOUSEBUTTONUP and event.button == 1:
+                bouton_sprite.reinit()
+            if event.type == MOUSEBUTTONDOWN and event.button == 1 and event.pos[0] <= 642 and event.pos[0] >= 585 and event.pos[1] <= 404 and event.pos[1] >= 373:
+                bouton_sprite.select()
+                if distributeur2.solde >= 0:
+                    bouton_sprite.etat = True
+
+            ####### BOUTON ICE TEA ######
+            if event.type == MOUSEBUTTONUP and event.button == 1:
+                bouton_iceTea.reinit()
+            if event.type == MOUSEBUTTONDOWN and event.button == 1 and event.pos[0] <= 642 and event.pos[0] >= 585 and event.pos[1] <= 442 and event.pos[1] >= 411:
+                bouton_iceTea.select()
+                if distributeur2.solde >= 0:
+                    bouton_iceTea.etat = True
+            
+
+            ####### BOUTON SUIVANT DANS L'AIDE  #######
+            if event.type == MOUSEMOTION and event.pos[0] <= 511 and event.pos[0] >= 350 and event.pos[1] <= 570 and event.pos[1] >= 500 and bouton_suivant.etat == False:
+                bouton_suivant.hoover()
+            if event.type == MOUSEMOTION and (event.pos[0] >= 511 or event.pos[0] <= 350 or event.pos[1] >= 570 or event.pos[1] <= 500) and bouton_suivant.etat == False:
+                bouton_suivant.reinit()
+            if event.type == MOUSEBUTTONDOWN and event.button == 1 and event.pos[0] <= 511 and event.pos[0] >= 350 and event.pos[1] <= 570 and event.pos[1] >= 500:
+                bouton_suivant.select()
+                aideD2 = False
+
+            ###### BOUTON AIDE ######
+
+            if event.type == MOUSEMOTION and event.pos[0] <= 970 and event.pos[0] >= 900 and event.pos[1] <= 80 and event.pos[1] >= 10 and bouton_aide.etat == False:
+                bouton_aide.hoover()
+            if event.type == MOUSEMOTION and (event.pos[0] >= 970 or event.pos[0] <= 900 or event.pos[1] >= 80 or event.pos[1] <= 10) and bouton_aide.etat == False:
+                bouton_aide.reinit()
+            if event.type == MOUSEBUTTONDOWN and event.button == 1 and event.pos[0] <= 970 and event.pos[0] >= 900 and event.pos[1] <= 80 and event.pos[1] >= 10:
+                bouton_aide.select()
+                aideD2 = True
+
+
+##################################################################################################
+#                                                                                                #
+#                                   Niveau 3 Distributeur                                        #
+#                                                                                                #
+##################################################################################################
+
+
+    while distributeurNiveau3 == True:
+        thread_1.data = ""
+
+        fenetre.blit(fenetre_distribNiveau3.fond,(0,0))
+        fenetre.blit(bouton_retour.imageLoad, (30, -10))
+        fenetre.blit(bouton_coca.imageLoad, (0, 0))
+        fenetre.blit(bouton_evian.imageLoad, (0, 0))
+        fenetre.blit(bouton_sprite.imageLoad, (0, 0))
+        fenetre.blit(bouton_iceTea.imageLoad, (0, 0))
+        fenetre.blit(testAide.imageLoad, (60,200))
+        fenetre.blit(texte_bienvenue, (355, 85))
+        fenetre.blit(texte_etoiles, (355, 95))
+        fenetre.blit(texte_Cartes, (355, 105))
+        fenetre.blit(texte_etoiles, (355, 115))
+
+        if aideD3 == True:
+            testAide.affichePanneau()
+            fenetre.blit(bouton_suivant.imageLoad, (350,500))
+            fenetre.blit(bouton_aide.imageLoad, (3000,5000))
+        if aideD3 == False:
+            testAide.reinitPanneau()
+            fenetre.blit(bouton_suivant.imageLoad, (3000,5000))
+            fenetre.blit(bouton_aide.imageLoad, (900, 10))
+
+        try:
+            distributeur3.solde = int(thread_1.data)
+        except ValueError:
+            pass
+
+        if distributeur3.solde >= 0:
+
+            fenetre.blit(texte_Selection_Objets, (355, 125))
+            fenetre.blit(texte_etoiles, (355, 135))
+            pygame.display.flip()
+
+            if bouton_coca.etat == True:
+                ########### GET ITEM ###########
+                item = distributeur3.getItem("Coca")
+                            
+                ########## BUY ITEM ############
+
+                if distributeur3.solde < item.price:
+                    fenetre.blit(screen, (355,85))
+                    fenetre.blit(texte_Pas_Bras_Pas_De_Chocolat, (355,85))
+                    fenetre.blit(texte_etoiles, (355, 95))
+                    pygame.display.flip()
+                    pygame.time.wait(2000)
+                    bouton_coca.etat = False
+
+                else:
+                    distributeur3.solde -= item.price
+                    item.buyFromStock()
+                    fenetre.blit(screen, (355,85))
+                    fenetre.blit(texte("Vous avez acheté : " + str(item.name), None, 20, "#000000"), (355,85))
+                    fenetre.blit(texte_etoiles, (355, 95))
+                    fenetre.blit(texte("Argent restant : " + str(distributeur3.solde), None, 20, "#000000"), (355,105))
+                    fenetre.blit(texte_etoiles, (355, 115))
+
+                    ######### CHECK REFUND #########
+                    if distributeur3.solde > 0:
+                        fenetre.blit(texte(str(distributeur3.solde) + "€ rendu.", None, 20, "#000000"), (355,125))
+                        fenetre.blit(texte_etoiles, (355, 135))
+                        fenetre.blit(texte("Bonne Journée !", None, 20, "#000000"), (355,145))
+                        fenetre.blit(texte_etoiles, (355, 155))
+                    pygame.display.flip()
+                    pygame.time.wait(2000)
+                    bouton_coca.etat = False
+
+
+            if bouton_evian.etat == True:
+                ########### GET ITEM ###########
+                item = distributeur3.getItem("Evian")
+                            
+                ########## BUY ITEM ############
+
+                if distributeur3.solde < item.price:
+                    fenetre.blit(screen, (355,85))
+                    fenetre.blit(texte_Pas_Bras_Pas_De_Chocolat, (355,85))
+                    fenetre.blit(texte_etoiles, (355, 95))
+                    pygame.display.flip()
+                    pygame.time.wait(2000)
+                    bouton_evian.etat = False
+
+                else:
+                    distributeur3.solde -= item.price
+                    item.buyFromStock()
+                    fenetre.blit(screen, (355,85))
+                    fenetre.blit(texte("Vous avez acheté : " + str(item.name), None, 20, "#000000"), (355,85))
+                    fenetre.blit(texte_etoiles, (355, 95))
+                    fenetre.blit(texte("Argent restant : " + str(distributeur3.solde), None, 20, "#000000"), (355,105))
+                    fenetre.blit(texte_etoiles, (355, 115))
+
+                    ######### CHECK REFUND #########
+                    if distributeur3.solde > 0:
+                        fenetre.blit(texte(str(distributeur3.solde) + "€ rendu.", None, 20, "#000000"), (355,125))
+                        fenetre.blit(texte_etoiles, (355, 135))
+                        fenetre.blit(texte("Bonne Journée !", None, 20, "#000000"), (355,145))
+                        fenetre.blit(texte_etoiles, (355, 155))
+                    pygame.display.flip()
+                    pygame.time.wait(2000)
+                    bouton_evian.etat = False
+
+
+            if bouton_sprite.etat == True:
+                ########### GET ITEM ###########
+                item = distributeur3.getItem("Sprite")
+                            
+                ########## BUY ITEM ############
+
+                if distributeur3.solde < item.price:
+                    fenetre.blit(screen, (355,85))
+                    fenetre.blit(texte_Pas_Bras_Pas_De_Chocolat, (355,85))
+                    fenetre.blit(texte_etoiles, (355, 95))
+                    pygame.display.flip()
+                    pygame.time.wait(2000)
+                    bouton_sprite.etat = False
+
+                else:
+                    distributeur3.solde -= item.price
+                    item.buyFromStock()
+                    fenetre.blit(screen, (355,85))
+                    fenetre.blit(texte("Vous avez acheté : " + str(item.name), None, 20, "#000000"), (355,85))
+                    fenetre.blit(texte_etoiles, (355, 95))
+                    fenetre.blit(texte("Argent restant : " + str(distributeur3.solde), None, 20, "#000000"), (355,105))
+                    fenetre.blit(texte_etoiles, (355, 115))
+
+                    ######### CHECK REFUND #########
+                    if distributeur3.solde > 0:
+                        fenetre.blit(texte(str(distributeur3.solde) + "€ rendu.", None, 20, "#000000"), (355,125))
+                        fenetre.blit(texte_etoiles, (355, 135))
+                        fenetre.blit(texte("Bonne Journée !", None, 20, "#000000"), (355,145))
+                        fenetre.blit(texte_etoiles, (355, 155))
+                    pygame.display.flip()
+                    pygame.time.wait(2000)
+                    bouton_sprite.etat = False
+
+
+            if bouton_iceTea.etat == True:
+                ########### GET ITEM ###########
+                item = distributeur3.getItem("Ice Tea")
+                            
+                ########## BUY ITEM ############
+
+                if distributeur3.solde < item.price:
+                    fenetre.blit(screen, (355,85))
+                    fenetre.blit(texte_Pas_Bras_Pas_De_Chocolat, (355,85))
+                    fenetre.blit(texte_etoiles, (355, 95))
+                    pygame.display.flip()
+                    pygame.time.wait(2000)
+                    bouton_iceTea.etat = False
+
+                else:
+                    distributeur3.solde -= item.price
+                    item.buyFromStock()
+                    fenetre.blit(screen, (355,85))
+                    fenetre.blit(texte("Vous avez acheté : " + str(item.name), None, 20, "#000000"), (355,85))
+                    fenetre.blit(texte_etoiles, (355, 95))
+                    fenetre.blit(texte("Argent restant : " + str(distributeur3.solde), None, 20, "#000000"), (355,105))
+                    fenetre.blit(texte_etoiles, (355, 115))
+
+                    ######### CHECK REFUND #########
+                    if distributeur3.solde > 0:
+                        fenetre.blit(texte(str(distributeur3.solde) + "€ rendu.", None, 20, "#000000"), (355,125))
+                        fenetre.blit(texte_etoiles, (355, 135))
+                        fenetre.blit(texte("Bonne Journée !", None, 20, "#000000"), (355,145))
+                        fenetre.blit(texte_etoiles, (355, 155))
+                    pygame.display.flip()
+                    pygame.time.wait(2000)
+                    bouton_iceTea.etat = False
+
+        pygame.display.update()
+
+
+
+        for event in pygame.event.get():
+            if event.type == QUIT:
+                pygame.quit()
+            ###### BOUTON RETOUR #####
+            if event.type == MOUSEMOTION and event.pos[0] <= 191 and event.pos[0] >= 30 and event.pos[1] <= 82 and event.pos[1] >= 0 and bouton_quitter.etat == False:
+                bouton_retour.hoover()
+            if event.type == MOUSEMOTION and (event.pos[0] >= 191 or event.pos[0] <= 30 or event.pos[1] >= 82 or event.pos[1] <= 0) and bouton_quitter.etat == False:
+                bouton_retour.reinit()
+            if event.type == MOUSEBUTTONDOWN and event.button == 1 and event.pos[0] <= 191 and event.pos[0] >= 30 and event.pos[1] <= 82 and event.pos[1] >= 0:
+                bouton_retour.select()
+                bouton_quitter.etat = False
+                bouton_retour.etat = True
+                bouton_continuer.etat = False
+                selecteurNiveau()
+                distributeurNiveau1 = False
+                distributeurNiveau2 = False
+                distributeurNiveau3 = False
+
+            ##### BOUTON COCA ######
+            if event.type == MOUSEBUTTONUP and event.button == 1:
+                bouton_coca.reinit()
+            if event.type == MOUSEBUTTONDOWN and event.button == 1 and event.pos[0] <= 642 and event.pos[0] >= 585 and event.pos[1] <= 327 and event.pos[1] >= 296:
+                bouton_coca.select()
+                if distributeur3.solde >= 0:
+                    bouton_coca.etat = True
+
+                
+            ###### BOUTON EVIAN ######
+            if event.type == MOUSEBUTTONUP and event.button == 1:
+                bouton_evian.reinit()
+            if event.type == MOUSEBUTTONDOWN and event.button == 1 and event.pos[0] <= 642 and event.pos[0] >= 585 and event.pos[1] <= 365 and event.pos[1] >= 334:
+                bouton_evian.select()
+                if distributeur3.solde >= 0:
+                    bouton_evian.etat = True
+
+            ###### BOUTON SPRITE ######
+            if event.type == MOUSEBUTTONUP and event.button == 1:
+                bouton_sprite.reinit()
+            if event.type == MOUSEBUTTONDOWN and event.button == 1 and event.pos[0] <= 642 and event.pos[0] >= 585 and event.pos[1] <= 404 and event.pos[1] >= 373:
+                bouton_sprite.select()
+                if distributeur3.solde >= 0:
+                    bouton_sprite.etat = True
+
+            ####### BOUTON ICE TEA ######
+            if event.type == MOUSEBUTTONUP and event.button == 1:
+                bouton_iceTea.reinit()
+            if event.type == MOUSEBUTTONDOWN and event.button == 1 and event.pos[0] <= 642 and event.pos[0] >= 585 and event.pos[1] <= 442 and event.pos[1] >= 411:
+                bouton_iceTea.select()
+                if distributeur3.solde >= 0:
+                    bouton_iceTea.etat = True
+            
+
+            ####### BOUTON SUIVANT DANS L'AIDE  #######
+            if event.type == MOUSEMOTION and event.pos[0] <= 511 and event.pos[0] >= 350 and event.pos[1] <= 570 and event.pos[1] >= 500 and bouton_suivant.etat == False:
+                bouton_suivant.hoover()
+            if event.type == MOUSEMOTION and (event.pos[0] >= 511 or event.pos[0] <= 350 or event.pos[1] >= 570 or event.pos[1] <= 500) and bouton_suivant.etat == False:
+                bouton_suivant.reinit()
+            if event.type == MOUSEBUTTONDOWN and event.button == 1 and event.pos[0] <= 511 and event.pos[0] >= 350 and event.pos[1] <= 570 and event.pos[1] >= 500:
+                bouton_suivant.select()
+                aideD3 = False
+
+            ###### BOUTON AIDE ######
+
+            if event.type == MOUSEMOTION and event.pos[0] <= 970 and event.pos[0] >= 900 and event.pos[1] <= 80 and event.pos[1] >= 10 and bouton_aide.etat == False:
+                bouton_aide.hoover()
+            if event.type == MOUSEMOTION and (event.pos[0] >= 970 or event.pos[0] <= 900 or event.pos[1] >= 80 or event.pos[1] <= 10) and bouton_aide.etat == False:
+                bouton_aide.reinit()
+            if event.type == MOUSEBUTTONDOWN and event.button == 1 and event.pos[0] <= 970 and event.pos[0] >= 900 and event.pos[1] <= 80 and event.pos[1] >= 10:
+                bouton_aide.select()
+                aideD3 = True
 
 
 ##################################################################################################
@@ -1225,6 +1752,8 @@ def selecteurNiveau(): #
             panneauDistributeur.affichePanneau()
             panneauHotel.reinitPanneau()
             fenetre.blit(bouton_Niveau1.imageLoad, (500,260))
+            fenetre.blit(bouton_Niveau2.imageLoad, (720,260))
+            fenetre.blit(bouton_Niveau3.imageLoad, (500,370))
         if bouton_hotel.etat == True:
             panneauPorte.reinitPanneau()
             panneauDistributeur.reinitPanneau()
@@ -1306,6 +1835,28 @@ def selecteurNiveau(): #
                     bouton_Niveau1.reinit()
                 if event.type == MOUSEBUTTONDOWN and event.button == 1 and event.pos[0] <= 700 and event.pos[0] >= 525 and event.pos[1] <= 320 and event.pos[1] >= 245:
                     bouclePrincipale(False, False, False, False, True, False, False, False, False, False)
+                    bouton_distributeur.etat = False
+                    gameStart = False
+
+            if bouton_distributeur.etat == True:
+                #distributeur Niveau 2
+                if event.type == MOUSEMOTION and event.pos[0] <= 905 and event.pos[0] >= 730 and event.pos[1] <= 320 and event.pos[1] >= 245:
+                    bouton_Niveau2.hoover()
+                if event.type == MOUSEMOTION and (event.pos[0] >= 905 or event.pos[0] <= 730 or event.pos[1] >= 320 or event.pos[1] <= 245):
+                    bouton_Niveau2.reinit()
+                if event.type == MOUSEBUTTONDOWN and event.button == 1 and event.pos[0] <= 905 and event.pos[0] >= 730 and event.pos[1] <= 320 and event.pos[1] >= 245:
+                    bouclePrincipale(False, False, False, False, False, True, False, False, False, False)
+                    bouton_distributeur.etat = False
+                    gameStart = False
+            
+            if bouton_distributeur.etat == True:
+                #distributeur Niveau 3
+                if event.type == MOUSEMOTION and event.pos[0] <= 700 and event.pos[0] >= 525 and event.pos[1] <= 435 and event.pos[1] >= 360:
+                    bouton_Niveau3.hoover()
+                if event.type == MOUSEMOTION and (event.pos[0] >= 700 or event.pos[0] <= 525 or event.pos[1] >= 435 or event.pos[1] <= 360):
+                    bouton_Niveau3.reinit()
+                if event.type == MOUSEBUTTONDOWN and event.button == 1 and event.pos[0] <= 700 and event.pos[0] >= 525 and event.pos[1] <= 435 and event.pos[1] >= 360:
+                    bouclePrincipale(False, False, False, False, False, False, True, False, False, False)
                     bouton_distributeur.etat = False
                     gameStart = False
 
