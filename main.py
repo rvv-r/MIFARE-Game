@@ -146,6 +146,7 @@ def bouclePrincipale(boolp1, boolp2, boolp3, boolp4, boold1, boold2, boold3, boo
 
     while porteNiveau1 == True:
         thread_1.data = ""
+        thread_1.choixNiveauSerial = "a"
         fenetre.blit(fenetre_porteNiveau1.fond,(0,0))
         fenetre.blit(bouton_retour.imageLoad, (30, -10))
         fenetre.blit(testAide.imageLoad, (60,200))
@@ -163,7 +164,7 @@ def bouclePrincipale(boolp1, boolp2, boolp3, boolp4, boold1, boold2, boold3, boo
         if porteN1.verouille == 0:
             fenetre.blit(porteN1.imageOuverte, (0,0))
             fenetre.blit(bouton_continuer.imageLoad, (50, 560))
-        if thread_1.indexNiveau1 >= 0: #permet d'ouvrir la porte quand on recoit le code ouvrir par le port série
+        if thread_1.indexNiveauPorte1 >= 0: #permet d'ouvrir la porte quand on recoit le code ouvrir par le port série
             porteN1.verouille = 0
 
         pygame.display.update()
@@ -230,6 +231,7 @@ def bouclePrincipale(boolp1, boolp2, boolp3, boolp4, boold1, boold2, boold3, boo
 
     while porteNiveau2 == True:
         thread_1.data = ""
+        thread_1.choixNiveauSerial = "b"
         fenetre.blit(fenetre_porteNiveau2.fond,(0,0))
         fenetre.blit(bouton_retour.imageLoad, (30, -10))
         fenetre.blit(testAide.imageLoad, (450,200))
@@ -247,7 +249,7 @@ def bouclePrincipale(boolp1, boolp2, boolp3, boolp4, boold1, boold2, boold3, boo
         if porteN2.verouille == 0:
             fenetre.blit(porteN2.imageOuverte, (0,0))
             fenetre.blit(bouton_continuer.imageLoad, (50, 560))
-        if thread_1.data == "ouvre2": #permet d'ouvrir la porte quand on recoit le code ouvrir par le port série
+        if thread_1.indexNiveauPorte2 >= 0: #permet d'ouvrir la porte quand on recoit le code ouvrir par le port série
             porteN2.verouille = 0
 
 
@@ -411,6 +413,7 @@ def bouclePrincipale(boolp1, boolp2, boolp3, boolp4, boold1, boold2, boold3, boo
 
     while porteNiveau3_2 == True:
         thread_1.data = ""
+        thread_1.choixNiveauSerial = "c"
         fenetre.blit(fenetre_porteNiveau3_2.fond,(0,0))
         fenetre.blit(bouton_retour.imageLoad, (30, -10))
         fenetre.blit(testAide.imageLoad, (450,200))
@@ -428,7 +431,7 @@ def bouclePrincipale(boolp1, boolp2, boolp3, boolp4, boold1, boold2, boold3, boo
         if porteN3.verouille == 0:
             fenetre.blit(porteN3.imageOuverte, (0,0))
             fenetre.blit(bouton_continuer.imageLoad, (50, 560))
-        if thread_1.data == "ouvre3": #permet d'ouvrir la porte quand on recoit le code ouvrir par le port série
+        if thread_1.indexNiveauPorte3 >= 0: #permet d'ouvrir la porte quand on recoit le code ouvrir par le port série
             porteN3.verouille = 0
 
 
@@ -496,6 +499,7 @@ def bouclePrincipale(boolp1, boolp2, boolp3, boolp4, boold1, boold2, boold3, boo
 
     while porteNiveau4 == True:
         thread_1.data = ""
+        thread_1.choixNiveauSerial = "d"
         fenetre.blit(fenetre_porteNiveau4.fond,(0,0))
         fenetre.blit(bouton_retour.imageLoad, (30, -10))
 
@@ -513,7 +517,7 @@ def bouclePrincipale(boolp1, boolp2, boolp3, boolp4, boold1, boold2, boold3, boo
             testAide.reinitPanneau()
             fenetre.blit(bouton_suivant.imageLoad, (3000,5000))
             fenetre.blit(bouton_aide.imageLoad, (900, 10))
-        if thread_1.data == "ouvre4": #permet d'ouvrir la porte quand on recoit le code ouvrir par le port série
+        if thread_1.indexNiveauPorte4 >= 0: #permet d'ouvrir la porte quand on recoit le code ouvrir par le port série
             porteN4.verouille = 0
 
 
@@ -1622,6 +1626,7 @@ def bouclePrincipale(boolp1, boolp2, boolp3, boolp4, boold1, boold2, boold3, boo
 
     while hotelNiveau2 == True:
         thread_1.data = ""
+        thread_1.choixNiveauSerial = "a"
         fenetre.blit(fenetre_hotelNiveau2.fond,(0,0))
         fenetre.blit(bouton_retour.imageLoad, (30, -10))
         fenetre.blit(testAide.imageLoad, (60,200))
@@ -1639,7 +1644,7 @@ def bouclePrincipale(boolp1, boolp2, boolp3, boolp4, boold1, boold2, boold3, boo
         if porteNH2.verouille == 0:
             fenetre.blit(porteNH2.imageOuverte, (0,0))
             fenetre.blit(bouton_continuer.imageLoad, (50, 560))
-        if thread_1.indexNiveau1 >= 0: #permet d'ouvrir la porte quand on recoit le code ouvrir par le port série
+        if thread_1.indexNiveauPorte1 >= 0: #permet d'ouvrir la porte quand on recoit le code ouvrir par le port série
             porteNH2.verouille = 0
 
         pygame.display.update()
@@ -1727,6 +1732,7 @@ def selecteurNiveau(): #
     bouton_Niveau5 = Bouton("image/boutons/boutonNiveau5.png", "image/boutons/boutonNiveau5Hoover.png", "image/boutons/boutonNiveau5.png")
 
     while gameStart == True:
+        thread_1.choixNiveauSerial = ""
         fenetre = pygame.display.set_mode((1000, 661))
         fenetre.blit(fenetre_selection.fond,(0,0))
         fenetre.blit(bouton_porte.imageLoad,(100,255))
