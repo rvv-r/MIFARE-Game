@@ -33,6 +33,7 @@ def bouclePrincipale(boolp1, boolp2, boolp3, boolp4, boold1, boold2, boold3, boo
     fenetre_hotelNiveau1_2 = Terrain("image/scene/sceneMetro2.png")
     fenetre_hotelNiveau1_3 = Terrain("image/scene/sceneMetro3.jpg")
     fenetre_hotelNiveau2 = Terrain("image/scene/sceneHotel1.jpg")
+    fenetre_hotelNiveau3 = Terrain("image/scene/sceneHotel1.jpg")
 
 ######## AUTRE IMAGE  ############################
 
@@ -102,6 +103,7 @@ def bouclePrincipale(boolp1, boolp2, boolp3, boolp4, boold1, boold2, boold3, boo
     porteNH1_2 = Portique("image/portes/metroOuvert.png", "image/portes/metroFerme.png", 1)
     porteNH1_3 = Portique("image/portes/metroOuvert.png", "image/portes/metroFerme.png", 1)
     porteNH2 = Porte("image/portes/porteOuverteHotel1.png", "image/portes/porteFermeHotel1.png", 1)
+    porteNH3 = Porte("image/portes/porteOuverteHotel1.png", "image/portes/porteFermeHotel1.png", 1)
 
 
 ####### Création de la fenêtre ########################
@@ -134,6 +136,7 @@ def bouclePrincipale(boolp1, boolp2, boolp3, boolp4, boold1, boold2, boold3, boo
     aideD3 = True
     aideH1 = True
     aideH2 = True
+    aideH3 = True
 
 ###################################### BOUCLE DES NIVEAUX ##################################################################
 
@@ -1663,7 +1666,7 @@ def bouclePrincipale(boolp1, boolp2, boolp3, boolp4, boold1, boold2, boold3, boo
                 bouton_retour.etat = True
                 bouton_continuer.etat = False
                 selecteurNiveau()
-                porteNiveau1 = False
+                hotelNiveau2 = False
             
             ###### BOUTON POUR CONTINUER QUE SI LA PORTE EST OUVERTE #####
             if porteNH2.verouille == 0:
@@ -1676,9 +1679,9 @@ def bouclePrincipale(boolp1, boolp2, boolp3, boolp4, boold1, boold2, boold3, boo
                     bouton_quitter.etat = False
                     bouton_retour.etat = False
                     bouton_continuer.etat = True
-                    porteHotel2 = False
-                    selecteurNiveau() #Comme c'est le dernier niveau on retombe sur la sélection de menu """""""A CHANGER SI CE N'EST PLUS LE DERNIER NIVEAU"""""""""
-                    bouton_continuer.etat = False #Pour rénitialiser le bouton continuer entre les niveaux
+                    hotelNiveau2 = False
+                    hotelNiveau3 = True
+
             ####### BOUTON SUIVANT DANS L'AIDE  #######
             if event.type == MOUSEMOTION and event.pos[0] <= 511 and event.pos[0] >= 350 and event.pos[1] <= 570 and event.pos[1] >= 500 and bouton_suivant.etat == False:
                 bouton_suivant.hoover()
@@ -1702,6 +1705,90 @@ def bouclePrincipale(boolp1, boolp2, boolp3, boolp4, boold1, boold2, boold3, boo
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_p:    #ancien code qui ouvrait la porte avec p
                     porteNH2.verouille = 0
+
+##################################################################################################
+#                                                                                                #
+#                                       Niveau 3 Hotel                                           #
+#                                                                                                #
+##################################################################################################
+
+    while hotelNiveau3 == True:
+        thread_1.data = ""
+        fenetre.blit(fenetre_hotelNiveau3.fond,(0,0))
+        fenetre.blit(bouton_retour.imageLoad, (30, -10))
+        fenetre.blit(testAide.imageLoad, (60,200))
+
+        if aideH3 == True:
+            testAide.affichePanneau()
+            fenetre.blit(bouton_suivant.imageLoad, (350,500))
+            fenetre.blit(bouton_aide.imageLoad, (3000,5000))
+        if aideH3 == False:
+            testAide.reinitPanneau()
+            fenetre.blit(bouton_suivant.imageLoad, (3000,5000))
+            fenetre.blit(bouton_aide.imageLoad, (900, 10))
+        if porteNH3.verouille == 1:
+            fenetre.blit(porteNH3.imageFerme, (0,0))
+        if porteNH3.verouille == 0:
+            fenetre.blit(porteNH3.imageOuverte, (0,0))
+            fenetre.blit(bouton_continuer.imageLoad, (50, 560))
+        if thread_1.indexNiveau1 >= 0: #permet d'ouvrir la porte quand on recoit le code ouvrir par le port série
+            porteNH3.verouille = 0
+
+        pygame.display.update()
+
+        for event in pygame.event.get():
+            if event.type == QUIT:
+                pygame.quit()
+            ###### BOUTON POUR RETOUR #####
+            if event.type == MOUSEMOTION and event.pos[0] <= 191 and event.pos[0] >= 30 and event.pos[1] <= 82 and event.pos[1] >= 0 and bouton_quitter.etat == False:
+                bouton_retour.hoover()
+            if event.type == MOUSEMOTION and (event.pos[0] >= 191 or event.pos[0] <= 30 or event.pos[1] >= 82 or event.pos[1] <= 0) and bouton_quitter.etat == False:
+                bouton_retour.reinit()
+            if event.type == MOUSEBUTTONDOWN and event.button == 1 and event.pos[0] <= 191 and event.pos[0] >= 30 and event.pos[1] <= 82 and event.pos[1] >= 0:
+                bouton_retour.select()
+                bouton_quitter.etat = False
+                bouton_retour.etat = True
+                bouton_continuer.etat = False
+                selecteurNiveau()
+                hotelNiveau3 = False
+            
+            ###### BOUTON POUR CONTINUER QUE SI LA PORTE EST OUVERTE #####
+            if porteNH3.verouille == 0:
+                if event.type == MOUSEMOTION and event.pos[0] <= 211 and event.pos[0] >= 50 and event.pos[1] <= 630 and event.pos[1] >= 560 and bouton_continuer.etat == False:
+                    bouton_continuer.hoover()
+                if event.type == MOUSEMOTION and (event.pos[0] >= 211 or event.pos[0] <= 50 or event.pos[1] >= 630 or event.pos[1] <= 560) and bouton_continuer.etat == False:
+                    bouton_continuer.reinit()
+                if event.type == MOUSEBUTTONDOWN and event.button == 1 and event.pos[0] <= 233 and event.pos[0] >= 50 and event.pos[1] <= 630 and event.pos[1] >= 560:
+                    bouton_continuer.select()
+                    bouton_quitter.etat = False
+                    bouton_retour.etat = False
+                    bouton_continuer.etat = True
+                    hotelNiveau3 = False
+                    selecteurNiveau() #Comme c'est le dernier niveau on retombe sur la sélection de menu """""""A CHANGER SI CE N'EST PLUS LE DERNIER NIVEAU"""""""""
+                    bouton_continuer.etat = False #Pour rénitialiser le bouton continuer entre les niveaux
+            ####### BOUTON SUIVANT DANS L'AIDE  #######
+            if event.type == MOUSEMOTION and event.pos[0] <= 511 and event.pos[0] >= 350 and event.pos[1] <= 570 and event.pos[1] >= 500 and bouton_suivant.etat == False:
+                bouton_suivant.hoover()
+            if event.type == MOUSEMOTION and (event.pos[0] >= 511 or event.pos[0] <= 350 or event.pos[1] >= 570 or event.pos[1] <= 500) and bouton_suivant.etat == False:
+                bouton_suivant.reinit()
+            if event.type == MOUSEBUTTONDOWN and event.button == 1 and event.pos[0] <= 511 and event.pos[0] >= 350 and event.pos[1] <= 570 and event.pos[1] >= 500:
+                bouton_suivant.select()
+                aideH3 = False
+
+            ###### BOUTON AIDE ######
+
+            if event.type == MOUSEMOTION and event.pos[0] <= 970 and event.pos[0] >= 900 and event.pos[1] <= 80 and event.pos[1] >= 10 and bouton_aide.etat == False:
+                bouton_aide.hoover()
+            if event.type == MOUSEMOTION and (event.pos[0] >= 970 or event.pos[0] <= 900 or event.pos[1] >= 80 or event.pos[1] <= 10) and bouton_aide.etat == False:
+                bouton_aide.reinit()
+            if event.type == MOUSEBUTTONDOWN and event.button == 1 and event.pos[0] <= 970 and event.pos[0] >= 900 and event.pos[1] <= 80 and event.pos[1] >= 10:
+                bouton_aide.select()
+                aideH3 = True
+
+            ########  TOUCHE DU CLAVIER POUR LES TEST ############
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_p:    #ancien code qui ouvrait la porte avec p
+                    porteNH3.verouille = 0
 
 
 
@@ -1766,6 +1853,7 @@ def selecteurNiveau(): #
             panneauHotel.affichePanneau()
             fenetre.blit(bouton_Niveau1.imageLoad, (500,260))
             fenetre.blit(bouton_Niveau2.imageLoad, (720,260))
+            fenetre.blit(bouton_Niveau3.imageLoad, (500,370))
 
         pygame.display.update()
 
@@ -1844,7 +1932,6 @@ def selecteurNiveau(): #
                     bouton_distributeur.etat = False
                     gameStart = False
 
-            if bouton_distributeur.etat == True:
                 #distributeur Niveau 2
                 if event.type == MOUSEMOTION and event.pos[0] <= 905 and event.pos[0] >= 730 and event.pos[1] <= 320 and event.pos[1] >= 245:
                     bouton_Niveau2.hoover()
@@ -1854,8 +1941,7 @@ def selecteurNiveau(): #
                     bouclePrincipale(False, False, False, False, False, True, False, False, False, False)
                     bouton_distributeur.etat = False
                     gameStart = False
-            
-            if bouton_distributeur.etat == True:
+
                 #distributeur Niveau 3
                 if event.type == MOUSEMOTION and event.pos[0] <= 700 and event.pos[0] >= 525 and event.pos[1] <= 435 and event.pos[1] >= 360:
                     bouton_Niveau3.hoover()
@@ -1880,6 +1966,7 @@ def selecteurNiveau(): #
                 bouton_quitter.etat = False
             
             if bouton_hotel.etat == True:
+                
                 #Hotel Niveau 1
                 if event.type == MOUSEMOTION and event.pos[0] <= 700 and event.pos[0] >= 525 and event.pos[1] <= 320 and event.pos[1] >= 245:
                     bouton_Niveau1.hoover()
@@ -1887,8 +1974,9 @@ def selecteurNiveau(): #
                     bouton_Niveau1.reinit()
                 if event.type == MOUSEBUTTONDOWN and event.button == 1 and event.pos[0] <= 700 and event.pos[0] >= 525 and event.pos[1] <= 320 and event.pos[1] >= 245:
                     bouclePrincipale(False, False, False, False, False, False, False, True, False, False)
-                    bouton_porte.etat = False
+                    bouton_hotel.etat = False
                     gameStart = False
+
                 #Hotel Niveau 2
                 if event.type == MOUSEMOTION and event.pos[0] <= 905 and event.pos[0] >= 730 and event.pos[1] <= 320 and event.pos[1] >= 245:
                     bouton_Niveau2.hoover()
@@ -1896,8 +1984,19 @@ def selecteurNiveau(): #
                     bouton_Niveau2.reinit()
                 if event.type == MOUSEBUTTONDOWN and event.button == 1 and event.pos[0] <= 905 and event.pos[0] >= 730 and event.pos[1] <= 320 and event.pos[1] >= 245:
                     bouclePrincipale(False, False, False, False, False, False, False, False, True, False)
-                    bouton_porte.etat = False
+                    bouton_hotel.etat = False
                     gameStart = False
+
+                #Hotel Niveau 3
+                if event.type == MOUSEMOTION and event.pos[0] <= 700 and event.pos[0] >= 525 and event.pos[1] <= 435 and event.pos[1] >= 360:
+                    bouton_Niveau3.hoover()
+                if event.type == MOUSEMOTION and (event.pos[0] >= 700 or event.pos[0] <= 525 or event.pos[1] >= 435 or event.pos[1] <= 360):
+                    bouton_Niveau3.reinit()
+                if event.type == MOUSEBUTTONDOWN and event.button == 1 and event.pos[0] <= 700 and event.pos[0] >= 525 and event.pos[1] <= 435 and event.pos[1] >= 360:
+                    bouclePrincipale(False, False, False, False, False, False, False, False, False, True)
+                    bouton_hotel.etat = False
+                    gameStart = False
+
 
             ###### BOUTON POUR QUITTER ######
             if event.type == MOUSEMOTION and event.pos[0] <= 120 and event.pos[0] >= 40 and event.pos[1] <= 120 and event.pos[1] >= 40 and bouton_quitter.etat == False:
