@@ -134,6 +134,7 @@ class Recevoir(Thread):
         self.indexNiveauHotel1_2 = -1
         self.indexNiveauHotel1_3 = -1
         self.indexNiveauHotel2 = -1
+        self.indexNiveauHotel3 = -1
         self.choixNiveauSerial = ""
 
     def run(self):
@@ -148,6 +149,8 @@ class Recevoir(Thread):
             self.indexNiveauPorte2 = self.data.find("01010101010101010101010101010101")
             self.indexNiveauPorte3 = self.data.find("02020202020202020202020202020202")
             self.indexNiveauPorte4 = self.data.find("03030303030303030303030303030303")
+            self.indexNiveauHotel2 = self.data.find("243")
+            self.indexNiveauHotel3 = self.data.find("23041998")
             print(self.data)
             if self.data == "quit": # si on reçoit quit ferme la connection
                 print("connection fermé")
