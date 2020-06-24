@@ -365,7 +365,7 @@ def bouclePrincipale(boolp1, boolp2, boolp3, boolp4, boold1, boold2, boold3, boo
                 bouton_blouse.hoover()
             if event.type == MOUSEMOTION and (event.pos[0] >= 280 or event.pos[0] <= 150 or event.pos[1] >= 530 or event.pos[1] <= 220) and bouton_quitter.etat == False:
                 bouton_blouse.reinit()
-            if event.type == MOUSEBUTTONDOWN and event.button == 1 and event.pos[0] <= 500 and event.pos[0] >= 200 and event.pos[1] <= 500 and event.pos[1] >= 200:
+            if event.type == MOUSEBUTTONDOWN and event.button == 1 and event.pos[0] <= 280 and event.pos[0] >= 150 and event.pos[1] <= 530 and event.pos[1] >= 220:
                 suivant3_1 = True
             
             ###### BOUTON POUR CONTINUER QUE SI LA BLOUSE EST PRISE #####
@@ -1629,7 +1629,7 @@ def bouclePrincipale(boolp1, boolp2, boolp3, boolp4, boold1, boold2, boold3, boo
 
     while hotelNiveau2 == True:
         thread_1.data = ""
-        thread_1.choixNiveauSerial = "a"
+        thread_1.choixNiveauSerial = "e"
         fenetre.blit(fenetre_hotelNiveau2.fond,(0,0))
         fenetre.blit(bouton_retour.imageLoad, (30, -10))
         fenetre.blit(testAide.imageLoad, (60,200))
@@ -1647,7 +1647,7 @@ def bouclePrincipale(boolp1, boolp2, boolp3, boolp4, boold1, boold2, boold3, boo
         if porteNH2.verouille == 0:
             fenetre.blit(porteNH2.imageOuverte, (0,0))
             fenetre.blit(bouton_continuer.imageLoad, (50, 560))
-        if thread_1.indexNiveauPorte1 >= 0: #permet d'ouvrir la porte quand on recoit le code ouvrir par le port série
+        if thread_1.indexNiveauHotel2 >= 0: #permet d'ouvrir la porte quand on recoit le code ouvrir par le port série
             porteNH2.verouille = 0
 
         pygame.display.update()
@@ -1678,7 +1678,7 @@ def bouclePrincipale(boolp1, boolp2, boolp3, boolp4, boold1, boold2, boold3, boo
                     bouton_continuer.select()
                     bouton_quitter.etat = False
                     bouton_retour.etat = False
-                    bouton_continuer.etat = True
+                    bouton_continuer.etat = False
                     hotelNiveau2 = False
                     hotelNiveau3 = True
 
@@ -1714,6 +1714,7 @@ def bouclePrincipale(boolp1, boolp2, boolp3, boolp4, boold1, boold2, boold3, boo
 
     while hotelNiveau3 == True:
         thread_1.data = ""
+        thread_1.choixNiveauSerial = "f"
         fenetre.blit(fenetre_hotelNiveau3.fond,(0,0))
         fenetre.blit(bouton_retour.imageLoad, (30, -10))
         fenetre.blit(testAide.imageLoad, (60,200))
@@ -1731,7 +1732,7 @@ def bouclePrincipale(boolp1, boolp2, boolp3, boolp4, boold1, boold2, boold3, boo
         if porteNH3.verouille == 0:
             fenetre.blit(porteNH3.imageOuverte, (0,0))
             fenetre.blit(bouton_continuer.imageLoad, (50, 560))
-        if thread_1.indexNiveau1 >= 0: #permet d'ouvrir la porte quand on recoit le code ouvrir par le port série
+        if thread_1.indexNiveauHotel3 >= 0: #permet d'ouvrir la porte quand on recoit le code ouvrir par le port série
             porteNH3.verouille = 0
 
         pygame.display.update()
