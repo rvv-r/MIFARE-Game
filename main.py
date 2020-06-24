@@ -1872,38 +1872,38 @@ def selecteurNiveau(): #
 
             if bouton_porte.etat == True:
                 #Porte Niveau 1
-                if event.type == MOUSEMOTION and event.pos[0] <= 700 and event.pos[0] >= 525 and event.pos[1] <= 320 and event.pos[1] >= 245:
+                if event.type == MOUSEMOTION and event.pos[0] <= 681 and event.pos[0] >= 500 and event.pos[1] <= 330 and event.pos[1] >= 260:
                     bouton_Niveau1.hoover()
-                if event.type == MOUSEMOTION and (event.pos[0] >= 700 or event.pos[0] <= 525 or event.pos[1] >= 320 or event.pos[1] <= 245):
+                if event.type == MOUSEMOTION and (event.pos[0] >= 681 or event.pos[0] <= 500 or event.pos[1] >= 330 or event.pos[1] <= 260):
                     bouton_Niveau1.reinit()
-                if event.type == MOUSEBUTTONDOWN and event.button == 1 and event.pos[0] <= 700 and event.pos[0] >= 525 and event.pos[1] <= 320 and event.pos[1] >= 245:
+                if event.type == MOUSEBUTTONDOWN and event.button == 1 and event.pos[0] <= 681 and event.pos[0] >= 500 and event.pos[1] <= 330 and event.pos[1] >= 260:
                     bouclePrincipale(True, False, False, False, False, False, False, False, False, False)
                     bouton_porte.etat = False
                     gameStart = False
                 #Porte Niveau 2
-                if event.type == MOUSEMOTION and event.pos[0] <= 905 and event.pos[0] >= 730 and event.pos[1] <= 320 and event.pos[1] >= 245:
+                if event.type == MOUSEMOTION and event.pos[0] <= 901 and event.pos[0] >= 720 and event.pos[1] <= 330 and event.pos[1] >= 260:
                     bouton_Niveau2.hoover()
-                if event.type == MOUSEMOTION and (event.pos[0] >= 905 or event.pos[0] <= 730 or event.pos[1] >= 320 or event.pos[1] <= 245):
+                if event.type == MOUSEMOTION and (event.pos[0] >= 901 or event.pos[0] <= 720 or event.pos[1] >= 330 or event.pos[1] <= 260):
                     bouton_Niveau2.reinit()
-                if event.type == MOUSEBUTTONDOWN and event.button == 1 and event.pos[0] <= 905 and event.pos[0] >= 730 and event.pos[1] <= 320 and event.pos[1] >= 245:
+                if event.type == MOUSEBUTTONDOWN and event.button == 1 and event.pos[0] <= 901 and event.pos[0] >= 720 and event.pos[1] <= 330 and event.pos[1] >= 260:
                     bouclePrincipale(False, True, False, False, False, False, False, False, False, False)
                     bouton_porte.etat = False
                     gameStart = False
                 #Porte Niveau 3
-                if event.type == MOUSEMOTION and event.pos[0] <= 700 and event.pos[0] >= 525 and event.pos[1] <= 435 and event.pos[1] >= 360:
+                if event.type == MOUSEMOTION and event.pos[0] <= 681 and event.pos[0] >= 500 and event.pos[1] <= 440 and event.pos[1] >= 370:
                     bouton_Niveau3.hoover()
-                if event.type == MOUSEMOTION and (event.pos[0] >= 700 or event.pos[0] <= 525 or event.pos[1] >= 435 or event.pos[1] <= 360):
+                if event.type == MOUSEMOTION and (event.pos[0] >= 681 or event.pos[0] <= 500 or event.pos[1] >= 440 or event.pos[1] <= 370):
                     bouton_Niveau3.reinit()
-                if event.type == MOUSEBUTTONDOWN and event.button == 1 and event.pos[0] <= 700 and event.pos[0] >= 525 and event.pos[1] <= 435 and event.pos[1] >= 360:
+                if event.type == MOUSEBUTTONDOWN and event.button == 1 and event.pos[0] <= 681 and event.pos[0] >= 500 and event.pos[1] <= 440 and event.pos[1] >= 370:
                     bouclePrincipale(False, False, True, False, False, False, False, False, False, False)
                     bouton_porte.etat = False
                     gameStart = False
                 #Porte Niveau 4  
-                if event.type == MOUSEMOTION and event.pos[0] <= 905 and event.pos[0] >= 730 and event.pos[1] <= 435 and event.pos[1] >= 360:
+                if event.type == MOUSEMOTION and event.pos[0] <= 901 and event.pos[0] >= 720 and event.pos[1] <= 440 and event.pos[1] >= 370:
                     bouton_Niveau4.hoover()
-                if event.type == MOUSEMOTION and (event.pos[0] >= 905 or event.pos[0] <= 730 or event.pos[1] >= 435 or event.pos[1] <= 360):
+                if event.type == MOUSEMOTION and (event.pos[0] >= 901 or event.pos[0] <= 720 or event.pos[1] >= 440 or event.pos[1] <= 370):
                     bouton_Niveau4.reinit() 
-                if event.type == MOUSEBUTTONDOWN and event.button == 1 and event.pos[0] <= 905 and event.pos[0] >= 730 and event.pos[1] <= 435 and event.pos[1] >= 360:
+                if event.type == MOUSEBUTTONDOWN and event.button == 1 and event.pos[0] <= 901 and event.pos[0] >= 720 and event.pos[1] <= 440 and event.pos[1] >= 370:
                     bouclePrincipale(False, False, False, True, False, False, False, False, False, False)
                     bouton_porte.etat = False
                     gameStart = False
@@ -1923,31 +1923,31 @@ def selecteurNiveau(): #
 
             if bouton_distributeur.etat == True:
                 #distributeur Niveau 1
-                if event.type == MOUSEMOTION and event.pos[0] <= 700 and event.pos[0] >= 525 and event.pos[1] <= 320 and event.pos[1] >= 245:
+                if event.type == MOUSEMOTION and event.pos[0] <= 681 and event.pos[0] >= 500 and event.pos[1] <= 330 and event.pos[1] >= 245:
                     bouton_Niveau1.hoover()
-                if event.type == MOUSEMOTION and (event.pos[0] >= 700 or event.pos[0] <= 525 or event.pos[1] >= 320 or event.pos[1] <= 245):
+                if event.type == MOUSEMOTION and (event.pos[0] >= 681 or event.pos[0] <= 500 or event.pos[1] >= 330 or event.pos[1] <= 245):
                     bouton_Niveau1.reinit()
-                if event.type == MOUSEBUTTONDOWN and event.button == 1 and event.pos[0] <= 700 and event.pos[0] >= 525 and event.pos[1] <= 320 and event.pos[1] >= 245:
+                if event.type == MOUSEBUTTONDOWN and event.button == 1 and event.pos[0] <= 681 and event.pos[0] >= 500 and event.pos[1] <= 330 and event.pos[1] >= 245:
                     bouclePrincipale(False, False, False, False, True, False, False, False, False, False)
                     bouton_distributeur.etat = False
                     gameStart = False
 
                 #distributeur Niveau 2
-                if event.type == MOUSEMOTION and event.pos[0] <= 905 and event.pos[0] >= 730 and event.pos[1] <= 320 and event.pos[1] >= 245:
+                if event.type == MOUSEMOTION and event.pos[0] <= 901 and event.pos[0] >= 720 and event.pos[1] <= 330 and event.pos[1] >= 245:
                     bouton_Niveau2.hoover()
-                if event.type == MOUSEMOTION and (event.pos[0] >= 905 or event.pos[0] <= 730 or event.pos[1] >= 320 or event.pos[1] <= 245):
+                if event.type == MOUSEMOTION and (event.pos[0] >= 901 or event.pos[0] <= 720 or event.pos[1] >= 330 or event.pos[1] <= 245):
                     bouton_Niveau2.reinit()
-                if event.type == MOUSEBUTTONDOWN and event.button == 1 and event.pos[0] <= 905 and event.pos[0] >= 730 and event.pos[1] <= 320 and event.pos[1] >= 245:
+                if event.type == MOUSEBUTTONDOWN and event.button == 1 and event.pos[0] <= 901 and event.pos[0] >= 720 and event.pos[1] <= 330 and event.pos[1] >= 245:
                     bouclePrincipale(False, False, False, False, False, True, False, False, False, False)
                     bouton_distributeur.etat = False
                     gameStart = False
 
                 #distributeur Niveau 3
-                if event.type == MOUSEMOTION and event.pos[0] <= 700 and event.pos[0] >= 525 and event.pos[1] <= 435 and event.pos[1] >= 360:
+                if event.type == MOUSEMOTION and event.pos[0] <= 681 and event.pos[0] >= 500 and event.pos[1] <= 440 and event.pos[1] >= 370:
                     bouton_Niveau3.hoover()
-                if event.type == MOUSEMOTION and (event.pos[0] >= 700 or event.pos[0] <= 525 or event.pos[1] >= 435 or event.pos[1] <= 360):
+                if event.type == MOUSEMOTION and (event.pos[0] >= 681 or event.pos[0] <= 500 or event.pos[1] >= 440 or event.pos[1] <= 370):
                     bouton_Niveau3.reinit()
-                if event.type == MOUSEBUTTONDOWN and event.button == 1 and event.pos[0] <= 700 and event.pos[0] >= 525 and event.pos[1] <= 435 and event.pos[1] >= 360:
+                if event.type == MOUSEBUTTONDOWN and event.button == 1 and event.pos[0] <= 681 and event.pos[0] >= 500 and event.pos[1] <= 440 and event.pos[1] >= 370:
                     bouclePrincipale(False, False, False, False, False, False, True, False, False, False)
                     bouton_distributeur.etat = False
                     gameStart = False
@@ -1968,31 +1968,31 @@ def selecteurNiveau(): #
             if bouton_hotel.etat == True:
                 
                 #Hotel Niveau 1
-                if event.type == MOUSEMOTION and event.pos[0] <= 700 and event.pos[0] >= 525 and event.pos[1] <= 320 and event.pos[1] >= 245:
+                if event.type == MOUSEMOTION and event.pos[0] <= 681 and event.pos[0] >= 500 and event.pos[1] <= 330 and event.pos[1] >= 245:
                     bouton_Niveau1.hoover()
-                if event.type == MOUSEMOTION and (event.pos[0] >= 700 or event.pos[0] <= 525 or event.pos[1] >= 320 or event.pos[1] <= 245):
+                if event.type == MOUSEMOTION and (event.pos[0] >= 681 or event.pos[0] <= 500 or event.pos[1] >= 330 or event.pos[1] <= 245):
                     bouton_Niveau1.reinit()
-                if event.type == MOUSEBUTTONDOWN and event.button == 1 and event.pos[0] <= 700 and event.pos[0] >= 525 and event.pos[1] <= 320 and event.pos[1] >= 245:
+                if event.type == MOUSEBUTTONDOWN and event.button == 1 and event.pos[0] <= 681 and event.pos[0] >= 500 and event.pos[1] <= 330 and event.pos[1] >= 245:
                     bouclePrincipale(False, False, False, False, False, False, False, True, False, False)
                     bouton_hotel.etat = False
                     gameStart = False
 
                 #Hotel Niveau 2
-                if event.type == MOUSEMOTION and event.pos[0] <= 905 and event.pos[0] >= 730 and event.pos[1] <= 320 and event.pos[1] >= 245:
+                if event.type == MOUSEMOTION and event.pos[0] <= 901 and event.pos[0] >= 720 and event.pos[1] <= 330 and event.pos[1] >= 245:
                     bouton_Niveau2.hoover()
-                if event.type == MOUSEMOTION and (event.pos[0] >= 905 or event.pos[0] <= 730 or event.pos[1] >= 320 or event.pos[1] <= 245):
+                if event.type == MOUSEMOTION and (event.pos[0] >= 901 or event.pos[0] <= 720 or event.pos[1] >= 330 or event.pos[1] <= 245):
                     bouton_Niveau2.reinit()
-                if event.type == MOUSEBUTTONDOWN and event.button == 1 and event.pos[0] <= 905 and event.pos[0] >= 730 and event.pos[1] <= 320 and event.pos[1] >= 245:
+                if event.type == MOUSEBUTTONDOWN and event.button == 1 and event.pos[0] <= 901 and event.pos[0] >= 720 and event.pos[1] <= 330 and event.pos[1] >= 245:
                     bouclePrincipale(False, False, False, False, False, False, False, False, True, False)
                     bouton_hotel.etat = False
                     gameStart = False
 
                 #Hotel Niveau 3
-                if event.type == MOUSEMOTION and event.pos[0] <= 700 and event.pos[0] >= 525 and event.pos[1] <= 435 and event.pos[1] >= 360:
+                if event.type == MOUSEMOTION and event.pos[0] <= 681 and event.pos[0] >= 500 and event.pos[1] <= 440 and event.pos[1] >= 370:
                     bouton_Niveau3.hoover()
-                if event.type == MOUSEMOTION and (event.pos[0] >= 700 or event.pos[0] <= 525 or event.pos[1] >= 435 or event.pos[1] <= 360):
+                if event.type == MOUSEMOTION and (event.pos[0] >= 681 or event.pos[0] <= 500 or event.pos[1] >= 440 or event.pos[1] <= 370):
                     bouton_Niveau3.reinit()
-                if event.type == MOUSEBUTTONDOWN and event.button == 1 and event.pos[0] <= 700 and event.pos[0] >= 525 and event.pos[1] <= 435 and event.pos[1] >= 360:
+                if event.type == MOUSEBUTTONDOWN and event.button == 1 and event.pos[0] <= 681 and event.pos[0] >= 500 and event.pos[1] <= 440 and event.pos[1] >= 370:
                     bouclePrincipale(False, False, False, False, False, False, False, False, False, True)
                     bouton_hotel.etat = False
                     gameStart = False
@@ -2086,38 +2086,6 @@ def fctderoulant2(*args):
     if variable2.get() == "Linux":
         thread_1.environnementSerial = "/dev/pts/"
 
-def fctderoulant3(*args):
-    if variable3.get() == "0":
-        #thread_1.nbSerialPort = "0"
-        print("")
-    if variable3.get() == "1":
-        #thread_1.nbSerialPort = "1"
-        print("")
-    if variable3.get() == "2":
-        #thread_1.nbSerialPort = "2"
-        print("")
-    if variable3.get() == "3":
-        #thread_1.nbSerialPort = "3"
-        print("")
-    if variable3.get() == "4":
-        #thread_1.nbSerialPort = "4"
-        print("")
-    if variable3.get() == "5":
-        #thread_1.nbSerialPort = "4"
-        print("")
-    if variable3.get() == "6":
-        #thread_1.nbSerialPort = "4"
-        print("")
-    if variable3.get() == "7":
-        #thread_1.nbSerialPort = "4"
-        print("")
-    if variable3.get() == "8":
-        #thread_1.nbSerialPort = "4"
-        print("")
-    if variable3.get() == "9":
-        #thread_1.nbSerialPort = "4"
-        print("")
-
 
 #################  FENETRE TKINTER  #########################
 
@@ -2150,7 +2118,7 @@ zoneTouches = Frame(onglet, bg = 'white', width = 800, height = 200)
 zoneTouches.pack()
 
 onglet.add(zoneSelection, text='Config')
-onglet.add(zoneTouches, text='Les touches du clavier')
+onglet.add(zoneTouches, text='Aide')
 
 imagefond = PhotoImage(file="image/scene/imageConfig.gif")
 canvas.create_image(0,0,anchor=NW, image=imagefond)
@@ -2164,19 +2132,13 @@ texteDeroulant1.place(x = 190 , y = 45)
 texteDeroulant1 = tk.Label(zoneSelection, bg = 'white', text = "Numéro de port", font=('Helvetica', 11))
 texteDeroulant1.place(x = 190 , y = 85)
 
-texteDeroulant1 = tk.Label(zoneSelection, bg = 'white', text = "Numéro de port du lecteur", font=('Helvetica', 11))
-texteDeroulant1.place(x = 190 , y = 125)
+## Zone de texte pour l'aide ##
 
-## Zone de texte pour les touches du clavier ##
+texteDeroulant1 = tk.Label(zoneTouches, bg = 'white', text = "Liste des ports pour Linux : ls /dev/pts ", font=('Helvetica', 11))
+texteDeroulant1.place(x = 280 , y = 45)
 
-texteDeroulant1 = tk.Label(zoneTouches, bg = 'white', text = "Q pour quitter", font=('Helvetica', 11))
-texteDeroulant1.place(x = 360 , y = 45)
-
-texteDeroulant1 = tk.Label(zoneTouches, bg = 'white', text = "R pour retourner à la sélection de niveau", font=('Helvetica', 11))
+texteDeroulant1 = tk.Label(zoneTouches, bg = 'white', text = "Liste des ports Windows : Gestionnaire de périphériques", font=('Helvetica', 11))
 texteDeroulant1.place(x = 280 , y = 85)
-
-texteDeroulant1 = tk.Label(zoneTouches, bg = 'white', text = "C pour continuer une fois la porte ouverte", font=('Helvetica', 11))
-texteDeroulant1.place(x = 275 , y = 125)
 
 ## Menu déroulant 1 ##
 
@@ -2195,15 +2157,6 @@ opt2 = tk.OptionMenu(zoneSelection, variable2, *OptionList2)
 opt2.config(width=15, font=('Helvetica', 12))
 opt2.place(x = 400, y = 40)
 variable2.trace("w", fctderoulant2) #application de la fonction pour le menu déroulant 2
-
-## Menu déroulant 2 ##
-
-variable3 = tk.StringVar(app)
-variable3.set(OptionList[0])
-opt3 = tk.OptionMenu(zoneSelection, variable3, *OptionList)
-opt3.config(width=15, font=('Helvetica', 12))
-opt3.place(x = 400, y = 120)
-variable2.trace("w", fctderoulant3) #application de la fonction pour le menu déroulant 2
 
 
 ## Bouton Quitter ##
