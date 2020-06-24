@@ -2135,11 +2135,17 @@ texteDeroulant1.place(x = 190 , y = 85)
 
 ## Zone de texte pour l'aide ##
 
-texteDeroulant1 = tk.Label(zoneTouches, bg = 'white', text = "Liste des ports pour Linux : ls /dev/pts ", font=('Helvetica', 11))
-texteDeroulant1.place(x = 280 , y = 45)
+texteDeroulant1 = tk.Label(zoneTouches, bg = 'white', text = "Liste des ports pour les différents systèmes d'exploitation :", font=('Helvetica', 11))
+texteDeroulant1.place(x = 30 , y = 45)
 
-texteDeroulant1 = tk.Label(zoneTouches, bg = 'white', text = "Liste des ports Windows : Gestionnaire de périphériques", font=('Helvetica', 11))
-texteDeroulant1.place(x = 280 , y = 85)
+texteDeroulant1 = tk.Label(zoneTouches, bg = 'white', text = "Windows : Gestionnaire de périphériques -> Ports COM", font=('Helvetica', 11))
+texteDeroulant1.place(x = 80 , y = 85)
+
+texteDeroulant1 = tk.Label(zoneTouches, bg = 'white', text = "Linux : Dans le terminal -> ", font=('Helvetica', 11))
+texteDeroulant1.place(x = 80 , y = 125)
+
+texteDeroulant1 = tk.Label(zoneTouches, bg = 'white', text = "ls /dev/pts", font=('Courier', 11))
+texteDeroulant1.place(x = 260 , y = 125)
 
 ## Menu déroulant 1 ##
 
