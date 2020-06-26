@@ -148,7 +148,6 @@ def bouclePrincipale(boolp1, boolp2, boolp3, boolp4, boold1, boold2, boold3, boo
 ##################################################################################################
 
     while porteNiveau1 == True:
-        thread_1.data = ""
         thread_1.choixNiveauSerial = "a"
         fenetre.blit(fenetre_porteNiveau1.fond,(0,0))
         fenetre.blit(bouton_retour.imageLoad, (30, -10))
@@ -623,7 +622,7 @@ def bouclePrincipale(boolp1, boolp2, boolp3, boolp4, boold1, boold2, boold3, boo
             fenetre.blit(texte_etoiles, (355, 135))
             pygame.display.flip()
 
-            if bouton_coca.etat == True:
+            """if bouton_coca.etat == True:
                 ########### GET ITEM ###########
                 item = distributeur1.getItem("Coca")
                             
@@ -654,7 +653,7 @@ def bouclePrincipale(boolp1, boolp2, boolp3, boolp4, boold1, boold2, boold3, boo
                         fenetre.blit(texte_etoiles, (355, 155))
                     pygame.display.flip()
                     pygame.time.wait(2000)
-                    bouton_coca.etat = False
+                    bouton_coca.etat = False"""
 
 
             if bouton_evian.etat == True:
@@ -761,7 +760,7 @@ def bouclePrincipale(boolp1, boolp2, boolp3, boolp4, boold1, boold2, boold3, boo
         pygame.display.update()
 
 
-
+        
         for event in pygame.event.get():
             if event.type == QUIT:
                 pygame.quit()
@@ -787,8 +786,10 @@ def bouclePrincipale(boolp1, boolp2, boolp3, boolp4, boold1, boold2, boold3, boo
                 bouton_coca.reinit()
             if event.type == MOUSEBUTTONDOWN and event.button == 1 and event.pos[0] <= 642 and event.pos[0] >= 585 and event.pos[1] <= 327 and event.pos[1] >= 296:
                 bouton_coca.select()
-                if distributeur1.solde >= 0:
-                    bouton_coca.etat = True
+                thread_1.envoieh()
+                bouton_coca.etat = True
+            
+            
 
                 
             ###### BOUTON EVIAN ######
@@ -1099,7 +1100,7 @@ def bouclePrincipale(boolp1, boolp2, boolp3, boolp4, boold1, boold2, boold3, boo
 
 
     while distributeurNiveau3 == True:
-        thread_1.data = ""
+        
 
         fenetre.blit(fenetre_distribNiveau3.fond,(0,0))
         fenetre.blit(bouton_retour.imageLoad, (30, -10))

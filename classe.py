@@ -119,6 +119,7 @@ class PanneauNiveau:
 #################  THREAD POUR LA COMMUNICATION SERIE   #################
 
 class Recevoir(Thread):
+
     #constructeur
     def __init__(self):
         Thread.__init__(self)
@@ -135,15 +136,17 @@ class Recevoir(Thread):
         self.indexNiveauHotel1_3 = -1
         self.indexNiveauHotel2 = -1
         self.indexNiveauHotel3 = -1
+        self.testh = -1
         self.choixNiveauSerial = ""
+        self.ser = None
 
     def run(self):
         serialPort = self.environnementSerial+self.nbSerialPort 
-        ser = serial.Serial(serialPort, 9600, timeout=1) #ouverture du port série sur python
+        self.ser = serial.Serial(serialPort, 9600, timeout=1) #ouverture du port série sur python
         while self.var == True:
             lineb = str.encode(self.choixNiveauSerial)
-            ser.write(lineb)
-            self.data = str(ser.readline()) #lit les données envoie sur le port série
+            self.ser.write(lineb)
+            self.data = str(self.ser.readline()) #lit les données envoie sur le port série
             self.data = self.data[2:-1]  #on recoit b'message' permet d'avoir juste message
             self.indexNiveauPorte1 = self.data.find("09CDF05D")
             self.indexNiveauPorte2 = self.data.find("01010101010101010101010101010101")
@@ -151,10 +154,11 @@ class Recevoir(Thread):
             self.indexNiveauPorte4 = self.data.find("03030303030303030303030303030303")
             self.indexNiveauHotel2 = self.data.find("243")
             self.indexNiveauHotel3 = self.data.find("23041998")
+            self.testh = self.data.find("Solde")
             print(self.data)
-            if self.data == "quit": # si on reçoit quit ferme la connection
-                print("connection fermé")
-                self.var = False
+        
+    def envoieh(self):
+        self.ser.write(str.encode("h"))
 
 def texte(Texte, Police, Taille, Couleur):
     police = pygame.font.SysFont(Police, Taille)
