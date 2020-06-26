@@ -4,6 +4,7 @@ from threading import Thread
 from pygame.locals import *
 from tkinter import * 
 
+################################################################################### CLASSES DU JEU EN LUI-MÊME ##################################################################################################
 
 ##############     TERRAIN     #####################
 
@@ -41,6 +42,30 @@ class Bouton:
     def reinit(self):
         self.imageLoad = pygame.image.load(self.imageBouton)
 
+############### PORTIQUE METRO #################
+
+class Portique:
+    def __init__(self, imageOuverte, imageFerme, a):
+        self.imageOuverte = pygame.image.load(imageOuverte)
+        self.imageFerme = pygame.image.load(imageFerme)
+        self.verouille = a #Variable permettant de gérer la porte ouverte ou non
+        self.passage = 0
+
+############## PANNEAU DE NIVEAU DANS SELECTEUR DE NIVEAU #####################
+
+class PanneauNiveau:
+    def __init__(self,imageVide, imagePanneau):
+        self.imageLoad = pygame.image.load(imageVide)
+        self.imageVide = imageVide
+        self.imagePanneau = imagePanneau
+    
+    def affichePanneau(self):
+        self.imageLoad = pygame.image.load(self.imagePanneau)
+    
+    def reinitPanneau(self):
+        self.imageLoad = pygame.image.load(self.imageVide)
+
+################################################################################### CLASSES LIÉES AU DISTRIBUTEUR  ##################################################################################################
 
 ############   OBJETS DU DISTRIBUTEUR    #####################
 
@@ -64,15 +89,6 @@ class Item:
 class Solde:
     def __init__(self):
         self.amount = -1
-
-############### Portique metro #################
-
-class Portique:
-    def __init__(self, imageOuverte, imageFerme, a):
-        self.imageOuverte = pygame.image.load(imageOuverte)
-        self.imageFerme = pygame.image.load(imageFerme)
-        self.verouille = a #Variable permettant de gérer la porte ouverte ou non
-        self.passage = 0
 
 ############   DISTRIBUTEUR    #####################
 
@@ -100,23 +116,7 @@ class Distributeur:
                 break
         return ret
 
-############## PANNEAU DE NIVEAU DANS SELECTEUR DE NIVEAU #####################
-
-class PanneauNiveau:
-    def __init__(self,imageVide, imagePanneau):
-        self.imageLoad = pygame.image.load(imageVide)
-        self.imageVide = imageVide
-        self.imagePanneau = imagePanneau
-    
-    def affichePanneau(self):
-        self.imageLoad = pygame.image.load(self.imagePanneau)
-    
-    def reinitPanneau(self):
-        self.imageLoad = pygame.image.load(self.imageVide)
-
-
-
-#################  THREAD POUR LA COMMUNICATION SERIE   #################
+################################################################################### CLASSE POUR LA COMMUNICATION SÉRIE #################################################################################################
 
 class Recevoir(Thread):
 
