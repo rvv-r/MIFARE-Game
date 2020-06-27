@@ -589,6 +589,7 @@ def bouclePrincipale(boolp1, boolp2, boolp3, boolp4, boold1, boold2, boold3, boo
 
     while distributeurNiveau1 == True:
         thread_1.data = ""
+        print(traitement(thread_1.data, "B", "€"))
 
         fenetre.blit(fenetre_distribNiveau1.fond,(0,0))
         fenetre.blit(bouton_retour.imageLoad, (30, -10))
@@ -653,7 +654,7 @@ def bouclePrincipale(boolp1, boolp2, boolp3, boolp4, boold1, boold2, boold3, boo
                         fenetre.blit(texte_etoiles, (355, 155))
                     pygame.display.flip()
                     pygame.time.wait(2000)
-                    bouton_coca.etat = False"""
+                    bouton_coca.etat = False
 
 
             if bouton_evian.etat == True:
@@ -755,7 +756,7 @@ def bouclePrincipale(boolp1, boolp2, boolp3, boolp4, boold1, boold2, boold3, boo
                         fenetre.blit(texte_etoiles, (355, 155))
                     pygame.display.flip()
                     pygame.time.wait(2000)
-                    bouton_iceTea.etat = False
+                    bouton_iceTea.etat = False"""
 
         pygame.display.update()
 
@@ -786,7 +787,7 @@ def bouclePrincipale(boolp1, boolp2, boolp3, boolp4, boold1, boold2, boold3, boo
                 bouton_coca.reinit()
             if event.type == MOUSEBUTTONDOWN and event.button == 1 and event.pos[0] <= 642 and event.pos[0] >= 585 and event.pos[1] <= 327 and event.pos[1] >= 296:
                 bouton_coca.select()
-                thread_1.envoieh()
+                thread_1.envoieSerialDistributeurCoca()
                 bouton_coca.etat = True
             
             
@@ -797,24 +798,21 @@ def bouclePrincipale(boolp1, boolp2, boolp3, boolp4, boold1, boold2, boold3, boo
                 bouton_evian.reinit()
             if event.type == MOUSEBUTTONDOWN and event.button == 1 and event.pos[0] <= 642 and event.pos[0] >= 585 and event.pos[1] <= 365 and event.pos[1] >= 334:
                 bouton_evian.select()
-                if distributeur1.solde >= 0:
-                    bouton_evian.etat = True
+                thread_1.envoieSerialDistributeurEvian()
 
             ###### BOUTON SPRITE ######
             if event.type == MOUSEBUTTONUP and event.button == 1:
                 bouton_sprite.reinit()
             if event.type == MOUSEBUTTONDOWN and event.button == 1 and event.pos[0] <= 642 and event.pos[0] >= 585 and event.pos[1] <= 404 and event.pos[1] >= 373:
                 bouton_sprite.select()
-                if distributeur1.solde >= 0:
-                    bouton_sprite.etat = True
+                thread_1.envoieSerialDistributeurSprite()
 
             ####### BOUTON ICE TEA ######
             if event.type == MOUSEBUTTONUP and event.button == 1:
                 bouton_iceTea.reinit()
             if event.type == MOUSEBUTTONDOWN and event.button == 1 and event.pos[0] <= 642 and event.pos[0] >= 585 and event.pos[1] <= 442 and event.pos[1] >= 411:
                 bouton_iceTea.select()
-                if distributeur1.solde >= 0:
-                    bouton_iceTea.etat = True
+                thread_1.envoieSerialDistributeurIceTea()
             
 
             ####### BOUTON SUIVANT DANS L'AIDE  #######

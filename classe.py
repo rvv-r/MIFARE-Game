@@ -157,10 +157,37 @@ class Recevoir(Thread):
             self.testh = self.data.find("Solde")
             print(self.data)
         
-    def envoieh(self):
+    def envoieSerialDistributeurCoca(self):
         self.ser.write(str.encode("h"))
+        self.ser.write(str.encode("h"))
+
+    def envoieSerialDistributeurEvian(self):
+        self.ser.write(str.encode("i"))
+        self.ser.write(str.encode("i"))
+
+    def envoieSerialDistributeurSprite(self):
+        self.ser.write(str.encode("j"))
+        self.ser.write(str.encode("j"))
+
+    def envoieSerialDistributeurIceTea(self):
+        self.ser.write(str.encode("k"))
+        self.ser.write(str.encode("k"))
 
 def texte(Texte, Police, Taille, Couleur):
     police = pygame.font.SysFont(Police, Taille)
     text = police.render(Texte, True, pygame.Color(Couleur))
     return(text)
+
+def traitement(texte, balise1, balise2):
+    for k in range(len(texte)):
+        if str(texte[k]) == balise1:
+            i = k+1
+        if str(texte[k]) == balise2:
+            j = k
+            break
+        else:
+            return
+    return(texte[i:j])
+
+print(traitement("sfvdf", "B", "€"))
+
