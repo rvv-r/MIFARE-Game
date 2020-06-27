@@ -154,7 +154,7 @@ class Recevoir(Thread):
             self.indexNiveauPorte4 = self.data.find("03030303030303030303030303030303")
             self.indexNiveauHotel2 = self.data.find("243")
             self.indexNiveauHotel3 = self.data.find("23041998")
-            self.testh = self.data.find("Solde")
+            self.testh = self.data.find("h")
             print(self.data)
         
     def envoieSerialDistributeurCoca(self):
@@ -179,6 +179,8 @@ def texte(Texte, Police, Taille, Couleur):
     return(text)
 
 def traitement(texte, balise1, balise2):
+    i = 0
+    j = 0
     for k in range(len(texte)):
         if str(texte[k]) == balise1:
             i = k+1

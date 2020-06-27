@@ -589,7 +589,8 @@ def bouclePrincipale(boolp1, boolp2, boolp3, boolp4, boold1, boold2, boold3, boo
 
     while distributeurNiveau1 == True:
         thread_1.data = ""
-        print(traitement(thread_1.data, "B", "€"))
+        if thread_1.testh >= 0:
+            print(traitement(thread_1.data, "B", "Y"))
 
         fenetre.blit(fenetre_distribNiveau1.fond,(0,0))
         fenetre.blit(bouton_retour.imageLoad, (30, -10))
