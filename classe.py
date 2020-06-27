@@ -185,9 +185,7 @@ def traitement(texte, balise1, balise2):
         if str(texte[k]) == balise2:
             j = k
             break
-        else:
-            return
     return(texte[i:j])
 
-print(traitement("sfvdf", "B", "€"))
+print(traitement("B240€", "B", "€"))
 
