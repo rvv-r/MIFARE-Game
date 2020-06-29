@@ -612,15 +612,15 @@ def bouclePrincipale(boolp1, boolp2, boolp3, boolp4, boold1, boold2, boold3, boo
             fenetre.blit(bouton_suivant.imageLoad, (3000,5000))
             fenetre.blit(bouton_aide.imageLoad, (900, 10))
 
-        try:
-            distributeur1.solde = int(thread_1.data)
-        except ValueError:
-            pass
+        
+        if thread_1.carteNonPresente >= 0:
+            bouton_evian.etat = False
+            bouton_sprite.etat = False
+            bouton_iceTea.etat = False
+            bouton_coca.etat = False
+            pygame.display.flip()
 
         if thread_1.soldeInsuffisant == -1:
-            fenetre.blit(texte_Selection_Objets, (355, 125))
-            fenetre.blit(texte_etoiles, (355, 135))
-            pygame.display.flip()
 
             if bouton_coca.etat == True:
                 ########### GET ITEM ###########
@@ -633,11 +633,9 @@ def bouclePrincipale(boolp1, boolp2, boolp3, boolp4, boold1, boold2, boold3, boo
                     fenetre.blit(texte_Pas_Bras_Pas_De_Chocolat, (355,85))
                     fenetre.blit(texte_etoiles, (355, 95))
                     pygame.display.flip()
-                    pygame.time.wait(2000)
-                    bouton_coca.etat = False
+                
 
                 else:
-                    #distributeur1.solde -= item.price
                     item.buyFromStock()
                     fenetre.blit(screen, (355,85))
                     fenetre.blit(texte("Votre Solde : " + str(thread_1.soldeAvant) + "€", None, 20, "#000000"), (355,85))
@@ -652,42 +650,35 @@ def bouclePrincipale(boolp1, boolp2, boolp3, boolp4, boold1, boold2, boold3, boo
                     fenetre.blit(texte("Bonne Journée !", None, 20, "#000000"), (355,145))
                     fenetre.blit(texte_etoiles, (355, 155))
                     pygame.display.flip()
-                    pygame.time.wait(2000)
-                    bouton_coca.etat = False
 
 
-            """if bouton_evian.etat == True:
+            if bouton_evian.etat == True:
                 ########### GET ITEM ###########
                 item = distributeur1.getItem("Evian")
                             
                 ########## BUY ITEM ############
 
-                if distributeur1.solde < item.price:
+                if thread_1.soldeInsuffisant >= 0:
                     fenetre.blit(screen, (355,85))
                     fenetre.blit(texte_Pas_Bras_Pas_De_Chocolat, (355,85))
                     fenetre.blit(texte_etoiles, (355, 95))
                     pygame.display.flip()
-                    pygame.time.wait(2000)
-                    bouton_evian.etat = False
 
                 else:
-                    distributeur1.solde -= item.price
                     item.buyFromStock()
                     fenetre.blit(screen, (355,85))
-                    fenetre.blit(texte("Vous avez acheté : " + str(item.name), None, 20, "#000000"), (355,85))
+                    fenetre.blit(texte("Votre Solde : " + str(thread_1.soldeAvant) + "€", None, 20, "#000000"), (355,85))
                     fenetre.blit(texte_etoiles, (355, 95))
-                    fenetre.blit(texte("Argent restant : " + str(distributeur1.solde), None, 20, "#000000"), (355,105))
+                    fenetre.blit(texte("Vous avez acheté : " + str(item.name) + " à 1€", None, 20, "#000000"), (355,105))
                     fenetre.blit(texte_etoiles, (355, 115))
 
-                    ######### CHECK REFUND #########
-                    if distributeur1.solde > 0:
-                        fenetre.blit(texte(str(distributeur1.solde) + "€ rendu.", None, 20, "#000000"), (355,125))
-                        fenetre.blit(texte_etoiles, (355, 135))
-                        fenetre.blit(texte("Bonne Journée !", None, 20, "#000000"), (355,145))
-                        fenetre.blit(texte_etoiles, (355, 155))
+                    
+                    
+                    fenetre.blit(texte("Nouveau Solde : " + str(thread_1.soldeApres) + "€", None, 20, "#000000"), (355,125))
+                    fenetre.blit(texte_etoiles, (355, 135))
+                    fenetre.blit(texte("Bonne Journée !", None, 20, "#000000"), (355,145))
+                    fenetre.blit(texte_etoiles, (355, 155))
                     pygame.display.flip()
-                    pygame.time.wait(2000)
-                    bouton_evian.etat = False
 
 
             if bouton_sprite.etat == True:
@@ -696,32 +687,27 @@ def bouclePrincipale(boolp1, boolp2, boolp3, boolp4, boold1, boold2, boold3, boo
                             
                 ########## BUY ITEM ############
 
-                if distributeur1.solde < item.price:
+                if thread_1.soldeInsuffisant >= 0:
                     fenetre.blit(screen, (355,85))
                     fenetre.blit(texte_Pas_Bras_Pas_De_Chocolat, (355,85))
                     fenetre.blit(texte_etoiles, (355, 95))
                     pygame.display.flip()
-                    pygame.time.wait(2000)
-                    bouton_sprite.etat = False
 
                 else:
-                    distributeur1.solde -= item.price
                     item.buyFromStock()
                     fenetre.blit(screen, (355,85))
-                    fenetre.blit(texte("Vous avez acheté : " + str(item.name), None, 20, "#000000"), (355,85))
+                    fenetre.blit(texte("Votre Solde : " + str(thread_1.soldeAvant) + "€", None, 20, "#000000"), (355,85))
                     fenetre.blit(texte_etoiles, (355, 95))
-                    fenetre.blit(texte("Argent restant : " + str(distributeur1.solde), None, 20, "#000000"), (355,105))
+                    fenetre.blit(texte("Vous avez acheté : " + str(item.name) + " à 2€", None, 20, "#000000"), (355,105))
                     fenetre.blit(texte_etoiles, (355, 115))
 
-                    ######### CHECK REFUND #########
-                    if distributeur1.solde > 0:
-                        fenetre.blit(texte(str(distributeur1.solde) + "€ rendu.", None, 20, "#000000"), (355,125))
-                        fenetre.blit(texte_etoiles, (355, 135))
-                        fenetre.blit(texte("Bonne Journée !", None, 20, "#000000"), (355,145))
-                        fenetre.blit(texte_etoiles, (355, 155))
+                    
+                    
+                    fenetre.blit(texte("Nouveau Solde : " + str(thread_1.soldeApres) + "€", None, 20, "#000000"), (355,125))
+                    fenetre.blit(texte_etoiles, (355, 135))
+                    fenetre.blit(texte("Bonne Journée !", None, 20, "#000000"), (355,145))
+                    fenetre.blit(texte_etoiles, (355, 155))
                     pygame.display.flip()
-                    pygame.time.wait(2000)
-                    bouton_sprite.etat = False
 
 
             if bouton_iceTea.etat == True:
@@ -730,32 +716,27 @@ def bouclePrincipale(boolp1, boolp2, boolp3, boolp4, boold1, boold2, boold3, boo
                             
                 ########## BUY ITEM ############
 
-                if distributeur1.solde < item.price:
+                if thread_1.soldeInsuffisant >= 0:
                     fenetre.blit(screen, (355,85))
                     fenetre.blit(texte_Pas_Bras_Pas_De_Chocolat, (355,85))
                     fenetre.blit(texte_etoiles, (355, 95))
                     pygame.display.flip()
-                    pygame.time.wait(2000)
-                    bouton_iceTea.etat = False
 
                 else:
-                    distributeur1.solde -= item.price
                     item.buyFromStock()
                     fenetre.blit(screen, (355,85))
-                    fenetre.blit(texte("Vous avez acheté : " + str(item.name), None, 20, "#000000"), (355,85))
+                    fenetre.blit(texte("Votre Solde : " + str(thread_1.soldeAvant) + "€", None, 20, "#000000"), (355,85))
                     fenetre.blit(texte_etoiles, (355, 95))
-                    fenetre.blit(texte("Argent restant : " + str(distributeur1.solde), None, 20, "#000000"), (355,105))
+                    fenetre.blit(texte("Vous avez acheté : " + str(item.name) + " à 2€", None, 20, "#000000"), (355,105))
                     fenetre.blit(texte_etoiles, (355, 115))
 
-                    ######### CHECK REFUND #########
-                    if distributeur1.solde > 0:
-                        fenetre.blit(texte(str(distributeur1.solde) + "€ rendu.", None, 20, "#000000"), (355,125))
-                        fenetre.blit(texte_etoiles, (355, 135))
-                        fenetre.blit(texte("Bonne Journée !", None, 20, "#000000"), (355,145))
-                        fenetre.blit(texte_etoiles, (355, 155))
+                    
+                    
+                    fenetre.blit(texte("Nouveau Solde : " + str(thread_1.soldeApres) + "€", None, 20, "#000000"), (355,125))
+                    fenetre.blit(texte_etoiles, (355, 135))
+                    fenetre.blit(texte("Bonne Journée !", None, 20, "#000000"), (355,145))
+                    fenetre.blit(texte_etoiles, (355, 155))
                     pygame.display.flip()
-                    pygame.time.wait(2000)
-                    bouton_iceTea.etat = False"""
 
         pygame.display.update()
 
@@ -785,9 +766,13 @@ def bouclePrincipale(boolp1, boolp2, boolp3, boolp4, boold1, boold2, boold3, boo
             if event.type == MOUSEBUTTONUP and event.button == 1:
                 bouton_coca.reinit()
             if event.type == MOUSEBUTTONDOWN and event.button == 1 and event.pos[0] <= 642 and event.pos[0] >= 585 and event.pos[1] <= 327 and event.pos[1] >= 296:
+                bouton_evian.etat = False
+                bouton_sprite.etat = False
+                bouton_iceTea.etat = False
                 bouton_coca.select()
                 thread_1.envoieSerialDistributeurCoca()
                 bouton_coca.etat = True
+                pygame.time.wait(150)
             
             
 
@@ -796,22 +781,37 @@ def bouclePrincipale(boolp1, boolp2, boolp3, boolp4, boold1, boold2, boold3, boo
             if event.type == MOUSEBUTTONUP and event.button == 1:
                 bouton_evian.reinit()
             if event.type == MOUSEBUTTONDOWN and event.button == 1 and event.pos[0] <= 642 and event.pos[0] >= 585 and event.pos[1] <= 365 and event.pos[1] >= 334:
+                bouton_sprite.etat = False
+                bouton_iceTea.etat = False
+                bouton_coca.etat = False
                 bouton_evian.select()
                 thread_1.envoieSerialDistributeurEvian()
+                bouton_evian.etat = True
+                pygame.time.wait(150)
 
             ###### BOUTON SPRITE ######
             if event.type == MOUSEBUTTONUP and event.button == 1:
                 bouton_sprite.reinit()
             if event.type == MOUSEBUTTONDOWN and event.button == 1 and event.pos[0] <= 642 and event.pos[0] >= 585 and event.pos[1] <= 404 and event.pos[1] >= 373:
+                bouton_iceTea.etat = False
+                bouton_coca.etat = False
+                bouton_evian.etat = False
                 bouton_sprite.select()
                 thread_1.envoieSerialDistributeurSprite()
+                bouton_sprite.etat = True
+                pygame.time.wait(150)
 
             ####### BOUTON ICE TEA ######
             if event.type == MOUSEBUTTONUP and event.button == 1:
                 bouton_iceTea.reinit()
             if event.type == MOUSEBUTTONDOWN and event.button == 1 and event.pos[0] <= 642 and event.pos[0] >= 585 and event.pos[1] <= 442 and event.pos[1] >= 411:
+                bouton_coca.etat = False
+                bouton_evian.etat = False
+                bouton_sprite.etat = False
                 bouton_iceTea.select()
                 thread_1.envoieSerialDistributeurIceTea()
+                bouton_iceTea.etat = True
+                pygame.time.wait(150)
             
 
             ####### BOUTON SUIVANT DANS L'AIDE  #######
@@ -1627,7 +1627,7 @@ def bouclePrincipale(boolp1, boolp2, boolp3, boolp4, boold1, boold2, boold3, boo
 
     while hotelNiveau2 == True:
         thread_1.data = ""
-        thread_1.choixNiveauSerial = "e"
+        thread_1.choixNiveauSerial = "f"
         fenetre.blit(fenetre_hotelNiveau2.fond,(0,0))
         fenetre.blit(bouton_retour.imageLoad, (30, -10))
         fenetre.blit(testAide.imageLoad, (60,200))
@@ -1712,7 +1712,7 @@ def bouclePrincipale(boolp1, boolp2, boolp3, boolp4, boold1, boold2, boold3, boo
 
     while hotelNiveau3 == True:
         thread_1.data = ""
-        thread_1.choixNiveauSerial = "f"
+        thread_1.choixNiveauSerial = "g"
         fenetre.blit(fenetre_hotelNiveau3.fond,(0,0))
         fenetre.blit(bouton_retour.imageLoad, (30, -10))
         fenetre.blit(testAide.imageLoad, (60,200))

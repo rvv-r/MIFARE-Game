@@ -143,6 +143,8 @@ class Recevoir(Thread):
         self.baliseSolde = -1
         self.baliseSolde2 = -1
         self.soldeInsuffisant = -1
+        self.carteNonPresente = -1
+
         self.choixNiveauSerial = ""
         self.ser = None
 
@@ -155,20 +157,21 @@ class Recevoir(Thread):
             self.data = str(self.ser.readline()) #lit les données envoie sur le port série
             self.data = self.data[2:-1]  #on recoit b'message' permet d'avoir juste message
             self.indexNiveauPorte1 = self.data.find("09CDF05D")
-            self.indexNiveauPorte2 = self.data.find("01010101010101010101010101010101")
-            self.indexNiveauPorte3 = self.data.find("02020202020202020202020202020202")
-            self.indexNiveauPorte4 = self.data.find("03030303030303030303030303030303")
+            self.indexNiveauPorte2 = self.data.find("726574726F506F72746532")
+            self.indexNiveauPorte3 = self.data.find("726574726F506F72746533")
+            self.indexNiveauPorte4 = self.data.find("726574726F506F72746534")
             self.indexNiveauHotel2 = self.data.find("243")
             self.indexNiveauHotel3 = self.data.find("23041998")
-            self.baliseSolde = self.data.find("B")
-            self.baliseSolde2 = self.data.find("A")
+            self.baliseSolde = self.data.find("A")
+            self.baliseSolde2 = self.data.find("E")
             self.soldeInsuffisant = self.data.find("insuffisant")
+            self.carteNonPresente = self.data.find("non")
             if self.baliseSolde >= 0:
-                self.soldeAvant = traitement(self.data, "B", "Y")
-                print(self.soldeAvant)
+                self.soldeAvant = traitement(self.data, "A", "B")
+                print("solde avant : " + self.soldeAvant)
             if self.baliseSolde2 >= 0:
-                self.soldeApres = traitement(self.data, "A", "Z")
-                print(self.soldeApres)
+                self.soldeApres = traitement(self.data, "E", "F")
+                print("solde après : " + self.soldeApres)
             print(self.data)
 
     def envoieSerialDistributeurCoca(self):
