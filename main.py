@@ -2,6 +2,7 @@ import pygame
 import serial
 import tkinter as tk
 import time
+import sys
 from tkinter import ttk
 from threading import Thread
 from pygame.locals import *
@@ -2165,7 +2166,7 @@ variable2.trace("w", fctderoulant2) #application de la fonction pour le menu dé
 
 ## Bouton Quitter ##
 
-bouton_quitter = Button(app, text="Quit", command=quit, width=15)  #Bouton quitter
+bouton_quitter = Button(app, text="Quit", command=sys.exit, width=15)  #Bouton quitter
 bouton_quitter.place(x = 600, y = 600)
 
 ## Bouton Start ##
