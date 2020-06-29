@@ -589,8 +589,6 @@ def bouclePrincipale(boolp1, boolp2, boolp3, boolp4, boold1, boold2, boold3, boo
 
     while distributeurNiveau1 == True:
         thread_1.data = ""
-        if thread_1.testh >= 0:
-            print(traitement(thread_1.data, "B", "Y"))
 
         fenetre.blit(fenetre_distribNiveau1.fond,(0,0))
         fenetre.blit(bouton_retour.imageLoad, (30, -10))
@@ -618,19 +616,18 @@ def bouclePrincipale(boolp1, boolp2, boolp3, boolp4, boold1, boold2, boold3, boo
         except ValueError:
             pass
 
-        if distributeur1.solde >= 0:
-
+        if thread_1.soldeInsuffisant == -1:
             fenetre.blit(texte_Selection_Objets, (355, 125))
             fenetre.blit(texte_etoiles, (355, 135))
             pygame.display.flip()
 
-            """if bouton_coca.etat == True:
+            if bouton_coca.etat == True:
                 ########### GET ITEM ###########
                 item = distributeur1.getItem("Coca")
                             
                 ########## BUY ITEM ############
 
-                if distributeur1.solde < item.price:
+                if thread_1.soldeInsuffisant >= 0:
                     fenetre.blit(screen, (355,85))
                     fenetre.blit(texte_Pas_Bras_Pas_De_Chocolat, (355,85))
                     fenetre.blit(texte_etoiles, (355, 95))
@@ -639,26 +636,26 @@ def bouclePrincipale(boolp1, boolp2, boolp3, boolp4, boold1, boold2, boold3, boo
                     bouton_coca.etat = False
 
                 else:
-                    distributeur1.solde -= item.price
+                    #distributeur1.solde -= item.price
                     item.buyFromStock()
                     fenetre.blit(screen, (355,85))
-                    fenetre.blit(texte("Vous avez acheté : " + str(item.name), None, 20, "#000000"), (355,85))
+                    fenetre.blit(texte("Votre Solde : " + str(thread_1.soldeAvant) + "€", None, 20, "#000000"), (355,85))
                     fenetre.blit(texte_etoiles, (355, 95))
-                    fenetre.blit(texte("Argent restant : " + str(distributeur1.solde), None, 20, "#000000"), (355,105))
+                    fenetre.blit(texte("Vous avez acheté : " + str(item.name) + " à 3€", None, 20, "#000000"), (355,105))
                     fenetre.blit(texte_etoiles, (355, 115))
 
-                    ######### CHECK REFUND #########
-                    if distributeur1.solde > 0:
-                        fenetre.blit(texte(str(distributeur1.solde) + "€ rendu.", None, 20, "#000000"), (355,125))
-                        fenetre.blit(texte_etoiles, (355, 135))
-                        fenetre.blit(texte("Bonne Journée !", None, 20, "#000000"), (355,145))
-                        fenetre.blit(texte_etoiles, (355, 155))
+                    
+                    
+                    fenetre.blit(texte("Nouveau Solde : " + str(thread_1.soldeApres) + "€", None, 20, "#000000"), (355,125))
+                    fenetre.blit(texte_etoiles, (355, 135))
+                    fenetre.blit(texte("Bonne Journée !", None, 20, "#000000"), (355,145))
+                    fenetre.blit(texte_etoiles, (355, 155))
                     pygame.display.flip()
                     pygame.time.wait(2000)
                     bouton_coca.etat = False
 
 
-            if bouton_evian.etat == True:
+            """if bouton_evian.etat == True:
                 ########### GET ITEM ###########
                 item = distributeur1.getItem("Evian")
                             

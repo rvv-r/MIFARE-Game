@@ -127,6 +127,10 @@ class Recevoir(Thread):
         self.nbSerialPort = ""   # permet la configuration du numéro de port
         self.environnementSerial = ""  #'COM' pour windows, '/dev/pts/' pour Linux
         self.var = True             #Variable qui permettra d'arrêter le thread
+        self.soldeAvant = 0
+        self.soldeApres = 0
+
+
         self.indexNiveauPorte1 = -1
         self.indexNiveauPorte2 = -1
         self.indexNiveauPorte3 = -1
@@ -136,13 +140,15 @@ class Recevoir(Thread):
         self.indexNiveauHotel1_3 = -1
         self.indexNiveauHotel2 = -1
         self.indexNiveauHotel3 = -1
-        self.testh = -1
+        self.baliseSolde = -1
+        self.baliseSolde2 = -1
+        self.soldeInsuffisant = -1
         self.choixNiveauSerial = ""
         self.ser = None
 
     def run(self):
         serialPort = self.environnementSerial+self.nbSerialPort 
-        self.ser = serial.Serial(serialPort, 9600, timeout=1) #ouverture du port série sur python
+        self.ser = serial.Serial(serialPort, 9600, timeout=3) #ouverture du port série sur python
         while self.var == True:
             lineb = str.encode(self.choixNiveauSerial)
             self.ser.write(lineb)
@@ -154,9 +160,17 @@ class Recevoir(Thread):
             self.indexNiveauPorte4 = self.data.find("03030303030303030303030303030303")
             self.indexNiveauHotel2 = self.data.find("243")
             self.indexNiveauHotel3 = self.data.find("23041998")
-            self.testh = self.data.find("h")
+            self.baliseSolde = self.data.find("B")
+            self.baliseSolde2 = self.data.find("A")
+            self.soldeInsuffisant = self.data.find("insuffisant")
+            if self.baliseSolde >= 0:
+                self.soldeAvant = traitement(self.data, "B", "Y")
+                print(self.soldeAvant)
+            if self.baliseSolde2 >= 0:
+                self.soldeApres = traitement(self.data, "A", "Z")
+                print(self.soldeApres)
             print(self.data)
-        
+
     def envoieSerialDistributeurCoca(self):
         self.ser.write(str.encode("h"))
         self.ser.write(str.encode("h"))
@@ -179,15 +193,15 @@ def texte(Texte, Police, Taille, Couleur):
     return(text)
 
 def traitement(texte, balise1, balise2):
+    texter = texte
     i = 0
     j = 0
-    for k in range(len(texte)):
-        if str(texte[k]) == balise1:
+    for k in range(len(texter)):
+        if str(texter[k]) == balise1:
             i = k+1
-        if str(texte[k]) == balise2:
+        if str(texter[k]) == balise2:
             j = k
             break
-    return(texte[i:j])
+    return(texter[i:j])
 
-print(traitement("B240€", "B", "€"))
 
