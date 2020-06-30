@@ -635,7 +635,7 @@ def bouclePrincipale(boolp1, boolp2, boolp3, boolp4, boold1, boold2, boold3, boo
                 item = distributeur1.getItem("Coca")
                             
                 ########## BUY ITEM ############                  
-                if thread_1.insuffisant >= 0 or thread_1.soldeInsuffisant == -1:
+                if thread_1.insuffisant >= 0:
                     fenetre.blit(screen, (355,85))
                     fenetre.blit(texte_Pas_Bras_Pas_De_Chocolat, (355,85))
                     fenetre.blit(texte_etoiles, (355, 95))
@@ -666,7 +666,7 @@ def bouclePrincipale(boolp1, boolp2, boolp3, boolp4, boold1, boold2, boold3, boo
                             
                 ########## BUY ITEM ############
 
-                if thread_1.insuffisant >= 0 or thread_1.soldeInsuffisant == -1:
+                if thread_1.insuffisant >= 0:
                     fenetre.blit(screen, (355,85))
                     fenetre.blit(texte_Pas_Bras_Pas_De_Chocolat, (355,85))
                     fenetre.blit(texte_etoiles, (355, 95))
@@ -699,7 +699,7 @@ def bouclePrincipale(boolp1, boolp2, boolp3, boolp4, boold1, boold2, boold3, boo
                             
                 ########## BUY ITEM ############
 
-                if thread_1.insuffisant >= 0 or thread_1.soldeInsuffisant == -1:
+                if thread_1.insuffisant >= 0:
                     fenetre.blit(screen, (355,85))
                     fenetre.blit(texte_Pas_Bras_Pas_De_Chocolat, (355,85))
                     fenetre.blit(texte_etoiles, (355, 95))
@@ -732,7 +732,7 @@ def bouclePrincipale(boolp1, boolp2, boolp3, boolp4, boold1, boold2, boold3, boo
                             
                 ########## BUY ITEM ############
 
-                if thread_1.insuffisant >= 0 or thread_1.soldeInsuffisant == -1:
+                if thread_1.insuffisant >= 0:
                     fenetre.blit(screen, (355,85))
                     fenetre.blit(texte_Pas_Bras_Pas_De_Chocolat, (355,85))
                     fenetre.blit(texte_etoiles, (355, 95))
@@ -900,7 +900,7 @@ def bouclePrincipale(boolp1, boolp2, boolp3, boolp4, boold1, boold2, boold3, boo
             fenetre.blit(bouton_suivant.imageLoad, (3000,5000))
             fenetre.blit(bouton_aide.imageLoad, (900, 10))
 
-        if distributeur2.compteur >= 1:
+        if thread_1.soldeAvant == thread_1.soldeApres and distributeur2.compteur >= 1:
             fenetre.blit(bouton_continuer.imageLoad, (50, 560))
 
         if thread_1.obtenuBoisson == 1:
@@ -922,7 +922,7 @@ def bouclePrincipale(boolp1, boolp2, boolp3, boolp4, boold1, boold2, boold3, boo
                 item = distributeur2.getItem("Coca")
                             
                 ########## BUY ITEM ############                  
-                if thread_1.insuffisant >= 0 or thread_1.soldeInsuffisant == -1:
+                if thread_1.insuffisant >= 0:
                     fenetre.blit(screen, (355,85))
                     fenetre.blit(texte_Pas_Bras_Pas_De_Chocolat, (355,85))
                     fenetre.blit(texte_etoiles, (355, 95))
@@ -953,7 +953,7 @@ def bouclePrincipale(boolp1, boolp2, boolp3, boolp4, boold1, boold2, boold3, boo
                             
                 ########## BUY ITEM ############
 
-                if thread_1.insuffisant >= 0 or thread_1.soldeInsuffisant == -1:
+                if thread_1.insuffisant >= 0:
                     fenetre.blit(screen, (355,85))
                     fenetre.blit(texte_Pas_Bras_Pas_De_Chocolat, (355,85))
                     fenetre.blit(texte_etoiles, (355, 95))
@@ -986,7 +986,7 @@ def bouclePrincipale(boolp1, boolp2, boolp3, boolp4, boold1, boold2, boold3, boo
                             
                 ########## BUY ITEM ############
 
-                if thread_1.insuffisant >= 0 or thread_1.soldeInsuffisant == -1:
+                if thread_1.insuffisant >= 0:
                     fenetre.blit(screen, (355,85))
                     fenetre.blit(texte_Pas_Bras_Pas_De_Chocolat, (355,85))
                     fenetre.blit(texte_etoiles, (355, 95))
@@ -1019,7 +1019,7 @@ def bouclePrincipale(boolp1, boolp2, boolp3, boolp4, boold1, boold2, boold3, boo
                             
                 ########## BUY ITEM ############
 
-                if thread_1.insuffisant >= 0 or thread_1.soldeInsuffisant == -1:
+                if thread_1.insuffisant >= 0:
                     fenetre.blit(screen, (355,85))
                     fenetre.blit(texte_Pas_Bras_Pas_De_Chocolat, (355,85))
                     fenetre.blit(texte_etoiles, (355, 95))
@@ -1199,7 +1199,7 @@ def bouclePrincipale(boolp1, boolp2, boolp3, boolp4, boold1, boold2, boold3, boo
             bouton_sprite.etat = False
             bouton_iceTea.etat = False
             bouton_coca.etat = False
-            thread_1.soldeInsuffisant = -1
+            thread_1.insuffisant = -1
             pygame.display.flip()
 
         if thread_1.soldeInsuffisant == -1:
@@ -1209,7 +1209,7 @@ def bouclePrincipale(boolp1, boolp2, boolp3, boolp4, boold1, boold2, boold3, boo
                 item = distributeur3.getItem("Coca")
                             
                 ########## BUY ITEM ############                  
-                if thread_1.insuffisant >= 0 or thread_1.soldeInsuffisant == -1:
+                if thread_1.insuffisant >= 0:
                     fenetre.blit(screen, (355,85))
                     fenetre.blit(texte_Pas_Bras_Pas_De_Chocolat, (355,85))
                     fenetre.blit(texte_etoiles, (355, 95))
@@ -1236,7 +1236,7 @@ def bouclePrincipale(boolp1, boolp2, boolp3, boolp4, boold1, boold2, boold3, boo
                             
                 ########## BUY ITEM ############
 
-                if thread_1.insuffisant >= 0 or thread_1.soldeInsuffisant == -1:
+                if thread_1.insuffisant >= 0:
                     fenetre.blit(screen, (355,85))
                     fenetre.blit(texte_Pas_Bras_Pas_De_Chocolat, (355,85))
                     fenetre.blit(texte_etoiles, (355, 95))
@@ -1269,7 +1269,7 @@ def bouclePrincipale(boolp1, boolp2, boolp3, boolp4, boold1, boold2, boold3, boo
                             
                 ########## BUY ITEM ############
 
-                if thread_1.insuffisant >= 0 or thread_1.soldeInsuffisant == -1:
+                if thread_1.insuffisant >= 0:
                     fenetre.blit(screen, (355,85))
                     fenetre.blit(texte_Pas_Bras_Pas_De_Chocolat, (355,85))
                     fenetre.blit(texte_etoiles, (355, 95))
@@ -1302,7 +1302,7 @@ def bouclePrincipale(boolp1, boolp2, boolp3, boolp4, boold1, boold2, boold3, boo
                             
                 ########## BUY ITEM ############
 
-                if thread_1.insuffisant >= 0 or thread_1.soldeInsuffisant == -1:
+                if thread_1.insuffisant >= 0:
                     fenetre.blit(screen, (355,85))
                     fenetre.blit(texte_Pas_Bras_Pas_De_Chocolat, (355,85))
                     fenetre.blit(texte_etoiles, (355, 95))
