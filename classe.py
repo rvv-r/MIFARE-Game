@@ -96,6 +96,10 @@ class Distributeur:
     def __init__(self):
         self.items = []
         self.solde = Solde().amount
+        self.compteur = 0
+
+    def addcompteur(self):
+        self.compteur += 1
 
     def addItem(self, item):
         self.items.append(item)
@@ -143,7 +147,13 @@ class Recevoir(Thread):
         self.baliseSolde = -1
         self.baliseSolde2 = -1
         self.soldeInsuffisant = -1
+        self.insuffisant = -1
         self.carteNonPresente = -1
+        self.obtenuCoca = -1
+        self.obtenuEvian = -1
+        self.obtenuSprite = -1
+        self.obtenuIceTea = -1
+        self.obtenuBoisson = 0
 
         self.choixNiveauSerial = ""
         self.ser = None
@@ -166,12 +176,21 @@ class Recevoir(Thread):
             self.baliseSolde2 = self.data.find("E")
             self.soldeInsuffisant = self.data.find("insuffisant")
             self.carteNonPresente = self.data.find("non")
+            self.obtenuCoca = self.data.find("Coca")
+            self.obtenuEvian = self.data.find("evian")
+            self.obtenuSprite = self.data.find("Sprite")
+            self.obtenuIceTea = self.data.find("Ice")
+
+            if self.obtenuCoca >= 0 or self.obtenuEvian >= 0 or self.obtenuSprite >= 0 or self.obtenuIceTea >= 0 :
+                self.obtenuBoisson = 1
+            if self.soldeInsuffisant == 0:
+                self.insuffisant = 1
             if self.baliseSolde >= 0:
                 self.soldeAvant = traitement(self.data, "A", "B")
-                print("solde avant : " + self.soldeAvant)
+                #print("solde avant : " + self.soldeAvant)
             if self.baliseSolde2 >= 0:
                 self.soldeApres = traitement(self.data, "E", "F")
-                print("solde après : " + self.soldeApres)
+                #print("solde après : " + self.soldeApres)
             print(self.data)
 
     def envoieSerialDistributeurCoca(self):

@@ -553,7 +553,7 @@ def bouclePrincipale(boolp1, boolp2, boolp3, boolp4, boold1, boold2, boold3, boo
                     bouton_continuer.select()
                     bouton_quitter.etat = False
                     bouton_retour.etat = False
-                    bouton_continuer.etat = True
+                    bouton_continuer.etat = False
                     selecteurNiveau() #Comme c'est le dernier niveau on retombe sur la sélection de menu """""""A CHANGER SI CE N'EST PLUS LE DERNIER NIVEAU"""""""""
                     porteNiveau4 = False
 
@@ -587,6 +587,7 @@ def bouclePrincipale(boolp1, boolp2, boolp3, boolp4, boold1, boold2, boold3, boo
 #                                                                                                #
 ##################################################################################################
 
+    valeure = True
 
     while distributeurNiveau1 == True:
         thread_1.data = ""
@@ -612,12 +613,19 @@ def bouclePrincipale(boolp1, boolp2, boolp3, boolp4, boold1, boold2, boold3, boo
             fenetre.blit(bouton_suivant.imageLoad, (3000,5000))
             fenetre.blit(bouton_aide.imageLoad, (900, 10))
 
+        if distributeur1.compteur >= 3:
+            fenetre.blit(bouton_continuer.imageLoad, (50, 560))
+
+        if thread_1.obtenuBoisson == 1:
+            distributeur1.addcompteur()
+            thread_1.obtenuBoisson = 0
         
         if thread_1.carteNonPresente >= 0:
             bouton_evian.etat = False
             bouton_sprite.etat = False
             bouton_iceTea.etat = False
             bouton_coca.etat = False
+            thread_1.insuffisant = -1
             pygame.display.flip()
 
         if thread_1.soldeInsuffisant == -1:
@@ -626,14 +634,12 @@ def bouclePrincipale(boolp1, boolp2, boolp3, boolp4, boold1, boold2, boold3, boo
                 ########### GET ITEM ###########
                 item = distributeur1.getItem("Coca")
                             
-                ########## BUY ITEM ############
-
-                if thread_1.soldeInsuffisant >= 0:
+                ########## BUY ITEM ############                  
+                if thread_1.insuffisant >= 0:
                     fenetre.blit(screen, (355,85))
                     fenetre.blit(texte_Pas_Bras_Pas_De_Chocolat, (355,85))
                     fenetre.blit(texte_etoiles, (355, 95))
                     pygame.display.flip()
-                
 
                 else:
                     item.buyFromStock()
@@ -643,8 +649,6 @@ def bouclePrincipale(boolp1, boolp2, boolp3, boolp4, boold1, boold2, boold3, boo
                     fenetre.blit(texte("Vous avez acheté : " + str(item.name) + " à 3€", None, 20, "#000000"), (355,105))
                     fenetre.blit(texte_etoiles, (355, 115))
 
-                    
-                    
                     fenetre.blit(texte("Nouveau Solde : " + str(thread_1.soldeApres) + "€", None, 20, "#000000"), (355,125))
                     fenetre.blit(texte_etoiles, (355, 135))
                     fenetre.blit(texte("Bonne Journée !", None, 20, "#000000"), (355,145))
@@ -658,7 +662,7 @@ def bouclePrincipale(boolp1, boolp2, boolp3, boolp4, boold1, boold2, boold3, boo
                             
                 ########## BUY ITEM ############
 
-                if thread_1.soldeInsuffisant >= 0:
+                if thread_1.insuffisant >= 0:
                     fenetre.blit(screen, (355,85))
                     fenetre.blit(texte_Pas_Bras_Pas_De_Chocolat, (355,85))
                     fenetre.blit(texte_etoiles, (355, 95))
@@ -687,7 +691,7 @@ def bouclePrincipale(boolp1, boolp2, boolp3, boolp4, boold1, boold2, boold3, boo
                             
                 ########## BUY ITEM ############
 
-                if thread_1.soldeInsuffisant >= 0:
+                if thread_1.insuffisant >= 0:
                     fenetre.blit(screen, (355,85))
                     fenetre.blit(texte_Pas_Bras_Pas_De_Chocolat, (355,85))
                     fenetre.blit(texte_etoiles, (355, 95))
@@ -716,7 +720,7 @@ def bouclePrincipale(boolp1, boolp2, boolp3, boolp4, boold1, boold2, boold3, boo
                             
                 ########## BUY ITEM ############
 
-                if thread_1.soldeInsuffisant >= 0:
+                if thread_1.insuffisant >= 0:
                     fenetre.blit(screen, (355,85))
                     fenetre.blit(texte_Pas_Bras_Pas_De_Chocolat, (355,85))
                     fenetre.blit(texte_etoiles, (355, 95))
@@ -738,9 +742,15 @@ def bouclePrincipale(boolp1, boolp2, boolp3, boolp4, boold1, boold2, boold3, boo
                     fenetre.blit(texte_etoiles, (355, 155))
                     pygame.display.flip()
 
+        if thread_1.soldeInsuffisant >= 0:
+            fenetre.blit(screen, (355,85))
+            fenetre.blit(texte_Pas_Bras_Pas_De_Chocolat, (355,85))
+            fenetre.blit(texte_etoiles, (355, 95))
+            pygame.display.flip()
+
         pygame.display.update()
 
-
+        
         
         for event in pygame.event.get():
             if event.type == QUIT:
@@ -757,9 +767,6 @@ def bouclePrincipale(boolp1, boolp2, boolp3, boolp4, boold1, boold2, boold3, boo
                 bouton_continuer.etat = False
                 selecteurNiveau()
                 distributeurNiveau1 = False
-                distributeurNiveau2 = False
-                distributeurNiveau3 = False
-
                 
 
             ##### BOUTON COCA ######
@@ -775,8 +782,6 @@ def bouclePrincipale(boolp1, boolp2, boolp3, boolp4, boold1, boold2, boold3, boo
                 pygame.time.wait(150)
             
             
-
-                
             ###### BOUTON EVIAN ######
             if event.type == MOUSEBUTTONUP and event.button == 1:
                 bouton_evian.reinit()
@@ -813,6 +818,20 @@ def bouclePrincipale(boolp1, boolp2, boolp3, boolp4, boold1, boold2, boold3, boo
                 bouton_iceTea.etat = True
                 pygame.time.wait(150)
             
+            ####### BOUTON CONTINUER ######
+            if distributeur1.compteur >= 3:
+                if event.type == MOUSEMOTION and event.pos[0] <= 211 and event.pos[0] >= 50 and event.pos[1] <= 630 and event.pos[1] >= 560 and bouton_continuer.etat == False:
+                    bouton_continuer.hoover()
+                if event.type == MOUSEMOTION and (event.pos[0] >= 211 or event.pos[0] <= 50 or event.pos[1] >= 630 or event.pos[1] <= 560) and bouton_continuer.etat == False:
+                    bouton_continuer.reinit()
+                if event.type == MOUSEBUTTONDOWN and event.button == 1 and event.pos[0] <= 233 and event.pos[0] >= 50 and event.pos[1] <= 630 and event.pos[1] >= 560:
+                    bouton_continuer.select()
+                    bouton_quitter.etat = False
+                    bouton_retour.etat = False
+                    bouton_continuer.etat = False
+                    distributeurNiveau1 = False
+                    distributeurNiveau2 = True
+
 
             ####### BOUTON SUIVANT DANS L'AIDE  #######
             if event.type == MOUSEMOTION and event.pos[0] <= 511 and event.pos[0] >= 350 and event.pos[1] <= 570 and event.pos[1] >= 500 and bouton_suivant.etat == False:
@@ -869,7 +888,7 @@ def bouclePrincipale(boolp1, boolp2, boolp3, boolp4, boold1, boold2, boold3, boo
             distributeur2.solde = int(thread_1.data)
         except ValueError:
             pass
-
+        
         if distributeur2.solde >= 0:
 
             fenetre.blit(texte_Selection_Objets, (355, 125))
@@ -882,13 +901,11 @@ def bouclePrincipale(boolp1, boolp2, boolp3, boolp4, boold1, boold2, boold3, boo
                             
                 ########## BUY ITEM ############
 
-                if distributeur2.solde < item.price:
+                if thread_1.soldeInsuffisant >= 0:
                     fenetre.blit(screen, (355,85))
                     fenetre.blit(texte_Pas_Bras_Pas_De_Chocolat, (355,85))
                     fenetre.blit(texte_etoiles, (355, 95))
                     pygame.display.flip()
-                    pygame.time.wait(2000)
-                    bouton_coca.etat = False
 
                 else:
                     distributeur2.solde -= item.price
