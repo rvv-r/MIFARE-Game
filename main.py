@@ -100,9 +100,9 @@ def bouclePrincipale(boolp1, boolp2, boolp3, boolp4, boold1, boold2, boold3, boo
     porteN2 = Porte("image/portes/porteOuverte2.png","image/portes/porteFerme2.png",1)
     porteN3 = Porte("image/portes/porteOuverte3.png","image/portes/porteFerme3.png",1)
     porteN4 = Porte("image/portes/porteOuverte4.png","image/portes/porteFerme4.png",1)
-    porteNH1_1 = Portique("image/portes/metroOuvert.png", "image/portes/metroFerme.png", 1)
-    porteNH1_2 = Portique("image/portes/metroOuvert.png", "image/portes/metroFerme.png", 1)
-    porteNH1_3 = Portique("image/portes/metroOuvert.png", "image/portes/metroFerme.png", 1)
+    porteNH1_1 = Porte("image/portes/metroOuvert.png", "image/portes/metroFerme.png", 1)
+    porteNH1_2 = Porte("image/portes/metroOuvert.png", "image/portes/metroFerme.png", 1)
+    porteNH1_3 = Porte("image/portes/metroOuvert.png", "image/portes/metroFerme.png", 1)
     porteNH2 = Porte("image/portes/porteOuverteHotel1.png", "image/portes/porteFermeHotel1.png", 1)
     porteNH3 = Porte("image/portes/porteOuverteHotel1.png", "image/portes/porteFermeHotel1.png", 1)
 
@@ -1448,16 +1448,12 @@ def bouclePrincipale(boolp1, boolp2, boolp3, boolp4, boold1, boold2, boold3, boo
   
     while hotelNiveau1_1 == True:
         thread_1.data = ""
+        thread_1.choixNiveauSerial = "e"
         fenetre.blit(fenetre_hotelNiveau1_1.fond,(0,0))
         fenetre.blit(bouton_retour.imageLoad, (30, -10))
         
         
-        try:
-            porteNH1_1.passage = int(thread_1.data)
-        except ValueError:
-            pass
-        
-        if porteNH1_1.passage >= 1: #permet d'ouvrir la porte quand on recoit le code ouvrir par le port série
+        if thread_1.indexNiveauHotel1_1 >= 0: #permet d'ouvrir la porte quand on recoit le code ouvrir par le port série
             porteNH1_1.verouille = 0
 
         if porteNH1_1.verouille == 1:
