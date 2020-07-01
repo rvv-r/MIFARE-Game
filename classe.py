@@ -1,3 +1,7 @@
+#####################################################################
+#Auteur : Florian Neuville, Jean-Laurent Rouvière Hesse, Dan Nacache#
+#####################################################################
+
 import pygame
 import serial
 from threading import Thread
