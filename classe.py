@@ -177,6 +177,8 @@ class Recevoir(Thread):
             self.obtenuSprite = self.data.find("Sprite")
             self.obtenuIceTea = self.data.find("Ice")
             self.indexNiveauHotel1_1 = self.data.find("Suivant")
+            self.indexNiveauHotel1_2 = self.data.find("Suivant")
+            self.indexNiveauHotel1_3 = self.data.find("Suivant")
 
             if self.obtenuCoca >= 0 or self.obtenuEvian >= 0 or self.obtenuSprite >= 0 or self.obtenuIceTea >= 0 :
                 self.obtenuBoisson = 1
@@ -190,21 +192,37 @@ class Recevoir(Thread):
                 #print("solde après : " + self.soldeApres)
             print(self.data)
 
-    def envoieSerialDistributeurCoca(self):
+    def envoieSerialDistributeur1Coca(self):
         self.ser.write(str.encode("h"))
         self.ser.write(str.encode("h"))
 
-    def envoieSerialDistributeurEvian(self):
+    def envoieSerialDistributeur1Evian(self):
         self.ser.write(str.encode("i"))
         self.ser.write(str.encode("i"))
 
-    def envoieSerialDistributeurSprite(self):
+    def envoieSerialDistributeur1Sprite(self):
         self.ser.write(str.encode("j"))
         self.ser.write(str.encode("j"))
 
-    def envoieSerialDistributeurIceTea(self):
+    def envoieSerialDistributeur1IceTea(self):
         self.ser.write(str.encode("k"))
         self.ser.write(str.encode("k"))
+    
+    def envoieSerialDistributeur3Coca(self):
+        self.ser.write(str.encode("p"))
+        self.ser.write(str.encode("p"))
+
+    def envoieSerialDistributeur3Evian(self):
+        self.ser.write(str.encode("q"))
+        self.ser.write(str.encode("q"))
+
+    def envoieSerialDistributeur3Sprite(self):
+        self.ser.write(str.encode("r"))
+        self.ser.write(str.encode("r"))
+
+    def envoieSerialDistributeur3IceTea(self):
+        self.ser.write(str.encode("s"))
+        self.ser.write(str.encode("s"))
 
 def texte(Texte, Police, Taille, Couleur):
     police = pygame.font.SysFont(Police, Taille)
