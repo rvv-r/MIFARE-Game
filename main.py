@@ -1187,7 +1187,7 @@ def bouclePrincipale(boolp1, boolp2, boolp3, boolp4, boold1, boold2, boold3, boo
             fenetre.blit(bouton_suivant.imageLoad, (3000,5000))
             fenetre.blit(bouton_aide.imageLoad, (900, 10))
 
-        if distributeur3.compteur >= 3:
+        if thread_1.soldeAvant < thread_1.soldeApres and distributeur3.compteur >= 1:
             fenetre.blit(bouton_continuer.imageLoad, (50, 560))
 
         if thread_1.obtenuBoisson == 1:
@@ -1405,7 +1405,7 @@ def bouclePrincipale(boolp1, boolp2, boolp3, boolp4, boold1, boold2, boold3, boo
                 pygame.time.wait(150)
             
             ####### BOUTON CONTINUER ######
-            if distributeur3.compteur >= 3:
+            if thread_1.soldeAvant < thread_1.soldeApres and distributeur3.compteur >= 1:
                 if event.type == MOUSEMOTION and event.pos[0] <= 211 and event.pos[0] >= 50 and event.pos[1] <= 630 and event.pos[1] >= 560 and bouton_continuer.etat == False:
                     bouton_continuer.hoover()
                 if event.type == MOUSEMOTION and (event.pos[0] >= 211 or event.pos[0] <= 50 or event.pos[1] >= 630 or event.pos[1] <= 560) and bouton_continuer.etat == False:
