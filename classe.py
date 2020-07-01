@@ -42,14 +42,6 @@ class Bouton:
     def reinit(self):
         self.imageLoad = pygame.image.load(self.imageBouton)
 
-############### PORTIQUE METRO #################
-
-class Portique:
-    def __init__(self, imageOuverte, imageFerme, a):
-        self.imageOuverte = pygame.image.load(imageOuverte)
-        self.imageFerme = pygame.image.load(imageFerme)
-        self.verouille = a #Variable permettant de gérer la porte ouverte ou non
-        self.passage = 0
 
 ############## PANNEAU DE NIVEAU DANS SELECTEUR DE NIVEAU #####################
 
@@ -180,6 +172,7 @@ class Recevoir(Thread):
             self.obtenuEvian = self.data.find("evian")
             self.obtenuSprite = self.data.find("Sprite")
             self.obtenuIceTea = self.data.find("Ice")
+            self.indexNiveauHotel1_1 = self.data.find("Suivant")
 
             if self.obtenuCoca >= 0 or self.obtenuEvian >= 0 or self.obtenuSprite >= 0 or self.obtenuIceTea >= 0 :
                 self.obtenuBoisson = 1
