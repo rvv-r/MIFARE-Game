@@ -180,6 +180,8 @@ class Recevoir(Thread):
             self.indexNiveauHotel1_2 = self.data.find("Suivant")
             self.indexNiveauHotel1_3 = self.data.find("Suivant")
 
+            if self.indexNiveauHotel1_1 >= 0:
+                self.choixNiveauSerial = ""
             if self.obtenuCoca >= 0 or self.obtenuEvian >= 0 or self.obtenuSprite >= 0 or self.obtenuIceTea >= 0 :
                 self.obtenuBoisson = 1
             if self.soldeInsuffisant == 0:
