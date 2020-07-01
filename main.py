@@ -1447,7 +1447,7 @@ def bouclePrincipale(boolp1, boolp2, boolp3, boolp4, boold1, boold2, boold3, boo
                     bouton_continuer.select()
                     bouton_quitter.etat = False
                     bouton_retour.etat = False
-                    bouton_continuer = False
+                    bouton_continuer.etat = False
                     hotelNiveau1_1 = False
                     hotelNiveau1_2 = True
 
@@ -1528,7 +1528,7 @@ def bouclePrincipale(boolp1, boolp2, boolp3, boolp4, boold1, boold2, boold3, boo
                 hotelNiveau1_2 = False
         
             ###### BOUTON POUR CONTINUER QUE SI LA PORTE EST OUVERTE #####
-            if thread_1.indexNiveauHotel1_2 >= 0:
+            if porteNH1_2.verouille == 0:
                 if event.type == MOUSEMOTION and event.pos[0] <= 211 and event.pos[0] >= 50 and event.pos[1] <= 630 and event.pos[1] >= 560 and bouton_continuer.etat == False:
                     bouton_continuer.hoover()
                 if event.type == MOUSEMOTION and (event.pos[0] >= 211 or event.pos[0] <= 50 or event.pos[1] >= 630 or event.pos[1] <= 560) and bouton_continuer.etat == False:
@@ -1537,6 +1537,7 @@ def bouclePrincipale(boolp1, boolp2, boolp3, boolp4, boold1, boold2, boold3, boo
                     bouton_continuer.select()
                     bouton_quitter.etat = False
                     bouton_retour.etat = False
+                    bouton_continuer.etat = False
                     hotelNiveau1_2 = False
                     hotelNiveau1_3 = True
 
@@ -1573,12 +1574,15 @@ def bouclePrincipale(boolp1, boolp2, boolp3, boolp4, boold1, boold2, boold3, boo
 
         if thread_1.indexNiveauHotel1_3 >= 0: #permet d'ouvrir la porte quand on recoit le code ouvrir par le port série
             porteNH1_3.verouille = 0
+            thread_1.choixNiveauSerial = ""
 
         if porteNH1_3.verouille == 1:
             fenetre.blit(porteNH1_3.imageFerme, (0,0))
+            thread_1.choixNiveauSerial = "e"
         if porteNH1_3.verouille == 0:
             fenetre.blit(porteNH1_3.imageOuverte, (0,0))
             fenetre.blit(bouton_continuer.imageLoad, (50, 560))
+            thread_1.choixNiveauSerial = ""
         
 
         fenetre.blit(testAide.imageLoad, (450,200))
@@ -1612,7 +1616,7 @@ def bouclePrincipale(boolp1, boolp2, boolp3, boolp4, boold1, boold2, boold3, boo
                 hotelNiveau1 = False
         
             ###### BOUTON POUR CONTINUER QUE SI LA PORTE EST OUVERTE #####
-            if thread_1.indexNiveauHotel1_3 >= 0:
+            if porteNH1_3.verouille == 0:
                 if event.type == MOUSEMOTION and event.pos[0] <= 211 and event.pos[0] >= 50 and event.pos[1] <= 630 and event.pos[1] >= 560 and bouton_continuer.etat == False:
                     bouton_continuer.hoover()
                 if event.type == MOUSEMOTION and (event.pos[0] >= 211 or event.pos[0] <= 50 or event.pos[1] >= 630 or event.pos[1] <= 560) and bouton_continuer.etat == False:
