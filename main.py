@@ -1,3 +1,7 @@
+#####################################################################
+#Auteur : Florian Neuville, Jean-Laurent Rouvière Hesse, Dan Nacache#
+#####################################################################
+
 import pygame
 import serial
 import tkinter as tk
@@ -232,11 +236,6 @@ def bouclePrincipale(boolp1, boolp2, boolp3, boolp4, boold1, boold2, boold3, boo
                 bouton_aide.select()
                 aideP1 = True
 
-            ########  TOUCHE DU CLAVIER POUR LES TEST ############
-            if event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_p:    #ancien code qui ouvrait la porte avec p
-                    porteN1.verouille = 0
-
 ##################################################################################################
 #                                                                                                #
 #                                       Niveau 2 Porte                                           #
@@ -324,10 +323,6 @@ def bouclePrincipale(boolp1, boolp2, boolp3, boolp4, boold1, boold2, boold3, boo
             if event.type == MOUSEBUTTONDOWN and event.button == 1 and event.pos[0] <= 970 and event.pos[0] >= 900 and event.pos[1] <= 80 and event.pos[1] >= 10:
                 bouton_aide.select()
                 aideP2 = True
-
-            if event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_p:    #ancien code qui ouvrait la porte avec p
-                    porteN2.verouille = 0
 
 
 ##################################################################################################
@@ -424,11 +419,6 @@ def bouclePrincipale(boolp1, boolp2, boolp3, boolp4, boold1, boold2, boold3, boo
                 bouton_aide.select()
                 aideP1 = True
 
-            ########  TOUCHE DU CLAVIER POUR LES TEST ############
-            if event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_p:    #ancien code qui ouvrait la porte avec p
-                    porteN1.verouille = 0
-
 ##################################################################################################
 #                                                                                                #
 #                                       Niveau 3_2 Porte                                         #
@@ -517,9 +507,6 @@ def bouclePrincipale(boolp1, boolp2, boolp3, boolp4, boold1, boold2, boold3, boo
                 bouton_aide.select()
                 aideP3 = True
 
-            if event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_p:    #ancien code qui ouvrait la porte avec p
-                    porteN3.verouille = 0
 
 ##################################################################################################
 #                                                                                                #
@@ -610,9 +597,6 @@ def bouclePrincipale(boolp1, boolp2, boolp3, boolp4, boold1, boold2, boold3, boo
                 bouton_aide.select()
                 aideP4 = True
 
-            if event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_p:    #ancien code qui ouvrait la porte avec p
-                    porteN4.verouille = 0
 
 
 ##################################################################################################
@@ -669,13 +653,11 @@ def bouclePrincipale(boolp1, boolp2, boolp3, boolp4, boold1, boold2, boold3, boo
                 item = distributeur1.getItem("Coca")
                             
                 ########## BUY ITEM ############                  
-                if thread_1.insuffisant >= 0:
+                if thread_1.insuffisant >= 0 and thread_1.soldeInsuffisant == -1:
                     fenetre.blit(screen, (355,85))
                     fenetre.blit(texte_Pas_Bras_Pas_De_Chocolat, (355,85))
                     fenetre.blit(texte_etoiles, (355, 95))
                     pygame.display.flip()
-                    pygame.time.wait(2000)
-                    bouton_coca.etat = False
 
                 else:
                     item.buyFromStock()
@@ -690,8 +672,6 @@ def bouclePrincipale(boolp1, boolp2, boolp3, boolp4, boold1, boold2, boold3, boo
                     fenetre.blit(texte("Bonne Journée !", None, 20, "#000000"), (355,145))
                     fenetre.blit(texte_etoiles, (355, 155))
                     pygame.display.flip()
-                    pygame.time.wait(2000)
-                    bouton_coca.etat = False
 
 
             if bouton_evian.etat == True:
@@ -700,13 +680,11 @@ def bouclePrincipale(boolp1, boolp2, boolp3, boolp4, boold1, boold2, boold3, boo
                             
                 ########## BUY ITEM ############
 
-                if thread_1.insuffisant >= 0:
+                if thread_1.insuffisant >= 0 and thread_1.soldeInsuffisant == -1:
                     fenetre.blit(screen, (355,85))
                     fenetre.blit(texte_Pas_Bras_Pas_De_Chocolat, (355,85))
                     fenetre.blit(texte_etoiles, (355, 95))
                     pygame.display.flip()
-                    pygame.time.wait(2000)
-                    bouton_evian.etat = False
 
                 else:
                     item.buyFromStock()
@@ -723,8 +701,6 @@ def bouclePrincipale(boolp1, boolp2, boolp3, boolp4, boold1, boold2, boold3, boo
                     fenetre.blit(texte("Bonne Journée !", None, 20, "#000000"), (355,145))
                     fenetre.blit(texte_etoiles, (355, 155))
                     pygame.display.flip()
-                    pygame.time.wait(2000)
-                    bouton_evian.etat = False
 
 
             if bouton_sprite.etat == True:
@@ -733,13 +709,11 @@ def bouclePrincipale(boolp1, boolp2, boolp3, boolp4, boold1, boold2, boold3, boo
                             
                 ########## BUY ITEM ############
 
-                if thread_1.insuffisant >= 0:
+                if thread_1.insuffisant >= 0 and thread_1.soldeInsuffisant == -1:
                     fenetre.blit(screen, (355,85))
                     fenetre.blit(texte_Pas_Bras_Pas_De_Chocolat, (355,85))
                     fenetre.blit(texte_etoiles, (355, 95))
                     pygame.display.flip()
-                    pygame.time.wait(2000)
-                    bouton_sprite.etat = False
 
                 else:
                     item.buyFromStock()
@@ -756,8 +730,6 @@ def bouclePrincipale(boolp1, boolp2, boolp3, boolp4, boold1, boold2, boold3, boo
                     fenetre.blit(texte("Bonne Journée !", None, 20, "#000000"), (355,145))
                     fenetre.blit(texte_etoiles, (355, 155))
                     pygame.display.flip()
-                    pygame.time.wait(2000)
-                    bouton_sprite.etat = False
 
 
             if bouton_iceTea.etat == True:
@@ -766,13 +738,11 @@ def bouclePrincipale(boolp1, boolp2, boolp3, boolp4, boold1, boold2, boold3, boo
                             
                 ########## BUY ITEM ############
 
-                if thread_1.insuffisant >= 0:
+                if thread_1.insuffisant >= 0 and thread_1.soldeInsuffisant == -1:
                     fenetre.blit(screen, (355,85))
                     fenetre.blit(texte_Pas_Bras_Pas_De_Chocolat, (355,85))
                     fenetre.blit(texte_etoiles, (355, 95))
                     pygame.display.flip()
-                    pygame.time.wait(2000)
-                    bouton_iceTea.etat = False
 
                 else:
                     item.buyFromStock()
@@ -789,8 +759,6 @@ def bouclePrincipale(boolp1, boolp2, boolp3, boolp4, boold1, boold2, boold3, boo
                     fenetre.blit(texte("Bonne Journée !", None, 20, "#000000"), (355,145))
                     fenetre.blit(texte_etoiles, (355, 155))
                     pygame.display.flip()
-                    pygame.time.wait(2000)
-                    bouton_iceTea.etat = False
 
         if thread_1.soldeInsuffisant >= 0:
             fenetre.blit(screen, (355,85))
@@ -827,9 +795,9 @@ def bouclePrincipale(boolp1, boolp2, boolp3, boolp4, boold1, boold2, boold3, boo
                 bouton_sprite.etat = False
                 bouton_iceTea.etat = False
                 bouton_coca.select()
-                thread_1.envoieSerialDistributeurCoca()
+                thread_1.envoieSerialDistributeur1Coca()
                 bouton_coca.etat = True
-                pygame.time.wait(150)
+                pygame.time.wait(250)
             
             
             ###### BOUTON EVIAN ######
@@ -840,9 +808,9 @@ def bouclePrincipale(boolp1, boolp2, boolp3, boolp4, boold1, boold2, boold3, boo
                 bouton_iceTea.etat = False
                 bouton_coca.etat = False
                 bouton_evian.select()
-                thread_1.envoieSerialDistributeurEvian()
+                thread_1.envoieSerialDistributeur1Evian()
                 bouton_evian.etat = True
-                pygame.time.wait(150)
+                pygame.time.wait(250)
 
             ###### BOUTON SPRITE ######
             if event.type == MOUSEBUTTONUP and event.button == 1:
@@ -852,9 +820,9 @@ def bouclePrincipale(boolp1, boolp2, boolp3, boolp4, boold1, boold2, boold3, boo
                 bouton_coca.etat = False
                 bouton_evian.etat = False
                 bouton_sprite.select()
-                thread_1.envoieSerialDistributeurSprite()
+                thread_1.envoieSerialDistributeur1Sprite()
                 bouton_sprite.etat = True
-                pygame.time.wait(150)
+                pygame.time.wait(250)
 
             ####### BOUTON ICE TEA ######
             if event.type == MOUSEBUTTONUP and event.button == 1:
@@ -864,9 +832,9 @@ def bouclePrincipale(boolp1, boolp2, boolp3, boolp4, boold1, boold2, boold3, boo
                 bouton_evian.etat = False
                 bouton_sprite.etat = False
                 bouton_iceTea.select()
-                thread_1.envoieSerialDistributeurIceTea()
+                thread_1.envoieSerialDistributeur1IceTea()
                 bouton_iceTea.etat = True
-                pygame.time.wait(150)
+                pygame.time.wait(250)
             
             ####### BOUTON CONTINUER ######
             if distributeur1.compteur >= 3:
@@ -956,13 +924,11 @@ def bouclePrincipale(boolp1, boolp2, boolp3, boolp4, boold1, boold2, boold3, boo
                 item = distributeur2.getItem("Coca")
                             
                 ########## BUY ITEM ############                  
-                if thread_1.insuffisant >= 0:
+                if thread_1.insuffisant >= 0 and thread_1.soldeInsuffisant == -1:
                     fenetre.blit(screen, (355,85))
                     fenetre.blit(texte_Pas_Bras_Pas_De_Chocolat, (355,85))
                     fenetre.blit(texte_etoiles, (355, 95))
                     pygame.display.flip()
-                    pygame.time.wait(2000)
-                    bouton_coca.etat = False
 
                 else:
                     item.buyFromStock()
@@ -977,8 +943,6 @@ def bouclePrincipale(boolp1, boolp2, boolp3, boolp4, boold1, boold2, boold3, boo
                     fenetre.blit(texte("Bonne Journée !", None, 20, "#000000"), (355,145))
                     fenetre.blit(texte_etoiles, (355, 155))
                     pygame.display.flip()
-                    pygame.time.wait(2000)
-                    bouton_coca.etat = False
 
 
             if bouton_evian.etat == True:
@@ -987,13 +951,11 @@ def bouclePrincipale(boolp1, boolp2, boolp3, boolp4, boold1, boold2, boold3, boo
                             
                 ########## BUY ITEM ############
 
-                if thread_1.insuffisant >= 0:
+                if thread_1.insuffisant >= 0 and thread_1.soldeInsuffisant == -1:
                     fenetre.blit(screen, (355,85))
                     fenetre.blit(texte_Pas_Bras_Pas_De_Chocolat, (355,85))
                     fenetre.blit(texte_etoiles, (355, 95))
                     pygame.display.flip()
-                    pygame.time.wait(2000)
-                    bouton_evian.etat = False
 
                 else:
                     item.buyFromStock()
@@ -1010,8 +972,6 @@ def bouclePrincipale(boolp1, boolp2, boolp3, boolp4, boold1, boold2, boold3, boo
                     fenetre.blit(texte("Bonne Journée !", None, 20, "#000000"), (355,145))
                     fenetre.blit(texte_etoiles, (355, 155))
                     pygame.display.flip()
-                    pygame.time.wait(2000)
-                    bouton_evian.etat = False
 
 
             if bouton_sprite.etat == True:
@@ -1020,13 +980,11 @@ def bouclePrincipale(boolp1, boolp2, boolp3, boolp4, boold1, boold2, boold3, boo
                             
                 ########## BUY ITEM ############
 
-                if thread_1.insuffisant >= 0:
+                if thread_1.insuffisant >= 0 and thread_1.soldeInsuffisant == -1:
                     fenetre.blit(screen, (355,85))
                     fenetre.blit(texte_Pas_Bras_Pas_De_Chocolat, (355,85))
                     fenetre.blit(texte_etoiles, (355, 95))
                     pygame.display.flip()
-                    pygame.time.wait(2000)
-                    bouton_sprite.etat = False
 
                 else:
                     item.buyFromStock()
@@ -1043,8 +1001,6 @@ def bouclePrincipale(boolp1, boolp2, boolp3, boolp4, boold1, boold2, boold3, boo
                     fenetre.blit(texte("Bonne Journée !", None, 20, "#000000"), (355,145))
                     fenetre.blit(texte_etoiles, (355, 155))
                     pygame.display.flip()
-                    pygame.time.wait(2000)
-                    bouton_sprite.etat = False
 
 
             if bouton_iceTea.etat == True:
@@ -1053,13 +1009,11 @@ def bouclePrincipale(boolp1, boolp2, boolp3, boolp4, boold1, boold2, boold3, boo
                             
                 ########## BUY ITEM ############
 
-                if thread_1.insuffisant >= 0:
+                if thread_1.insuffisant >= 0 and thread_1.soldeInsuffisant == -1:
                     fenetre.blit(screen, (355,85))
                     fenetre.blit(texte_Pas_Bras_Pas_De_Chocolat, (355,85))
                     fenetre.blit(texte_etoiles, (355, 95))
                     pygame.display.flip()
-                    pygame.time.wait(2000)
-                    bouton_iceTea.etat = False
 
                 else:
                     item.buyFromStock()
@@ -1076,8 +1030,6 @@ def bouclePrincipale(boolp1, boolp2, boolp3, boolp4, boold1, boold2, boold3, boo
                     fenetre.blit(texte("Bonne Journée !", None, 20, "#000000"), (355,145))
                     fenetre.blit(texte_etoiles, (355, 155))
                     pygame.display.flip()
-                    pygame.time.wait(2000)
-                    bouton_iceTea.etat = False
 
         if thread_1.soldeInsuffisant >= 0:
             fenetre.blit(screen, (355,85))
@@ -1114,7 +1066,7 @@ def bouclePrincipale(boolp1, boolp2, boolp3, boolp4, boold1, boold2, boold3, boo
                 bouton_sprite.etat = False
                 bouton_iceTea.etat = False
                 bouton_coca.select()
-                thread_1.envoieSerialDistributeurCoca()
+                thread_1.envoieSerialDistributeur1Coca()
                 bouton_coca.etat = True
                 pygame.time.wait(150)
             
@@ -1127,7 +1079,7 @@ def bouclePrincipale(boolp1, boolp2, boolp3, boolp4, boold1, boold2, boold3, boo
                 bouton_iceTea.etat = False
                 bouton_coca.etat = False
                 bouton_evian.select()
-                thread_1.envoieSerialDistributeurEvian()
+                thread_1.envoieSerialDistributeur1Evian()
                 bouton_evian.etat = True
                 pygame.time.wait(150)
 
@@ -1139,7 +1091,7 @@ def bouclePrincipale(boolp1, boolp2, boolp3, boolp4, boold1, boold2, boold3, boo
                 bouton_coca.etat = False
                 bouton_evian.etat = False
                 bouton_sprite.select()
-                thread_1.envoieSerialDistributeurSprite()
+                thread_1.envoieSerialDistributeur1Sprite()
                 bouton_sprite.etat = True
                 pygame.time.wait(150)
 
@@ -1151,7 +1103,7 @@ def bouclePrincipale(boolp1, boolp2, boolp3, boolp4, boold1, boold2, boold3, boo
                 bouton_evian.etat = False
                 bouton_sprite.etat = False
                 bouton_iceTea.select()
-                thread_1.envoieSerialDistributeurIceTea()
+                thread_1.envoieSerialDistributeur1IceTea()
                 bouton_iceTea.etat = True
                 pygame.time.wait(150)
             
@@ -1221,8 +1173,8 @@ def bouclePrincipale(boolp1, boolp2, boolp3, boolp4, boold1, boold2, boold3, boo
             fenetre.blit(bouton_suivant.imageLoad, (3000,5000))
             fenetre.blit(bouton_aide.imageLoad, (900, 10))
 
-        if thread_1.soldeAvant < thread_1.soldeApres and distributeur3.compteur >= 1:
-            fenetre.blit(bouton_continuer.imageLoad, (50, 560))
+        """if int(thread_1.soldeAvant) < int(thread_1.soldeApres) and distributeur3.compteur >= 1:
+            fenetre.blit(bouton_continuer.imageLoad, (50, 560))"""
 
         if thread_1.obtenuBoisson == 1:
             distributeur3.addcompteur()
@@ -1256,7 +1208,7 @@ def bouclePrincipale(boolp1, boolp2, boolp3, boolp4, boold1, boold2, boold3, boo
                     fenetre.blit(texte_etoiles, (355, 95))
                     fenetre.blit(texte("Vous avez acheté : " + str(item.name) + " à 3€", None, 20, "#000000"), (355,105))
                     fenetre.blit(texte_etoiles, (355, 115))
-
+                    pygame.time.wait(100)
                     fenetre.blit(texte("Nouveau Solde : " + str(thread_1.soldeApres) + "€", None, 20, "#000000"), (355,125))
                     fenetre.blit(texte_etoiles, (355, 135))
                     fenetre.blit(texte("Bonne Journée !", None, 20, "#000000"), (355,145))
@@ -1275,8 +1227,7 @@ def bouclePrincipale(boolp1, boolp2, boolp3, boolp4, boold1, boold2, boold3, boo
                     fenetre.blit(texte_Pas_Bras_Pas_De_Chocolat, (355,85))
                     fenetre.blit(texte_etoiles, (355, 95))
                     pygame.display.flip()
-                    pygame.time.wait(2000)
-                    bouton_evian.etat = False
+                    
 
                 else:
                     item.buyFromStock()
@@ -1293,8 +1244,6 @@ def bouclePrincipale(boolp1, boolp2, boolp3, boolp4, boold1, boold2, boold3, boo
                     fenetre.blit(texte("Bonne Journée !", None, 20, "#000000"), (355,145))
                     fenetre.blit(texte_etoiles, (355, 155))
                     pygame.display.flip()
-                    pygame.time.wait(2000)
-                    bouton_evian.etat = False
 
 
             if bouton_sprite.etat == True:
@@ -1308,8 +1257,6 @@ def bouclePrincipale(boolp1, boolp2, boolp3, boolp4, boold1, boold2, boold3, boo
                     fenetre.blit(texte_Pas_Bras_Pas_De_Chocolat, (355,85))
                     fenetre.blit(texte_etoiles, (355, 95))
                     pygame.display.flip()
-                    pygame.time.wait(2000)
-                    bouton_sprite.etat = False
 
                 else:
                     item.buyFromStock()
@@ -1326,8 +1273,6 @@ def bouclePrincipale(boolp1, boolp2, boolp3, boolp4, boold1, boold2, boold3, boo
                     fenetre.blit(texte("Bonne Journée !", None, 20, "#000000"), (355,145))
                     fenetre.blit(texte_etoiles, (355, 155))
                     pygame.display.flip()
-                    pygame.time.wait(2000)
-                    bouton_sprite.etat = False
 
 
             if bouton_iceTea.etat == True:
@@ -1341,8 +1286,6 @@ def bouclePrincipale(boolp1, boolp2, boolp3, boolp4, boold1, boold2, boold3, boo
                     fenetre.blit(texte_Pas_Bras_Pas_De_Chocolat, (355,85))
                     fenetre.blit(texte_etoiles, (355, 95))
                     pygame.display.flip()
-                    pygame.time.wait(2000)
-                    bouton_iceTea.etat = False
 
                 else:
                     item.buyFromStock()
@@ -1359,8 +1302,6 @@ def bouclePrincipale(boolp1, boolp2, boolp3, boolp4, boold1, boold2, boold3, boo
                     fenetre.blit(texte("Bonne Journée !", None, 20, "#000000"), (355,145))
                     fenetre.blit(texte_etoiles, (355, 155))
                     pygame.display.flip()
-                    pygame.time.wait(2000)
-                    bouton_iceTea.etat = False
 
         if thread_1.soldeInsuffisant >= 0:
             fenetre.blit(screen, (355,85))
@@ -1397,9 +1338,9 @@ def bouclePrincipale(boolp1, boolp2, boolp3, boolp4, boold1, boold2, boold3, boo
                 bouton_sprite.etat = False
                 bouton_iceTea.etat = False
                 bouton_coca.select()
-                thread_1.envoieSerialDistributeurCoca()
+                thread_1.envoieSerialDistributeur3Coca()
                 bouton_coca.etat = True
-                pygame.time.wait(150)
+                pygame.time.wait(50)
             
             
             ###### BOUTON EVIAN ######
@@ -1410,9 +1351,9 @@ def bouclePrincipale(boolp1, boolp2, boolp3, boolp4, boold1, boold2, boold3, boo
                 bouton_iceTea.etat = False
                 bouton_coca.etat = False
                 bouton_evian.select()
-                thread_1.envoieSerialDistributeurEvian()
+                thread_1.envoieSerialDistributeur3Evian()
                 bouton_evian.etat = True
-                pygame.time.wait(150)
+                pygame.time.wait(300)
 
             ###### BOUTON SPRITE ######
             if event.type == MOUSEBUTTONUP and event.button == 1:
@@ -1422,9 +1363,9 @@ def bouclePrincipale(boolp1, boolp2, boolp3, boolp4, boold1, boold2, boold3, boo
                 bouton_coca.etat = False
                 bouton_evian.etat = False
                 bouton_sprite.select()
-                thread_1.envoieSerialDistributeurSprite()
+                thread_1.envoieSerialDistributeur3Sprite()
                 bouton_sprite.etat = True
-                pygame.time.wait(150)
+                pygame.time.wait(300)
 
             ####### BOUTON ICE TEA ######
             if event.type == MOUSEBUTTONUP and event.button == 1:
@@ -1434,12 +1375,12 @@ def bouclePrincipale(boolp1, boolp2, boolp3, boolp4, boold1, boold2, boold3, boo
                 bouton_evian.etat = False
                 bouton_sprite.etat = False
                 bouton_iceTea.select()
-                thread_1.envoieSerialDistributeurIceTea()
+                thread_1.envoieSerialDistributeur3IceTea()
                 bouton_iceTea.etat = True
-                pygame.time.wait(150)
+                pygame.time.wait(300)
             
             ####### BOUTON CONTINUER ######
-            if thread_1.soldeAvant < thread_1.soldeApres and distributeur3.compteur >= 1:
+            """if int(thread_1.soldeAvant) < int(thread_1.soldeApres) and distributeur3.compteur >= 1:
                 if event.type == MOUSEMOTION and event.pos[0] <= 211 and event.pos[0] >= 50 and event.pos[1] <= 630 and event.pos[1] >= 560 and bouton_continuer.etat == False:
                     bouton_continuer.hoover()
                 if event.type == MOUSEMOTION and (event.pos[0] >= 211 or event.pos[0] <= 50 or event.pos[1] >= 630 or event.pos[1] <= 560) and bouton_continuer.etat == False:
@@ -1450,7 +1391,7 @@ def bouclePrincipale(boolp1, boolp2, boolp3, boolp4, boold1, boold2, boold3, boo
                     bouton_retour.etat = False
                     bouton_continuer.etat = False
                     distributeurNiveau3 = False
-                    selecteurNiveau()
+                    selecteurNiveau()"""
                     
 
 
@@ -1482,19 +1423,22 @@ def bouclePrincipale(boolp1, boolp2, boolp3, boolp4, boold1, boold2, boold3, boo
   
     while hotelNiveau1_1 == True:
         thread_1.data = ""
-        thread_1.choixNiveauSerial = "e"
         fenetre.blit(fenetre_hotelNiveau1_1.fond,(0,0))
         fenetre.blit(bouton_retour.imageLoad, (30, -10))
         
-        
+
         if thread_1.indexNiveauHotel1_1 >= 0: #permet d'ouvrir la porte quand on recoit le code ouvrir par le port série
             porteNH1_1.verouille = 0
+            thread_1.choixNiveauSerial = ""
+            
 
         if porteNH1_1.verouille == 1:
             fenetre.blit(porteNH1_1.imageFerme, (0,0))
+            thread_1.choixNiveauSerial = "e"
         if porteNH1_1.verouille == 0:
             fenetre.blit(porteNH1_1.imageOuverte, (0,0))
             fenetre.blit(bouton_continuer.imageLoad, (50, 560))
+            thread_1.choixNiveauSerial = ""
         
 
         fenetre.blit(testAide.imageLoad, (450,200))
@@ -1537,6 +1481,7 @@ def bouclePrincipale(boolp1, boolp2, boolp3, boolp4, boold1, boold2, boold3, boo
                     bouton_continuer.select()
                     bouton_quitter.etat = False
                     bouton_retour.etat = False
+                    bouton_continuer = False
                     hotelNiveau1_1 = False
                     hotelNiveau1_2 = True
 
@@ -1575,19 +1520,18 @@ def bouclePrincipale(boolp1, boolp2, boolp3, boolp4, boold1, boold2, boold3, boo
         fenetre.blit(bouton_retour.imageLoad, (30, -10))
         fenetre.blit(testAide.imageLoad, (450,200))
 
-        try:
-            porteNH1_2.passage = int(thread_1.data)
-        except ValueError:
-            pass
         
-        if porteNH1_2.passage >= 1: #permet d'ouvrir la porte quand on recoit le code ouvrir par le port série
+        if thread_1.indexNiveauHotel1_2 >= 0: #permet d'ouvrir la porte quand on recoit le code ouvrir par le port série
             porteNH1_2.verouille = 0
+            thread_1.choixNiveauSerial = ""
 
         if porteNH1_2.verouille == 1:
             fenetre.blit(porteNH1_2.imageFerme, (0,0))
+            thread_1.choixNiveauSerial = "e"
         if porteNH1_2.verouille == 0:
             fenetre.blit(porteNH1_2.imageOuverte, (0,0))
             fenetre.blit(bouton_continuer.imageLoad, (50, 560))
+            thread_1.choixNiveauSerial = ""
         
 
         if aideH1 == True:
@@ -1614,12 +1558,11 @@ def bouclePrincipale(boolp1, boolp2, boolp3, boolp4, boold1, boold2, boold3, boo
                 bouton_retour.select()
                 bouton_quitter.etat = False
                 bouton_retour.etat = True
-                bouton_continuer.etat = False
                 selecteurNiveau()
                 hotelNiveau1_2 = False
         
             ###### BOUTON POUR CONTINUER QUE SI LA PORTE EST OUVERTE #####
-            if porteNH1_2.verouille == 0:
+            if thread_1.indexNiveauHotel1_2 >= 0:
                 if event.type == MOUSEMOTION and event.pos[0] <= 211 and event.pos[0] >= 50 and event.pos[1] <= 630 and event.pos[1] >= 560 and bouton_continuer.etat == False:
                     bouton_continuer.hoover()
                 if event.type == MOUSEMOTION and (event.pos[0] >= 211 or event.pos[0] <= 50 or event.pos[1] >= 630 or event.pos[1] <= 560) and bouton_continuer.etat == False:
@@ -1641,7 +1584,6 @@ def bouclePrincipale(boolp1, boolp2, boolp3, boolp4, boold1, boold2, boold3, boo
                 aideH1 = False
 
             ###### BOUTON AIDE ######
-
             if event.type == MOUSEMOTION and event.pos[0] <= 970 and event.pos[0] >= 900 and event.pos[1] <= 80 and event.pos[1] >= 10 and bouton_aide.etat == False:
                 bouton_aide.hoover()
             if event.type == MOUSEMOTION and (event.pos[0] >= 970 or event.pos[0] <= 900 or event.pos[1] >= 80 or event.pos[1] <= 10) and bouton_aide.etat == False:
@@ -1650,9 +1592,6 @@ def bouclePrincipale(boolp1, boolp2, boolp3, boolp4, boold1, boold2, boold3, boo
                 bouton_aide.select()
                 aideH1 = True
 
-            if event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_p:    #ancien code qui ouvrait la porte avec p
-                    porteNH1_2.verouille = 0
 
 ##################################################################################################
 #                                                                                                #
@@ -1665,12 +1604,8 @@ def bouclePrincipale(boolp1, boolp2, boolp3, boolp4, boold1, boold2, boold3, boo
         fenetre.blit(fenetre_hotelNiveau1_3.fond,(0,0))
         fenetre.blit(bouton_retour.imageLoad, (30, -10))
         
-        try:
-            porteNH1_3.passage = int(thread_1.data)
-        except ValueError:
-            pass
 
-        if porteNH1_3.passage >= 1: #permet d'ouvrir la porte quand on recoit le code ouvrir par le port série
+        if thread_1.indexNiveauHotel1_3 >= 0: #permet d'ouvrir la porte quand on recoit le code ouvrir par le port série
             porteNH1_3.verouille = 0
 
         if porteNH1_3.verouille == 1:
@@ -1711,7 +1646,7 @@ def bouclePrincipale(boolp1, boolp2, boolp3, boolp4, boold1, boold2, boold3, boo
                 hotelNiveau1 = False
         
             ###### BOUTON POUR CONTINUER QUE SI LA PORTE EST OUVERTE #####
-            if porteNH1_3.verouille == 0:
+            if thread_1.indexNiveauHotel1_3 >= 0:
                 if event.type == MOUSEMOTION and event.pos[0] <= 211 and event.pos[0] >= 50 and event.pos[1] <= 630 and event.pos[1] >= 560 and bouton_continuer.etat == False:
                     bouton_continuer.hoover()
                 if event.type == MOUSEMOTION and (event.pos[0] >= 211 or event.pos[0] <= 50 or event.pos[1] >= 630 or event.pos[1] <= 560) and bouton_continuer.etat == False:
