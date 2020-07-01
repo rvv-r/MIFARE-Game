@@ -61,8 +61,11 @@ def bouclePrincipale(boolp1, boolp2, boolp3, boolp4, boold1, boold2, boold3, boo
     bouton_sprite = Bouton("image/boutons/boutonSprite.png", "image/boutons/boutonSprite.png", "image/boutons/boutonSpriteSelect.png")
     bouton_iceTea = Bouton("image/boutons/boutonIceTea.png", "image/boutons/boutonIceTea.png", "image/boutons/boutonIceTeaSelect.png")
 
+######## CREATION DE LA POLICE D'ÉCRITURE #############
 
-######## CREATION DU TEXTE #############
+    police_aide = pygame.font.SysFont("arial", 20)
+
+######## CREATION DU TEXTE DISTRIBUTEUR #############
 
     texte_bienvenue = texte("Bienvenue sur le distributeur !", None, 20, "#000000")
     texte_Cartes = texte("Veuillez poser votre carte", None, 20, "#000000")
@@ -156,6 +159,14 @@ def bouclePrincipale(boolp1, boolp2, boolp3, boolp4, boold1, boold2, boold3, boo
 
         if aideP1 == True:
             testAide.affichePanneau()
+            fenetre.blit(police_aide.render("PORTE NIVEAU 1", True, (242, 200, 105)),(200, 230))
+            fenetre.blit(police_aide.render("Apparemment, quelque chose se trame dans ", True, (242, 200, 105)),(100, 290))
+            fenetre.blit(police_aide.render("cette ruelle. Vous vous trouvez devant une  ", True, (242, 200, 105)),(100, 320))
+            fenetre.blit(police_aide.render("porte à laquelle vous n’avez pas accès.  ", True, (242, 200, 105)),(100, 350))
+            fenetre.blit(police_aide.render("Un badge est encastré dans le mur et  ", True, (242, 200, 105)),(100, 410))
+            fenetre.blit(police_aide.render("vous ne pouvez pas l’utiliser directement   ", True, (242, 200, 105)),(100, 440))
+            fenetre.blit(police_aide.render("pour ouvrir la porte, vous pouvez seulement  ", True, (242, 200, 105)),(100, 470))
+            fenetre.blit(police_aide.render("le consulter en lecture.", True, (242, 200, 105)),(100, 500))
             fenetre.blit(bouton_suivant.imageLoad, (350,500))
             fenetre.blit(bouton_aide.imageLoad, (3000,5000))
         if aideP1 == False:
@@ -241,6 +252,12 @@ def bouclePrincipale(boolp1, boolp2, boolp3, boolp4, boold1, boold2, boold3, boo
 
         if aideP2 == True:
             testAide.affichePanneau()
+            fenetre.blit(police_aide.render("PORTE NIVEAU 2", True, (242, 200, 105)),(580, 230))
+            fenetre.blit(police_aide.render("Une fois entré, vous avez accès à l’accueil", True, (242, 200, 105)),(480, 290))
+            fenetre.blit(police_aide.render("du bâtiment, mais êtes bloqué par une porte.", True, (242, 200, 105)),(480, 320))
+            fenetre.blit(police_aide.render("Vous apercevez sur le comptoir du bureau de ", True, (242, 200, 105)),(480, 380))
+            fenetre.blit(police_aide.render("l’accueil le badge d’accès d’une personne. ", True, (242, 200, 105)),(480, 410))
+            fenetre.blit(police_aide.render("Copiez le avant que cette personne ne revienne.   ", True, (242, 200, 105)),(480, 440))
             fenetre.blit(bouton_suivant.imageLoad, (740,500))
             fenetre.blit(bouton_aide.imageLoad, (3000,5000))
         if aideP2 == False:
@@ -333,6 +350,10 @@ def bouclePrincipale(boolp1, boolp2, boolp3, boolp4, boold1, boold2, boold3, boo
         fenetre.blit(testAide.imageLoad, (60,200))
         if aideP1 == True:
             testAide.affichePanneau()
+            fenetre.blit(police_aide.render("PORTE NIVEAU 3.1", True, (242, 200, 105)),(200, 230))
+            fenetre.blit(police_aide.render("Vous ne passez pas inaperçue avec votre  ", True, (242, 200, 105)),(100, 290))
+            fenetre.blit(police_aide.render("jogging il faudrait trouver quelque chose   ", True, (242, 200, 105)),(100, 320))
+            fenetre.blit(police_aide.render("pour se fondre dans la masse.  ", True, (242, 200, 105)),(100, 350))
             fenetre.blit(bouton_suivant.imageLoad, (350,500))
             fenetre.blit(bouton_aide.imageLoad, (3000,5000))
         if aideP1 == False:
@@ -358,7 +379,7 @@ def bouclePrincipale(boolp1, boolp2, boolp3, boolp4, boold1, boold2, boold3, boo
                 bouton_retour.etat = True
                 bouton_continuer.etat = False
                 selecteurNiveau()
-                porteNiveau1 = False
+                porteNiveau3_1 = False
             
             ###### BOUTON POUR SELECTIONNER BLOUSE #####
             if event.type == MOUSEMOTION and event.pos[0] <= 280 and event.pos[0] >= 150 and event.pos[1] <= 530 and event.pos[1] >= 220 and bouton_quitter.etat == False:
@@ -423,6 +444,12 @@ def bouclePrincipale(boolp1, boolp2, boolp3, boolp4, boold1, boold2, boold3, boo
 
         if aideP3 == True:
             testAide.affichePanneau()
+            fenetre.blit(police_aide.render("PORTE NIVEAU 3", True, (242, 200, 105)),(580, 230))
+            fenetre.blit(police_aide.render("Après avoir enfilé votre blouse, vous vous ", True, (242, 200, 105)),(480, 290))
+            fenetre.blit(police_aide.render("retrouvez dans une salle blanche devant ", True, (242, 200, 105)),(480, 320))
+            fenetre.blit(police_aide.render("une nouvelle porte, cependant impossible  ", True, (242, 200, 105)),(480, 350))
+            fenetre.blit(police_aide.render("d’y entrer. Essayer de copier le badge  ", True, (242, 200, 105)),(480, 380))
+            fenetre.blit(police_aide.render("sans que l’employé ne vous voie.   ", True, (242, 200, 105)),(480, 410))
             fenetre.blit(bouton_suivant.imageLoad, (740,500))
             fenetre.blit(bouton_aide.imageLoad, (3000,5000))
         if aideP3 == False:
@@ -455,7 +482,7 @@ def bouclePrincipale(boolp1, boolp2, boolp3, boolp4, boold1, boold2, boold3, boo
                 bouton_retour.etat = True
                 bouton_continuer.etat = False
                 selecteurNiveau()
-                porteNiveau3 = False
+                porteNiveau3_2 = False
            
             ###### BOUTON POUR CONTINUER QUE SI LA PORTE EST OUVERTE #####
             if porteN3.verouille == 0:
@@ -514,6 +541,13 @@ def bouclePrincipale(boolp1, boolp2, boolp3, boolp4, boold1, boold2, boold3, boo
         fenetre.blit(testAide.imageLoad, (450,200))
         if aideP4 == True:
             testAide.affichePanneau()
+            fenetre.blit(police_aide.render("PORTE NIVEAU 4", True, (242, 200, 105)),(580, 230))
+            fenetre.blit(police_aide.render("Vous faites face à la porte du coffre-fort,", True, (242, 200, 105)),(480, 290))
+            fenetre.blit(police_aide.render("l’équipe de sécurité a mis le paquet pour ", True, (242, 200, 105)),(480, 320))
+            fenetre.blit(police_aide.render(" sécuriser les badges.", True, (242, 200, 105)),(480, 350))
+            fenetre.blit(police_aide.render("Il se sera pas de tout repos pour copier ce", True, (242, 200, 105)),(480, 410))
+            fenetre.blit(police_aide.render("dernier badge. Attention copier ce badge vous", True, (242, 200, 105)),(480, 440))
+            fenetre.blit(police_aide.render("prendra beaucoup de temps.", True, (242, 200, 105)),(480, 470))
             fenetre.blit(bouton_suivant.imageLoad, (740,500))
             fenetre.blit(bouton_aide.imageLoad, (3000,5000))
         if aideP4 == False:
