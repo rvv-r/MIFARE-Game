@@ -624,6 +624,12 @@ def bouclePrincipale(boolp1, boolp2, boolp3, boolp4, boold1, boold2, boold3, boo
 
         if aideD1 == True:
             testAide.affichePanneau()
+            fenetre.blit(police_aide.render("DISTRIBUTEUR NIVEAU 1", True, (242, 200, 105)),(180, 230))
+            fenetre.blit(police_aide.render("Vous possédez un badge de paiement,", True, (242, 200, 105)),(100, 290))
+            fenetre.blit(police_aide.render("cependant son solde (1 €) est insuffisant", True, (242, 200, 105)),(100, 320))
+            fenetre.blit(police_aide.render("pour acheter plusieurs boisson.", True, (242, 200, 105)),(100, 350))
+            fenetre.blit(police_aide.render("Achetez en 3 il vaut mieux en avoir trop ", True, (242, 200, 105)),(100, 410))
+            fenetre.blit(police_aide.render("que pas assez.", True, (242, 200, 105)),(100, 440))
             fenetre.blit(bouton_suivant.imageLoad, (350,500))
             fenetre.blit(bouton_aide.imageLoad, (3000,5000))
         if aideD1 == False:
@@ -895,6 +901,12 @@ def bouclePrincipale(boolp1, boolp2, boolp3, boolp4, boold1, boold2, boold3, boo
 
         if aideD2 == True:
             testAide.affichePanneau()
+            fenetre.blit(police_aide.render("DISTRIBUTEUR NIVEAU 2", True, (242, 200, 105)),(180, 230))
+            fenetre.blit(police_aide.render("Vous devez réussir à acheter 2 boissons à 2 €" , True, (242, 200, 105)),(100, 290))
+            fenetre.blit(police_aide.render("alors que votre solde actuel est de 2 €.", True, (242, 200, 105)),(100, 320))
+            fenetre.blit(police_aide.render("Il semble qu’un petit temps d’attente", True, (242, 200, 105)),(100, 380))
+            fenetre.blit(police_aide.render("se passe avant le débit de la carte.", True, (242, 200, 105)),(100, 410))
+            fenetre.blit(police_aide.render("que pas assez.", True, (242, 200, 105)),(100, 440))
             fenetre.blit(bouton_suivant.imageLoad, (350,500))
             fenetre.blit(bouton_aide.imageLoad, (3000,5000))
         if aideD2 == False:
@@ -1166,6 +1178,10 @@ def bouclePrincipale(boolp1, boolp2, boolp3, boolp4, boold1, boold2, boold3, boo
 
         if aideD3 == True:
             testAide.affichePanneau()
+            fenetre.blit(police_aide.render("DISTRIBUTEUR NIVEAU 3", True, (242, 200, 105)),(180, 230))
+            fenetre.blit(police_aide.render("Vous avez 2 badges mais l'un d’eux a un solde", True, (242, 200, 105)),(100, 290))
+            fenetre.blit(police_aide.render("de 0€.", True, (242, 200, 105)),(100, 320))
+            fenetre.blit(police_aide.render("Serait-il possible de le recharger sans payer ?", True, (242, 200, 105)),(100, 380))
             fenetre.blit(bouton_suivant.imageLoad, (350,500))
             fenetre.blit(bouton_aide.imageLoad, (3000,5000))
         if aideD3 == False:
@@ -1445,6 +1461,15 @@ def bouclePrincipale(boolp1, boolp2, boolp3, boolp4, boold1, boold2, boold3, boo
 
         if aideH1 == True:
             testAide.affichePanneau()
+            fenetre.blit(police_aide.render("HÔTEL NIVEAU 1", True, (242, 200, 105)),(580, 230))
+            fenetre.blit(police_aide.render("Vous devez vous rendre à votre hôtel mais", True, (242, 200, 105)),(480, 290))
+            fenetre.blit(police_aide.render("pour cela il va falloir passer par les ", True, (242, 200, 105)),(480, 320))
+            fenetre.blit(police_aide.render("transports en commun.", True, (242, 200, 105)),(480, 350))
+            fenetre.blit(police_aide.render("Il vous faudra utiliser 3 voyages,", True, (242, 200, 105)),(480, 410))
+            fenetre.blit(police_aide.render("mais il ne vous en reste que 2 sur votre carte", True, (242, 200, 105)),(480, 440))
+            fenetre.blit(police_aide.render("de métro et vous n’avez pas d’argent pour la", True, (242, 200, 105)),(480, 470))
+            fenetre.blit(police_aide.render("recharger mais ce n’est pas", True, (242, 200, 105)),(480, 500))
+            fenetre.blit(police_aide.render("ça qui va vous arrêter.", True, (242, 200, 105)),(480, 530))
             fenetre.blit(bouton_suivant.imageLoad, (740,500))
             fenetre.blit(bouton_aide.imageLoad, (3000,5000))
         if aideH1 == False:
@@ -1481,7 +1506,7 @@ def bouclePrincipale(boolp1, boolp2, boolp3, boolp4, boold1, boold2, boold3, boo
                     bouton_continuer.select()
                     bouton_quitter.etat = False
                     bouton_retour.etat = False
-                    bouton_continuer = False
+                    bouton_continuer.etat = True
                     hotelNiveau1_1 = False
                     hotelNiveau1_2 = True
 
@@ -1571,6 +1596,7 @@ def bouclePrincipale(boolp1, boolp2, boolp3, boolp4, boold1, boold2, boold3, boo
                     bouton_continuer.select()
                     bouton_quitter.etat = False
                     bouton_retour.etat = False
+                    bouton_continuer.etat = True
                     hotelNiveau1_2 = False
                     hotelNiveau1_3 = True
 
@@ -1591,6 +1617,10 @@ def bouclePrincipale(boolp1, boolp2, boolp3, boolp4, boold1, boold2, boold3, boo
             if event.type == MOUSEBUTTONDOWN and event.button == 1 and event.pos[0] <= 970 and event.pos[0] >= 900 and event.pos[1] <= 80 and event.pos[1] >= 10:
                 bouton_aide.select()
                 aideH1 = True
+
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_p:    #ancien code qui ouvrait la porte avec p
+                    porteNH1_2.verouille = 0
 
 
 ##################################################################################################
@@ -1697,6 +1727,13 @@ def bouclePrincipale(boolp1, boolp2, boolp3, boolp4, boold1, boold2, boold3, boo
 
         if aideH2 == True:
             testAide.affichePanneau()
+            fenetre.blit(police_aide.render("HÔTEL NIVEAU 2", True, (242, 200, 105)),(200, 230))
+            fenetre.blit(police_aide.render("Vous vous trouvez à l’hôtel. À la réception,", True, (242, 200, 105)),(100, 290))
+            fenetre.blit(police_aide.render("on vous donne un badge pour la porte 237.", True, (242, 200, 105)),(100, 320))
+            fenetre.blit(police_aide.render("Cependant, cette chambre ne vous inspire", True, (242, 200, 105)),(100, 380))
+            fenetre.blit(police_aide.render("pas confiance et la chambre d’en face semble ", True, (242, 200, 105)),(100, 410))
+            fenetre.blit(police_aide.render("inoccupée. Essayez plutôt de dormir dans la ", True, (242, 200, 105)),(100, 440))
+            fenetre.blit(police_aide.render("chambre 243.", True, (242, 200, 105)),(100, 470))
             fenetre.blit(bouton_suivant.imageLoad, (350,500))
             fenetre.blit(bouton_aide.imageLoad, (3000,5000))
         if aideH2 == False:
@@ -1782,6 +1819,12 @@ def bouclePrincipale(boolp1, boolp2, boolp3, boolp4, boold1, boold2, boold3, boo
 
         if aideH3 == True:
             testAide.affichePanneau()
+            fenetre.blit(police_aide.render("HÔTEL NIVEAU 3", True, (242, 200, 105)),(200, 230))
+            fenetre.blit(police_aide.render("Vous avez envie de retourner dormir dans", True, (242, 200, 105)),(100, 290))
+            fenetre.blit(police_aide.render("la chambre 243 une semaine plus tard.", True, (242, 200, 105)),(100, 320))
+            fenetre.blit(police_aide.render("Heureusement vous avez oublié de rendre", True, (242, 200, 105)),(100, 380))
+            fenetre.blit(police_aide.render("votre badge, essayer de trouver un moyen", True, (242, 200, 105)),(100, 410))
+            fenetre.blit(police_aide.render("pour que la carte soit valide.", True, (242, 200, 105)),(100, 440))
             fenetre.blit(bouton_suivant.imageLoad, (350,500))
             fenetre.blit(bouton_aide.imageLoad, (3000,5000))
         if aideH3 == False:
