@@ -137,6 +137,7 @@ def bouclePrincipale(boolp1, boolp2, boolp3, boolp4, boold1, boold2, boold3, boo
     hotelNiveau3 = boolh3
     aideP1 = True
     aideP2 = True
+    aideP3_1 = True
     aideP3 = True
     aideP4 = True
     aideD1 = True
@@ -343,7 +344,7 @@ def bouclePrincipale(boolp1, boolp2, boolp3, boolp4, boold1, boold2, boold3, boo
             fenetre.blit(bouton_continuer.imageLoad, (50, 560))
 
         fenetre.blit(testAide.imageLoad, (60,200))
-        if aideP1 == True:
+        if aideP3_1 == True:
             testAide.affichePanneau()
             fenetre.blit(police_aide.render("PORTE NIVEAU 3.1", True, (242, 200, 105)),(200, 230))
             fenetre.blit(police_aide.render("Vous ne passez pas inaperçue avec votre  ", True, (242, 200, 105)),(100, 290))
@@ -351,7 +352,7 @@ def bouclePrincipale(boolp1, boolp2, boolp3, boolp4, boold1, boold2, boold3, boo
             fenetre.blit(police_aide.render("pour se fondre dans la masse.  ", True, (242, 200, 105)),(100, 350))
             fenetre.blit(bouton_suivant.imageLoad, (350,500))
             fenetre.blit(bouton_aide.imageLoad, (3000,5000))
-        if aideP1 == False:
+        if aideP3_1 == False:
             testAide.reinitPanneau()
             fenetre.blit(bouton_suivant.imageLoad, (3000,5000))
             fenetre.blit(bouton_aide.imageLoad, (900, 10))
@@ -407,7 +408,7 @@ def bouclePrincipale(boolp1, boolp2, boolp3, boolp4, boold1, boold2, boold3, boo
                 bouton_suivant.reinit()
             if event.type == MOUSEBUTTONDOWN and event.button == 1 and event.pos[0] <= 511 and event.pos[0] >= 350 and event.pos[1] <= 570 and event.pos[1] >= 500:
                 bouton_suivant.select()
-                aideP1 = False
+                aideP3_1 = False
 
             ###### BOUTON AIDE ######
 
@@ -417,7 +418,7 @@ def bouclePrincipale(boolp1, boolp2, boolp3, boolp4, boold1, boold2, boold3, boo
                 bouton_aide.reinit()
             if event.type == MOUSEBUTTONDOWN and event.button == 1 and event.pos[0] <= 970 and event.pos[0] >= 900 and event.pos[1] <= 80 and event.pos[1] >= 10:
                 bouton_aide.select()
-                aideP1 = True
+                aideP3_1 = True
 
 ##################################################################################################
 #                                                                                                #
