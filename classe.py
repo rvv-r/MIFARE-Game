@@ -147,6 +147,8 @@ class Recevoir(Thread):
         self.indexNiveauHotel1_3 = -1
         self.indexNiveauHotel2 = -1
         self.indexNiveauHotel3 = -1
+        self.indexMetro = -1
+        self.compteurMetro = 0
 
         #Solde pour le distributeur envoyé sous la forme ASoldeB, ici la balise retourne 0 quand il trouve un A dans une string
         self.baliseSolde = -1 
@@ -203,10 +205,18 @@ class Recevoir(Thread):
             self.indexNiveauHotel1_1 = self.data.find("Suivant")
             self.indexNiveauHotel1_2 = self.data.find("Suivant")
             self.indexNiveauHotel1_3 = self.data.find("Suivant")
+            self.indexMetro = self.data.find("ok")
+            
             
             #Condition pour réunir sous une seule variable si la boisson a été obtenu ou non
             if self.obtenuCoca >= 0 or self.obtenuEvian >= 0 or self.obtenuSprite >= 0 or self.obtenuIceTea >= 0 :
                 self.obtenuBoisson = 1
+
+            if self.indexMetro >= 0 and self.compteurMetro < 1:
+                self.ser.write(str.encode("e"))
+                self.ser.write(str.encode("e"))
+                self.compteurMetro += 1
+                
 
             #Permet d'avoir le solde insuffisant d'être affiché une seule fois
             if self.soldeInsuffisant == 0:
@@ -250,6 +260,8 @@ class Recevoir(Thread):
     def envoieSerialDistributeur3IceTea(self):
         self.ser.write(str.encode("s"))
         self.ser.write(str.encode("s"))
+    
+    
 
 #fonction permettant d'automatiser la création de texte dans pygame
 def texte(Texte, Police, Taille, Couleur):

@@ -1454,7 +1454,7 @@ def bouclePrincipale(boolp1, boolp2, boolp3, boolp4, boold1, boold2, boold3, boo
 
         if porteNH1_1.verouille == 1:
             fenetre.blit(porteNH1_1.imageFerme, (0,0))
-            thread_1.choixNiveauSerial = "e"
+            thread_1.choixNiveauSerial = "v"
         if porteNH1_1.verouille == 0:
             fenetre.blit(porteNH1_1.imageOuverte, (0,0))
             fenetre.blit(bouton_continuer.imageLoad, (50, 560))
@@ -1496,6 +1496,7 @@ def bouclePrincipale(boolp1, boolp2, boolp3, boolp4, boold1, boold2, boold3, boo
                 bouton_retour.select()
                 bouton_quitter.etat = False
                 bouton_retour.etat = True
+                thread_1.compteurMetro = 0
                 bouton_continuer.etat = False
                 selecteurNiveau()
                 hotelNiveau1_1 = False
@@ -1510,6 +1511,7 @@ def bouclePrincipale(boolp1, boolp2, boolp3, boolp4, boold1, boold2, boold3, boo
                     bouton_continuer.select()
                     bouton_quitter.etat = False
                     bouton_retour.etat = False
+                    thread_1.compteurMetro = 0
                     bouton_continuer.etat = False
                     hotelNiveau1_1 = False
                     hotelNiveau1_2 = True
@@ -1556,7 +1558,7 @@ def bouclePrincipale(boolp1, boolp2, boolp3, boolp4, boold1, boold2, boold3, boo
 
         if porteNH1_2.verouille == 1:
             fenetre.blit(porteNH1_2.imageFerme, (0,0))
-            thread_1.choixNiveauSerial = "e"
+            thread_1.choixNiveauSerial = "v"
         if porteNH1_2.verouille == 0:
             fenetre.blit(porteNH1_2.imageOuverte, (0,0))
             fenetre.blit(bouton_continuer.imageLoad, (50, 560))
@@ -1585,6 +1587,7 @@ def bouclePrincipale(boolp1, boolp2, boolp3, boolp4, boold1, boold2, boold3, boo
                 bouton_retour.reinit()
             if event.type == MOUSEBUTTONDOWN and event.button == 1 and event.pos[0] <= 191 and event.pos[0] >= 30 and event.pos[1] <= 82 and event.pos[1] >= 0:
                 bouton_retour.select()
+                thread_1.compteurMetro = 0
                 bouton_quitter.etat = False
                 bouton_retour.etat = True
                 selecteurNiveau()
@@ -1598,6 +1601,7 @@ def bouclePrincipale(boolp1, boolp2, boolp3, boolp4, boold1, boold2, boold3, boo
                     bouton_continuer.reinit()
                 if event.type == MOUSEBUTTONDOWN and event.button == 1 and event.pos[0] <= 233 and event.pos[0] >= 50 and event.pos[1] <= 630 and event.pos[1] >= 560:
                     bouton_continuer.select()
+                    thread_1.compteurMetro = 0
                     bouton_quitter.etat = False
                     bouton_retour.etat = False
                     bouton_continuer.etat = False
@@ -1645,7 +1649,7 @@ def bouclePrincipale(boolp1, boolp2, boolp3, boolp4, boold1, boold2, boold3, boo
 
         if porteNH1_3.verouille == 1:
             fenetre.blit(porteNH1_3.imageFerme, (0,0))
-            thread_1.choixNiveauSerial = "e"
+            thread_1.choixNiveauSerial = "v"
         if porteNH1_3.verouille == 0:
             fenetre.blit(porteNH1_3.imageOuverte, (0,0))
             fenetre.blit(bouton_continuer.imageLoad, (50, 560))
@@ -1676,6 +1680,7 @@ def bouclePrincipale(boolp1, boolp2, boolp3, boolp4, boold1, boold2, boold3, boo
                 bouton_retour.reinit()
             if event.type == MOUSEBUTTONDOWN and event.button == 1 and event.pos[0] <= 191 and event.pos[0] >= 30 and event.pos[1] <= 82 and event.pos[1] >= 0:
                 bouton_retour.select()
+                thread_1.compteurMetro = 0
                 bouton_quitter.etat = False
                 bouton_retour.etat = True
                 bouton_continuer.etat = False
@@ -1690,9 +1695,10 @@ def bouclePrincipale(boolp1, boolp2, boolp3, boolp4, boold1, boold2, boold3, boo
                     bouton_continuer.reinit()
                 if event.type == MOUSEBUTTONDOWN and event.button == 1 and event.pos[0] <= 233 and event.pos[0] >= 50 and event.pos[1] <= 630 and event.pos[1] >= 560:
                     bouton_continuer.select()
+                    thread_1.compteurMetro = 0
                     bouton_quitter.etat = False
                     bouton_retour.etat = False
-                    bouton_continuer.etat = True
+                    bouton_continuer.etat = False
                     hotelNiveau2 = True
                     hotelNiveau1_3 = False
 
