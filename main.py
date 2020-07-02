@@ -135,6 +135,8 @@ def bouclePrincipale(boolp1, boolp2, boolp3, boolp4, boold1, boold2, boold3, boo
     hotelNiveau1_3 = False
     hotelNiveau2 = boolh2
     hotelNiveau3 = boolh3
+
+    #booleen pour les aide dans chaques niveaux
     aideP1 = True
     aideP2 = True
     aideP3_1 = True
@@ -178,6 +180,7 @@ def bouclePrincipale(boolp1, boolp2, boolp3, boolp4, boold1, boold2, boold3, boo
             testAide.reinitPanneau()
             fenetre.blit(bouton_suivant.imageLoad, (3000,5000))
             fenetre.blit(bouton_aide.imageLoad, (900, 10))
+
         if porteN1.verouille == 1:
             fenetre.blit(porteN1.imageFerme, (0,0))
         if porteN1.verouille == 0:
