@@ -1135,7 +1135,8 @@ def bouclePrincipale(boolp1, boolp2, boolp3, boolp4, boold1, boold2, boold3, boo
                     bouton_retour.etat = False
                     bouton_continuer.etat = False
                     distributeurNiveau2 = False
-                    distributeurNiveau3 = True
+                    selecteurNiveau() #DISTRIBUTEUR 3 NON FONCTIONNEL DONC FIN DU SCÉNARIO ICI
+                    
 
 
             ####### BOUTON SUIVANT DANS L'AIDE  #######
@@ -1160,12 +1161,12 @@ def bouclePrincipale(boolp1, boolp2, boolp3, boolp4, boold1, boold2, boold3, boo
 
 ##################################################################################################
 #                                                                                                #
-#                                   Niveau 3 Distributeur                                        #
+#                                   Niveau 3 Distributeur (Non fonctionnel)                      #
 #                                                                                                #
 ##################################################################################################
 
 
-    while distributeurNiveau3 == True:
+    """while distributeurNiveau3 == True:
         
 
         fenetre.blit(fenetre_distribNiveau3.fond,(0,0))
@@ -1193,8 +1194,8 @@ def bouclePrincipale(boolp1, boolp2, boolp3, boolp4, boold1, boold2, boold3, boo
             fenetre.blit(bouton_suivant.imageLoad, (3000,5000))
             fenetre.blit(bouton_aide.imageLoad, (900, 10))
 
-        """if int(thread_1.soldeAvant) < int(thread_1.soldeApres) and distributeur3.compteur >= 1:
-            fenetre.blit(bouton_continuer.imageLoad, (50, 560))"""
+        if int(thread_1.soldeAvant) < int(thread_1.soldeApres) and distributeur3.compteur >= 1: #CONDITION DE VICTOIRE NON FONCTIONNEL.
+            fenetre.blit(bouton_continuer.imageLoad, (50, 560))
 
         if thread_1.obtenuBoisson == 1:
             distributeur3.addcompteur()
@@ -1399,8 +1400,8 @@ def bouclePrincipale(boolp1, boolp2, boolp3, boolp4, boold1, boold2, boold3, boo
                 bouton_iceTea.etat = True
                 pygame.time.wait(300)
             
-            ####### BOUTON CONTINUER ######
-            """if int(thread_1.soldeAvant) < int(thread_1.soldeApres) and distributeur3.compteur >= 1:
+            ####### BOUTON CONTINUER (NON FONCTIONNEL) ######
+            """ """if int(thread_1.soldeAvant) < int(thread_1.soldeApres) and distributeur3.compteur >= 1:
                 if event.type == MOUSEMOTION and event.pos[0] <= 211 and event.pos[0] >= 50 and event.pos[1] <= 630 and event.pos[1] >= 560 and bouton_continuer.etat == False:
                     bouton_continuer.hoover()
                 if event.type == MOUSEMOTION and (event.pos[0] >= 211 or event.pos[0] <= 50 or event.pos[1] >= 630 or event.pos[1] <= 560) and bouton_continuer.etat == False:
@@ -1411,7 +1412,7 @@ def bouclePrincipale(boolp1, boolp2, boolp3, boolp4, boold1, boold2, boold3, boo
                     bouton_retour.etat = False
                     bouton_continuer.etat = False
                     distributeurNiveau3 = False
-                    selecteurNiveau()"""
+                    selecteurNiveau()""" """
                     
 
 
@@ -1432,7 +1433,7 @@ def bouclePrincipale(boolp1, boolp2, boolp3, boolp4, boold1, boold2, boold3, boo
                 bouton_aide.reinit()
             if event.type == MOUSEBUTTONDOWN and event.button == 1 and event.pos[0] <= 970 and event.pos[0] >= 900 and event.pos[1] <= 80 and event.pos[1] >= 10:
                 bouton_aide.select()
-                aideD3 = True
+                aideD3 = True """
 
 
 ##################################################################################################
@@ -1535,9 +1536,6 @@ def bouclePrincipale(boolp1, boolp2, boolp3, boolp4, boold1, boold2, boold3, boo
                 bouton_aide.select()
                 aideH1 = True
 
-            if event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_p:    #ancien code qui ouvrait la porte avec p
-                    porteNH1_1.verouille = 0
 
 ##################################################################################################
 #                                                                                                #
@@ -1625,10 +1623,6 @@ def bouclePrincipale(boolp1, boolp2, boolp3, boolp4, boold1, boold2, boold3, boo
             if event.type == MOUSEBUTTONDOWN and event.button == 1 and event.pos[0] <= 970 and event.pos[0] >= 900 and event.pos[1] <= 80 and event.pos[1] >= 10:
                 bouton_aide.select()
                 aideH1 = True
-
-            if event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_p:    #ancien code qui ouvrait la porte avec p
-                    porteNH1_2.verouille = 0
 
 
 ##################################################################################################
@@ -1721,9 +1715,6 @@ def bouclePrincipale(boolp1, boolp2, boolp3, boolp4, boold1, boold2, boold3, boo
                 bouton_aide.select()
                 aideH1 = True
 
-            if event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_p:    #ancien code qui ouvrait la porte avec p
-                    porteNH1_3.verouille = 0
     
 ##################################################################################################
 #                                                                                                #
@@ -1812,10 +1803,7 @@ def bouclePrincipale(boolp1, boolp2, boolp3, boolp4, boold1, boold2, boold3, boo
                 bouton_aide.select()
                 aideH2 = True
 
-            ########  TOUCHE DU CLAVIER POUR LES TEST ############
-            if event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_p:    #ancien code qui ouvrait la porte avec p
-                    porteNH2.verouille = 0
+
 
 ##################################################################################################
 #                                                                                                #
@@ -1903,10 +1891,6 @@ def bouclePrincipale(boolp1, boolp2, boolp3, boolp4, boold1, boold2, boold3, boo
                 bouton_aide.select()
                 aideH3 = True
 
-            ########  TOUCHE DU CLAVIER POUR LES TEST ############
-            if event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_p:    #ancien code qui ouvrait la porte avec p
-                    porteNH3.verouille = 0
 
 
 
@@ -1964,7 +1948,7 @@ def selecteurNiveau(): #
             panneauHotel.reinitPanneau()
             fenetre.blit(bouton_Niveau1.imageLoad, (500,260))
             fenetre.blit(bouton_Niveau2.imageLoad, (720,260))
-            fenetre.blit(bouton_Niveau3.imageLoad, (500,370))
+            """fenetre.blit(bouton_Niveau3.imageLoad, (500,370))""" #DISTRRIBUTEUR 3 NON FONCTIONNEL
         if bouton_hotel.etat == True:
             panneauPorte.reinitPanneau()
             panneauDistributeur.reinitPanneau()
@@ -2060,7 +2044,7 @@ def selecteurNiveau(): #
                     bouton_distributeur.etat = False
                     gameStart = False
 
-                #distributeur Niveau 3
+                """ #distributeur Niveau 3 
                 if event.type == MOUSEMOTION and event.pos[0] <= 681 and event.pos[0] >= 500 and event.pos[1] <= 440 and event.pos[1] >= 370:
                     bouton_Niveau3.hoover()
                 if event.type == MOUSEMOTION and (event.pos[0] >= 681 or event.pos[0] <= 500 or event.pos[1] >= 440 or event.pos[1] <= 370):
@@ -2068,7 +2052,7 @@ def selecteurNiveau(): #
                 if event.type == MOUSEBUTTONDOWN and event.button == 1 and event.pos[0] <= 681 and event.pos[0] >= 500 and event.pos[1] <= 440 and event.pos[1] >= 370:
                     bouclePrincipale(False, False, False, False, False, False, True, False, False, False)
                     bouton_distributeur.etat = False
-                    gameStart = False
+                    gameStart = False """ #DISTRIBUTEUR 3 NON FONCTIONNEL
 
 
             ###### BOUTON POUR L'HOTEL ######
