@@ -143,7 +143,7 @@ class Recevoir(Thread):
         self.baliseSolde = -1
         self.baliseSolde2 = -1
         self.soldeInsuffisant = -1
-        self.insuffisant = 1
+        self.insuffisant = -1
         self.carteNonPresente = -1
         self.obtenuCoca = -1
         self.obtenuEvian = -1
