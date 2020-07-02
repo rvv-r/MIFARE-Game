@@ -154,7 +154,7 @@ class Recevoir(Thread):
 
         #gère le solde insuffisant
         self.soldeInsuffisant = -1
-        self.insuffisant = 1
+        self.insuffisant = -1
 
         #Pour vérifier si le badge est manquant
         self.carteNonPresente = -1
