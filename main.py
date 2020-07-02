@@ -2129,7 +2129,7 @@ def selecteurNiveau(): #
 def intro():
     gameIntro = True
 
-    fenetre_intro = Terrain("image/scene/intro2.jpg")
+    fenetre_intro = Terrain("image/scene/intro.jpg")
     bouton_suivant = Bouton("image/boutons/boutonSuivant2.png", "image/boutons/boutonSuivant2Hoover.png", "image/boutons/boutonSuivant2.png")
 
     while gameIntro == True:
